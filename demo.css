@@ -1,0 +1,202 @@
+/* Body Background Color*/
+body {
+  background-color: #B8F1D2;
+  color: #34495e;
+  font: 14px/1.231 "Lato", sans-serif; }
+
+a {
+  color: #1abc9c;
+  text-decoration: underline;
+  -webkit-transition: 0.25s;
+  -moz-transition: 0.25s;
+  -o-transition: 0.25s;
+  transition: 0.25s;
+  -webkit-backface-visibility: hidden; }
+  a:hover {
+    color: #2ecc71;
+    text-decoration: none; }
+
+h1 {
+  font-size: 32px;
+  font-weight: 900; }
+
+h2 {
+  font-size: 26px;
+  font-weight: 700;
+  margin-bottom: 2px; }
+
+h3 {
+  font-size: 24px;
+  font-weight: 700;
+  margin-bottom: 4px;
+  margin-top: 2px; }
+
+h4 {
+  font-size: 18px;
+  font-weight: 500;
+  margin-top: 4px; }
+
+h5 {
+  font-size: 16px;
+  font-weight: 500;
+  text-transform: uppercase; }
+
+h6 {
+  font-size: 13px;
+  font-weight: 500;
+  text-transform: uppercase; }
+
+.btn {
+  border: none;
+  background: #34495e;
+  color: white;
+  font-size: 16.5px;
+  text-decoration: none;
+  text-shadow: none;
+  -webkit-box-shadow: none;
+  -moz-box-shadow: none;
+  box-shadow: none;
+  -webkit-transition: 0.25s;
+  -moz-transition: 0.25s;
+  -o-transition: 0.25s;
+  transition: 0.25s;
+  -webkit-backface-visibility: hidden;
+}
+.btn:hover, .btn:focus {
+  background-color: #4e6d8d;
+  color: white;
+  -webkit-transition: 0.25s;
+  -moz-transition: 0.25s;
+  -o-transition: 0.25s;
+  transition: 0.25s;
+  -webkit-backface-visibility: hidden; 
+}
+.btn:active, .btn.active {
+  background-color: #2c3e50;
+  color: rgba(255, 255, 255, 0.75);
+  -webkit-box-shadow: none;
+  -moz-box-shadow: none;
+  box-shadow: none;
+}
+.btn.disabled, .btn[disabled] {
+  background-color: #95a5a6;
+  color: white;
+}
+.btn.btn-large {
+  padding-bottom: 12px;
+  padding-top: 13px;
+}
+.btn.btn-primary {
+  background-color: #1abc9c;
+}
+.btn.btn-primary:hover, .btn.btn-primary:focus {
+  background-color: #2fe2bf;
+}
+.btn.btn-primary:active, .btn.btn-primary.active {
+  background-color: #16a085;
+}
+.btn.btn-info {
+  background-color: #3498db;
+}
+.btn.btn-info:hover, .btn.btn-info:focus {
+  background-color: #5dade2;
+}
+.btn.btn-info:active, .btn.btn-info.active {
+  background-color: #2383c4;
+}
+.btn.btn-danger {
+background-color: #e74c3c;
+}
+.btn.btn-danger:hover, .btn.btn-danger:focus {
+  background-color: #ec7063;
+}
+.btn.btn-danger:active, .btn.btn-danger.active {
+  background-color: #dc2d1b;
+}
+.btn.btn-success {
+background-color: #2ecc71;
+}
+.btn.btn-success:hover, .btn.btn-success:focus {
+  background-color: #55d98d;
+}
+.btn.btn-success:active, .btn.btn-success.active {
+  background-color: #27ad60;
+}
+.btn.btn-warning {
+  background-color: #f1c40f;
+}
+.btn.btn-warning:hover, .btn.btn-warning:focus {
+  background-color: #f4d03f;
+}
+.btn.btn-warning:active, .btn.btn-warning.active {
+  background-color: #cea70c;
+}
+.demo-headline {
+  text-align: center;
+}
+.demo-logo {
+  font-size: 60px;
+  font-weight: 900;
+  letter-spacing: -2px;
+  line-height: 100px;
+}
+.demo-logo .logo {
+  background: url("logo.gif") center 0 no-repeat;
+  background-size: 256px 186px;
+  height: 186px;
+  margin: 0 auto 26px;
+  overflow: hidden;
+  text-indent: -9999em;
+  width: 256px;
+}
+.demo-logo small {
+  color: rgba(52, 73, 94, 0.3);
+  display: block;
+  font-size: 30px;
+  font-weight: 700;
+  letter-spacing: -1px;
+  padding-top: 5px;
+}
+.demo-row {
+  margin-bottom: 20px;
+}
+.demo-panel-title {
+  margin-bottom: 20px;
+  padding-top: 20px;
+}
+.demo-panel-title small {
+    color: #bfc1c3;
+    font-size: inherit;
+    font-weight: 400;
+}
+.demo-navigation {
+  margin-bottom: -4px;
+  margin-top: -10px;
+}
+/* button animation */
+.animateTest {
+  text-align: center;
+  color: #fff;
+  margin: 0 auto;
+  -webkit-backface-visibility: hidden;
+  -moz-backface-visibility: hidden;
+  -ms-backface-visibility: hidden;
+  backface-visibility: hidden;
+  
+  -webkit-animation-duration: 1s;
+  -webkit-animation-delay: .2s;
+  -webkit-animation-timing-function: ease;
+  -webkit-animation-fill-mode: both;
+  -moz-animation-duration: 1s;
+  -moz-animation-delay: .2s;
+  -moz-animation-timing-function: ease;
+  -moz-animation-fill-mode: both;
+  -ms-animation-duration: 1s;
+  -ms-animation-delay: .2s;
+  -ms-animation-timing-function: ease;
+  -ms-animation-fill-mode: both;
+  animation-duration: 1s;
+  animation-delay: .2s;
+  animation-timing-function: ease;
+  animation-fill-mode: both;
+}
