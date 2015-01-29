@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<!-- saved from url=(0033)http://www.bootcss.com/p/flat-ui/ -->
+<html lang="en" class="dk_fouc has-js">
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <meta charset="utf-8">
+        <title>Dynamic Effect</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <!-- Loading Bootstrap -->
+        <link href="bootstrap.css" rel="stylesheet">
+        <!-- Loading demo -->
+        <link href="demo.css" rel="stylesheet">
+        <!-- Loading animation -->
+        <link rel="stylesheet" href="../src/ea.css">
+        <link rel="shortcut icon" href="../favicon.ico">
+    </head>
+    <body>
+        <div class="container">
+            <div class="demo-headline">
+                <h1 class="demo-logo">
+                  <div class="logo"></div>
+                  ZX Dynamic Effect Lib
+                  <small>知心动效初体验</small>
+                </h1>
+            </div> <!-- /demo-headline -->
+
+            <h3 class="demo-panel-title">Buttons</h3>
+
+            <div class="row demo-row">
+                <div class="span3">
+                    <div tag="ea-bounce" class="animateTest btn btn-large btn-block btn-default">Bounce</div>
+                </div>
+                <div class="span3">
+                    <div tag="ea-swing" class="animateTest btn btn-large btn-block btn-primary">Swing</div>
+                </div>
+                <div class="span3">
+                    <div tag="ea-pulse" class="animateTest btn btn-large btn-block btn-info">Pulse</div>
+                </div>
+                <div class="span3">
+                    <div tag="ea-shake" class="animateTest btn btn-large btn-block btn-danger">Shake</div>
+                </div>
+            </div> <!-- /row -->
+
+            <h3 class="demo-panel-title">Divs</h3>
+
+            <div class="row demo-row">
+                <div class="span3">
+                    <div class="div1" id="div1">滑动</div>
+                </div>
+                <div class="span3">
+                    <div class="div2" id="div2">扭曲</div>
+                </div>
+                <div class="span3">
+                    <div class="div3" id="div3">翻转</div>
+                </div>
+                <div class="span3">
+                    <div class="div4" id="div4">渐隐渐现</div>
+                </div>
+            </div> <!-- /row -->
+
+            <h3 class="demo-panel-title">Numbers</h3>
+
+            <div class="row demo-row">
+                <div class="span3">
+                    <div tag="ea-flash" class="num1 ea-rule-repeat" id="num1">1</div>
+                </div>
+                <div class="span3">
+                    <div tag="ea-shake" class="num2 ea-rule-base" id="num2">2</div>
+                </div>
+                <div class="span3">
+                    <div tag="ea-bounce" class="num3 ea-rule-base" id="num3">3</div>
+                </div>
+                <div class="span3">
+                    <div tag="ea-tada" class="num4 ea-rule-base" id="num4">4</div>
+                </div>
+            </div> <!-- /row -->
+
+        </div> <!-- /container -->
+
+        <!-- Load JS here for greater good =============================-->
+        <script src="../src/jquery.min.js"></script>
+        <script src="../src/jquery-ui-1.10.0.custom.min.js"></script>
+        <script src="../src/modernizr.custom.js"></script>
+        <script src="../src/ea.js"></script>
+        <script src="demo.js"></script>
+
+        <tester id="tagsinput_tag_autosize_tester" style="position: absolute; top: -9999px; left: -9999px; width: auto; font-size: 14px; font-family: sans-serif; font-weight: 400; letter-spacing: 0px; white-space: nowrap;">
+        </tester>
+        <div id="site-navbar" style="position: absolute; top: -4px; left: -3px; border: 0; z-index: 2000;padding:0;margin:0;">
+            <a href="https://github.com/feares/dynamicEffect" title="返回首页" style="background:none;">
+            <img src="../return-back.png" style="padding:0;margin:0;border:0; -webkit-box-shadow: none;-moz-box-shadow: none;box-shadow: none;"></a>
+        </div>
+    </body>
+</html>

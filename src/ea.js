@@ -1,16 +1,12 @@
-window.Animate = (function (window, document, undefined) {
+window.EA = (function (window, document, undefined) {
 
     var version = '0.0.1',
 
-    Animate = {},
-
-    callbakcCache = null,
-
-    elmCache = null;
+    EA = {};
 
     console.log(Modernizr);
 
-    Animate.move = function (elm, path, time, callback) {
+    EA.move = function (elm, path, time, callback) {
         var plan = '';
         if (Modernizr.csstransforms) {
             setStyle3(elm, 'transition', (time/1000) + 's');
@@ -40,7 +36,7 @@ window.Animate = (function (window, document, undefined) {
         }
     }
 
-    Animate.rotate = function (elm, rotateX, rotateY, time, perspective, callback) {
+    EA.rotate = function (elm, rotateX, rotateY, time, perspective, callback) {
         if (Modernizr.csstransforms) {
             setStyle3(elm, 'transition', (time/1000) + 's');
             if (callback) {
@@ -52,11 +48,11 @@ window.Animate = (function (window, document, undefined) {
         }
     }
 
-    Animate.skew = function (elm, skewX, skewY, time, callback) {
+    EA.skew = function (elm, skewX, skewY, time, callback) {
         if (Modernizr.csstransforms) {
             setStyle3(elm, 'transition', (time/1000) + 's');
             if (callback) {
-              setEnd3(elm, callback);
+                setEnd3(elm, callback);
             }
             setStyle3(elm, 'transform', 'skewX(' + skewX + 'deg) skewY(' + skewY + 'deg)');
         } else {
@@ -64,7 +60,7 @@ window.Animate = (function (window, document, undefined) {
         }
     }
 
-    Animate.show = function (elm, time, callback) {
+    EA.show = function (elm, time, callback) {
         if (Modernizr.opacity) {
               setStyle3(elm, 'transition', (time/1000) + 's');
               if (callback) {
@@ -76,11 +72,11 @@ window.Animate = (function (window, document, undefined) {
         }
     }
 
-    Animate.hide = function (elm, time, callback) {
+    EA.hide = function (elm, time, callback) {
         if (Modernizr.opacity) {
             setStyle3(elm, 'transition', (time/1000) + 's');
             if (callback) {
-              setEnd3(elm, callback);
+                setEnd3(elm, callback);
             }
             setStyle(elm, {"opacity": 0});
         } else {
@@ -88,14 +84,10 @@ window.Animate = (function (window, document, undefined) {
         }
     }
 
-    Animate.trigger = function (elm, className, callback) {
+    EA.trigger = function (elm, className, callback) {
         if (Modernizr.cssanimations) {
-            if (callbakcCache) {
-                elmCache.removeEventListener('webkitAnimationEnd', callbakcCache);
-                elmCache.removeEventListener('animationend', callbakcCache);
-            }
-            callbakcCache = clear;
-            elmCache = elm;
+            elm.removeEventListener('webkitAnimationEnd', clear);
+            elm.removeEventListener('animationend', clear);
             elm.addEventListener('webkitAnimationEnd', clear);  // Chrome, Safari 和 Opera
             elm.addEventListener('animationend', clear);        // 标准语法
             $(elm).addClass(className);
@@ -105,9 +97,20 @@ window.Animate = (function (window, document, undefined) {
 
         function clear () {
             if (callback) {
-              callback();
-            }
+                callback();
+            }console.log('clear');
             $(elm).removeClass(className);
+        }
+    }
+
+    EA.stop = function (elm, className) {
+        if (Modernizr.cssanimations) {
+            if(className) {
+                $(elm).removeClass(className);
+            }
+            clearStyle3(elm);
+        } else {
+            console.log('can not realize on css2');
         }
     }
 
@@ -123,13 +126,15 @@ window.Animate = (function (window, document, undefined) {
         obj.style[msSyle] = value;
     }
 
+    function clearStyle3 (obj) {
+        setStyle3(obj, 'transition', '0s');
+        setStyle3(obj, 'transform', '');
+        setStyle3(obj, 'animation', '');
+    }
+
     function setEnd3 (elm, fnc) {
-        if (callbakcCache) {
-            elmCache.removeEventListener('webkitTransitionEnd', callbakcCache);
-            elmCache.removeEventListener('transitionend', callbakcCache);
-        }
-        callbakcCache = fnc;
-        elmCache = elm;
+        elm.removeEventListener('webkitTransitionEnd', fnc);
+        elm.removeEventListener('transitionend', fnc);
         elm.addEventListener('webkitTransitionEnd', fnc);  // Chrome, Safari 和 Opera
         elm.addEventListener('transitionend', fnc);        // 标准语法
     }
@@ -150,6 +155,6 @@ window.Animate = (function (window, document, undefined) {
         }
     }
 
-    return Animate;
+    return EA;
 
 })(this, this.document);
