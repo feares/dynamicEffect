@@ -9,7 +9,7 @@ $(document).ready(function() {
     // button demo event
     $(".animateTest").click(function () {
         var tag = $(this).attr('tag');
-        $(this).toggleClass(tag);
+        Animate.trigger(this, tag);
     });
 
     $("a[href='#']").click(function() {
@@ -46,9 +46,7 @@ $(document).ready(function() {
 
     $(".animated").click(function () {
         var tag = $(this).attr('tag');
-        Animate.trigger(this, tag, function(){
-          console.log('end');
-        });
+        Animate.trigger(this, tag);
     });
 
 });
