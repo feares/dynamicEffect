@@ -1,0 +1,22 @@
+body {
+    background-color: #B8F1D2;
+    color: #34495e;
+    font: 14px/1.231 "Lato", sans-serif;
+}
+
+.container {
+    width: 900px;
+    height: 100px;
+    margin: 150px 0 0 0;
+}
+
+.span3 {
+    display: inline-block;
+    height: 50px;
+    line-height: 50px;
+    text-align: center;
+    width: 100px;
+    border-radius: 5px;
+    background-color: #1abc9c;
+    cursor: pointer;
+}

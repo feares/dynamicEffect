@@ -211,15 +211,40 @@ window.EA = (function (window, document, undefined) {
      *
      * @param {Object} elm dom对象
      * @param {Object} option 运动参数
-     * @param {string} option.easing 缓动函数
-     * @param {number | string=} option.count 动画次数，可选参数默认为1，forever无限
      * @param {string} option.name 动画名称
      * @param {number} option.time 动画时间
+     * @param {string=} option.easing 缓动函数，可选参数
+     * @param {number=} option.delay 延迟时间，可选参数
+     * @param {number | string=} option.count 动画次数，可选参数默认为1，forever无限
+     * @param {boolean=} option.back 是否反向播放动画，可选参数
      * @param {Array} option.keyframe 关键帧动作
      */
     EA.create = function (elm, option, callback) {
-        if (option.name) {
-            var plan = '';
+        if (callback) {
+            setEnd3(callback);
+        }
+        if (option.name && option.keyframe) {
+            var cssText = '';
+            var plan = option.name + ' ' + option.time + 's';
+            cssText = '@-webkit-keyframes ' + option.name + ' {' + getCssText(option.keyframe) + '}';
+            addCSS(cssText);
+            if (!option.easing) {
+                option.easing = 'ease';
+            }
+            if (!option.delay) {
+                option.delay = 0;
+            }
+            if (!option.count) {
+                option.count = 1;
+            } else if (option.count === 'forever') {
+                option.count = 'infinite';
+            }
+            if(option.back == true) {
+                option.back = 'alternate';
+            } else {
+                option.back = 'normal';
+            }
+            plan += ' ' + option.easing + ' ' + option.delay + 's ' + option.count + ' ' + option.back;
             setStyle3(elm, 'animation', plan);
         }
     }
@@ -228,18 +253,61 @@ window.EA = (function (window, document, undefined) {
      * 更新动画
      *
      * @param {Object} elm dom对象
-     * @param {Object} option 运动参数
-     * @param {string} option.easing 缓动函数
-     * @param {number | string=} option.count 动画次数，可选参数默认为1，forever无限
-     * @param {string} option.name 动画名称
-     * @param {number} option.time 动画时间
-     * @param {Array} option.keyframe 关键帧动作
+     * @param {Array} keyframe 关键帧动作
      */
-    EA.update = function (elm, option, callback) {
-        if (option.name) {
+    EA.update = function (elm, keyframe, callback) {
+        if (callback) {
+            setEnd3(callback);
+        }
+        if (keyframe) {
             var plan = '';
             setStyle3(elm, 'animation', plan);
         }
+    }
+
+    /**
+     * 解析参数生成css文本
+     *
+     * @param {Array} option 生成css文本需要的参数
+     */
+    function getCssText(option) {
+        var tmp = '';
+        for (var i = 0, len = option.length;i < len;i++) {
+            tmp += option[i];
+        }
+        return tmp;
+    }
+
+    /**
+     * 向dom添加样式
+     *
+     * @param {number} cssText css文本
+     */
+    function addCSS(cssText){
+        var style = null, head = document.head || document.getElementsByTagName('head')[0];
+        style = document.getElementsByTagName('style')[0];
+        if (!style) {
+            style = document.createElement('style');
+            style.type = 'text/css';
+        }
+        if(style.styleSheet){
+            var func = function(){
+                try{
+                    style.styleSheet.cssText = cssText;
+                }catch(e){
+
+                }
+            }
+            if(style.styleSheet.disabled){
+                setTimeout(func,10);
+            }else{
+                func();
+            }
+        }else{
+            var textNode = document.createTextNode(cssText);
+            style.appendChild(textNode);
+        }
+        head.appendChild(style);
     }
 
     /**
@@ -329,42 +397,42 @@ window.EA = (function (window, document, undefined) {
         var tmp = Object.prototype.toString.call(obj);
         switch(type) {
             case 'number':
-              if (tmp == '[object Number]') {
+              if (tmp === '[object Number]') {
                   ret = true;
               }
               break;
             case 'string':
-              if (tmp == '[object String]') {
+              if (tmp === '[object String]') {
                   ret = true;
               }
               break;
             case 'boolean':
-              if (tmp == '[object Boolean]') {
+              if (tmp === '[object Boolean]') {
                   ret = true;
               }
               break;
             case 'array':
-              if (tmp == '[object Array]') {
+              if (tmp === '[object Array]') {
                   ret = true;
               }
               break;
             case 'function':
-              if (tmp == '[object Function]') {
+              if (tmp === '[object Function]') {
                   ret = true;
               }
               break;
             case 'object':
-              if (tmp == '[object Object]') {
+              if (tmp === '[object Object]') {
                   ret = true;
               }
               break;
             case 'null':
-              if (tmp == '[object Null]') {
+              if (tmp === '[object Null]') {
                   ret = true;
               }
               break;
             case 'undefined':
-              if (tmp == '[object Undefined]') {
+              if (tmp === '[object Undefined]') {
                   ret = true;
               }
               break;
