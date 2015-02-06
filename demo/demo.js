@@ -19,28 +19,28 @@ $(document).ready(function() {
     $("#div1").click(function () {
         var that = this;
         EA.move(this, {left:'10px'}, 1000, function () {
-          EA.move(that, {left:'0px'}, 1000);
+            EA.move(that, {left:'0px'}, 1000);
         });
     });
 
     $("#div2").click(function () {
         var that = this;
-        EA.skew(this, 0, 30, 1000, function () {
-          EA.skew(that, 0, 0, 1000);
+        EA.skew(this, {x : 0, y : 30}, 1000, function () {
+            EA.skew(that, {x : 0, y : 0}, 1000);
         });
     });
 
     $("#div3").click(function () {
         var that = this;
-        EA.rotate(this, 0, 180, 1000, 200, function () {
-          EA.rotate(that, 0, 0, 1000, 200);
+        EA.rotate(this, {x : 0, y : 180, p : 200}, 1000, function () {
+            EA.rotate(that, {x : 0, y : 0, p : 200}, 1000);
         });
     });
 
     $("#div4").click(function () {
         var that = this;
         EA.hide(this, 1000, function () {
-          EA.show(that, 1000);
+            EA.show(that, 1000);
         });
     });
 

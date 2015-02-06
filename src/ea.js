@@ -1,68 +1,131 @@
+/**
+ * @file EA is easy animation
+ * @author donkunshan(dongkunshan@baidu.com)
+ */
 window.EA = (function (window, document, undefined) {
 
     var version = '0.0.1',
 
     EA = {};
 
-    console.log(Modernizr);
+    log(Modernizr);
 
-    EA.move = function (elm, path, time, callback) {
+    /**
+     * 移动元素
+     *
+     * @param {Object} option 运动参数
+     * @param {number=} option.top top位移，可选参数
+     * @param {number=} option.right right位移，可选参数
+     * @param {number=} option.bottom bottom位移，可选参数
+     * @param {number=} option.left left位移，可选参数
+     * @param {number} time 动画时间
+     * @param {Function=} callback 回调函数，可选参数
+     */
+    EA.move = function (elm, option, time, callback) {
         var plan = '';
         if (Modernizr.csstransforms) {
-            setStyle3(elm, 'transition', (time/1000) + 's');
+            setStyle3(elm, 'transition', getTime(time) + 's');
             if (callback) {
                 setEnd3(elm, callback);
             }
-            for (var p in path) {
-                switch(p) {
-                    case 'top':
-                        plan += ' translateY(' + path[p] + ')';
-                        break;
-                    case 'right':
-                        plan += ' translateX(-' + path[p] + ')';
-                        break;
-                    case 'bottom':
-                        plan += ' translateY(-' + path[p] + ')';
-                        break;
-                    case 'left':
-                        plan += ' translateX(' + path[p] + ')';
-                        break;
-                }
+            var plan = '';
+            if (option.top) {
+                plan += ' translateY(' + option.top + ')';
+            }
+            if (option.right) {
+                plan += ' translateX(-' + option.right + ')';
+            }
+            if (option.bottom) {
+                plan += ' translateY(-' + option.bottom + ')';
+            }
+            if (option.left) {
+                plan += ' translateX(' + option.left + ')';
             }
             setStyle3(elm, 'transform', plan);
         } else {
-            setStyle(elm, {"position": "relative"});
             $(elm).animate(path, time, callback);
         }
     }
 
-    EA.rotate = function (elm, rotateX, rotateY, time, perspective, callback) {
+    /**
+     * 旋转元素
+     *
+     * @param {Object} option 运动参数
+     * @param {number=} option.x 相对于x轴角度，可选参数
+     * @param {number=} option.y 相对于y轴角度，可选参数
+     * @param {number=} option.p 3d视距，可选参数
+     * @param {number} time 动画时间
+     * @param {Function=} callback 回调函数，可选参数
+     */
+    EA.rotate = function (elm, option, time, callback) {
         if (Modernizr.csstransforms) {
-            setStyle3(elm, 'transition', (time/1000) + 's');
+            setStyle3(elm, 'transition', getTime(time) + 's');
+            var plan = '';
+            if (option.x) {
+                plan += ' rotateX(' + option.x + 'deg)';
+            } else {
+                plan += ' rotateX(0deg)';
+            }
+            if (option.y) {
+                plan = ' rotateY(' + option.y + 'deg)';
+            } else {
+                plan = ' rotateY(0deg)';
+            }
+            if (option.p) {
+                plan = 'perspective(' + option.p + 'px)' + plan;
+            }
             if (callback) {
                 setEnd3(elm, callback);
             }
-            setStyle3(elm, 'transform', 'perspective(' + perspective + 'px) rotateX(' + rotateX + 'deg) rotateY(' + rotateY + 'deg)');
+            setStyle3(elm, 'transform', plan);
         } else {
-            console.log('can not realize on css2');
+            log('can not realize on css2');
         }
     }
 
-    EA.skew = function (elm, skewX, skewY, time, callback) {
+    /**
+     * 扭曲元素
+     *
+     * @param {Object} elm dom对象
+     * @param {Object} option 运动参数
+     * @param {number=} option.x 相对于x轴角度，可选参数
+     * @param {number=} option.y 相对于y轴角度，可选参数
+     * @param {number} time 动画时间
+     * @param {Function=} callback 回调函数，可选参数
+     */
+    EA.skew = function (elm, option, time, callback) {
         if (Modernizr.csstransforms) {
-            setStyle3(elm, 'transition', (time/1000) + 's');
+            setStyle3(elm, 'transition', getTime(time) + 's');
             if (callback) {
                 setEnd3(elm, callback);
             }
-            setStyle3(elm, 'transform', 'skewX(' + skewX + 'deg) skewY(' + skewY + 'deg)');
+            var plan = '';
+            if (option.x) {
+                plan = ' skewX(' + option.x + 'deg)';
+            } else {
+                plan += ' skewX(0deg)';
+            }
+            if (option.y) {
+                plan = ' skewY(' + option.y + 'deg)';
+            } else {
+                plan += ' skewY(0deg)';
+            }
+            setStyle3(elm, 'transform', plan);
         } else {
-            console.log('can not realize on css2');
+            log('can not realize on css2');
         }
     }
 
+    /**
+     * 显示元素
+     *
+     * @param {Object} elm dom对象
+     * @param {number} time 动画时间
+     * @param {Function=} callback 回调函数，可选参数
+     */
     EA.show = function (elm, time, callback) {
         if (Modernizr.opacity) {
-              setStyle3(elm, 'transition', (time/1000) + 's');
+              setStyle3(elm, 'transition', getTime(time) + 's');
               if (callback) {
                   setEnd3(elm, callback);
               }
@@ -72,9 +135,16 @@ window.EA = (function (window, document, undefined) {
         }
     }
 
+    /**
+     * 隐藏元素
+     *
+     * @param {Object} elm dom对象
+     * @param {number} time 动画时间
+     * @param {Function=} callback 回调函数，可选参数
+     */
     EA.hide = function (elm, time, callback) {
         if (Modernizr.opacity) {
-            setStyle3(elm, 'transition', (time/1000) + 's');
+            setStyle3(elm, 'transition', getTime(time) + 's');
             if (callback) {
                 setEnd3(elm, callback);
             }
@@ -84,74 +154,233 @@ window.EA = (function (window, document, undefined) {
         }
     }
 
+    /**
+     * 触发动画，用于对写好的cssanimation调用
+     *
+     * @param {Object} elm dom对象
+     * @param {string | Array} className 要触发css类名，多个用数组
+     * @param {Function=} callback 回调函数，可选参数
+     */
     EA.trigger = function (elm, className, callback) {
         if (Modernizr.cssanimations) {
-            elm.removeEventListener('webkitAnimationEnd', clear);
-            elm.removeEventListener('animationend', clear);
-            elm.addEventListener('webkitAnimationEnd', clear);  // Chrome, Safari 和 Opera
-            elm.addEventListener('animationend', clear);        // 标准语法
-            $(elm).addClass(className);
+            setEnd3(elm, callback);
+            if (is(className, 'array')) {
+                for (var i = 0, len = className.length;i < len;i++) {
+                    $(elm).addClass(className[i]);
+                }
+            } else {
+                $(elm).addClass(className);
+            }
         } else {
-            console.log('can not realize on css2');
+            log('can not realize on css2');
         }
 
         function clear () {
             if (callback) {
                 callback();
-            }console.log('clear');
+            }
             $(elm).removeClass(className);
         }
     }
 
+    /**
+     * 停止动画
+     *
+     * @param {Object} elm dom对象
+     * @param {string | Array} className 要触发css类名，多个用数组
+     */
     EA.stop = function (elm, className) {
         if (Modernizr.cssanimations) {
             if(className) {
-                $(elm).removeClass(className);
+                if (is(className, 'array')) {
+                    for (var i = 0, len = className.length;i < len;i++) {
+                        $(elm).removeClass(className[i]);
+                    }
+                } else {
+                    $(elm).removeClass(className);
+                }
             }
             clearStyle3(elm);
         } else {
-            console.log('can not realize on css2');
+            $(elm).stop();
         }
     }
 
-    function setStyle3 (obj, name, value) {
+    /**
+     * 创建动画
+     *
+     * @param {Object} elm dom对象
+     * @param {Object} option 运动参数
+     * @param {string} option.easing 缓动函数
+     * @param {number | string=} option.count 动画次数，可选参数默认为1，forever无限
+     * @param {string} option.name 动画名称
+     * @param {number} option.time 动画时间
+     * @param {Array} option.keyframe 关键帧动作
+     */
+    EA.create = function (elm, option, callback) {
+        if (option.name) {
+            var plan = '';
+            setStyle3(elm, 'animation', plan);
+        }
+    }
+
+    /**
+     * 更新动画
+     *
+     * @param {Object} elm dom对象
+     * @param {Object} option 运动参数
+     * @param {string} option.easing 缓动函数
+     * @param {number | string=} option.count 动画次数，可选参数默认为1，forever无限
+     * @param {string} option.name 动画名称
+     * @param {number} option.time 动画时间
+     * @param {Array} option.keyframe 关键帧动作
+     */
+    EA.update = function (elm, option, callback) {
+        if (option.name) {
+            var plan = '';
+            setStyle3(elm, 'animation', plan);
+        }
+    }
+
+    /**
+     * 格式化时间
+     *
+     * @param {number} time 时间，单位是毫秒数
+     * @param {number=} fixed 时间精度，换算成秒小数点儿后的精度位数，可选参数
+     */
+    function getTime (time, fixed) {
+        if (!fixed) {
+            fixed = 1;
+        }
+        return (time / 1000).toFixed(fixed);
+    }
+
+    /**
+     * 设置css3样式
+     *
+     * @param {Object} elm dom对象
+     * @param {string} 属性明
+     * @param {string} 属性值
+     */
+    function setStyle3 (elm, name, value) {
         var wStyle = 'Webkit' + name.charAt(0).toUpperCase() + name.substring(1);
         var mStyle = 'Moz' + name.charAt(0).toUpperCase() + name.substring(1);
         var oSyle = 'O' + name.charAt(0).toUpperCase() + name.substring(1);
         var msSyle = 'ms' + name.charAt(0).toUpperCase() + name.substring(1);
-        obj.style[name] = value;
-        obj.style[wStyle] = value;
-        obj.style[mStyle] = value;
-        obj.style[oSyle] = value;
-        obj.style[msSyle] = value;
+        elm.style[name] = value;
+        elm.style[wStyle] = value;
+        elm.style[mStyle] = value;
+        elm.style[oSyle] = value;
+        elm.style[msSyle] = value;
     }
 
-    function clearStyle3 (obj) {
-        setStyle3(obj, 'transition', '0s');
-        setStyle3(obj, 'transform', '');
-        setStyle3(obj, 'animation', '');
+    /**
+     * 清除css3样式
+     *
+     * @param {Object} elm dom对象
+     */
+    function clearStyle3 (elm) {
+        setStyle3(elm, 'transition', '0s');
+        setStyle3(elm, 'transform', '');
+        setStyle3(elm, 'animation', '');
     }
 
-    function setEnd3 (elm, fnc) {
-        elm.removeEventListener('webkitTransitionEnd', fnc);
-        elm.removeEventListener('transitionend', fnc);
-        elm.addEventListener('webkitTransitionEnd', fnc);  // Chrome, Safari 和 Opera
-        elm.addEventListener('transitionend', fnc);        // 标准语法
+    /**
+     * 设置动画回调函数
+     *
+     * @param {Object} elm dom对象
+     * @param {Function=} callback 回调函数
+     */
+    function setEnd3 (elm, callback) {
+        $(elm).one('webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimationend animationend', callback);
+        $(elm).one('webkitTransitionEnd mozTransitionEnd MSTransitionEnd otransitionend transitionend', callback);
     }
 
-    function setStyle (obj, json) {
-        if (obj.length) {
+    /**
+     * 设置元素样式
+     *
+     * @param {Object} elm dom对象
+     * @param {Object} json 属性集合
+     */
+    function setStyle (elm, json) {
+        if (elm.length) {
             for(var i = 0;i < obj.length;i++){
                 setStyle(obj[i], json);
             }
         } else {
-            if(arguments.length === 2) {
+            if (arguments.length === 2) {
                 for (var i in json) {
-                  obj.style[i] = json[i];
+                    elm.style[i] = json[i];
                 }
             } else {
-                obj.style[arguments[1]] = arguments[2];
+                elm.style[arguments[1]] = arguments[2];
             }
+        }
+    }
+
+    /**
+     * 类型判断
+     *
+     * @param {Object} obj 数据对象
+     * @param {string} type 要匹配的类型
+     */
+    function is (obj, type){
+        var ret = false;
+        var tmp = Object.prototype.toString.call(obj);
+        switch(type) {
+            case 'number':
+              if (tmp == '[object Number]') {
+                  ret = true;
+              }
+              break;
+            case 'string':
+              if (tmp == '[object String]') {
+                  ret = true;
+              }
+              break;
+            case 'boolean':
+              if (tmp == '[object Boolean]') {
+                  ret = true;
+              }
+              break;
+            case 'array':
+              if (tmp == '[object Array]') {
+                  ret = true;
+              }
+              break;
+            case 'function':
+              if (tmp == '[object Function]') {
+                  ret = true;
+              }
+              break;
+            case 'object':
+              if (tmp == '[object Object]') {
+                  ret = true;
+              }
+              break;
+            case 'null':
+              if (tmp == '[object Null]') {
+                  ret = true;
+              }
+              break;
+            case 'undefined':
+              if (tmp == '[object Undefined]') {
+                  ret = true;
+              }
+              break;
+        }
+        return ret;
+    }
+
+    /**
+     * 设置元素样式
+     *
+     * @param {string} msg 日志内容
+     * @param {string=} level 日志级别，可选参数
+     */
+    function log (msg, level){
+        if (console) {
+            console.log(msg);
         }
     }
 
