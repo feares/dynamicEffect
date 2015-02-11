@@ -1,12 +1,13 @@
 /**
  * @file EA is easy animation
  * @author donkunshan(dongkunshan@baidu.com)
+ * @date 2015-02-14
  */
 window.EA = (function (window, document, undefined) {
 
     var version = '0.0.1',
-
     EA = {};
+    EA.animations = {};
 
     log(Modernizr);
 
@@ -159,11 +160,16 @@ window.EA = (function (window, document, undefined) {
      *
      * @param {Object} elm dom对象
      * @param {string | Array} className 要触发css类名，多个用数组
+     * @param {boolean=} save 是否保持动画结束时的状态
      * @param {Function=} callback 回调函数，可选参数
      */
-    EA.trigger = function (elm, className, callback) {
+    EA.trigger = function (elm, className, save, callback) {
         if (Modernizr.cssanimations) {
-            setEnd3(elm, callback);
+            if (is(save, 'function')) {
+                callback = save;
+                save = false;
+            }
+            setEnd3(elm, clear);
             if (is(className, 'array')) {
                 for (var i = 0, len = className.length;i < len;i++) {
                     $(elm).addClass(className[i]);
@@ -179,7 +185,9 @@ window.EA = (function (window, document, undefined) {
             if (callback) {
                 callback();
             }
-            $(elm).removeClass(className);
+            if (!save) {
+                $(elm).removeClass(className);
+            }
         }
     }
 
@@ -217,17 +225,17 @@ window.EA = (function (window, document, undefined) {
      * @param {number=} option.delay 延迟时间，可选参数
      * @param {number | string=} option.count 动画次数，可选参数默认为1，forever无限
      * @param {boolean=} option.back 是否反向播放动画，可选参数
+     * @param {boolean=} option.save 是否保持动画结束时的状态
      * @param {Array} option.keyframe 关键帧动作
      */
     EA.create = function (elm, option, callback) {
-        if (callback) {
-            setEnd3(callback);
-        }
+        setEnd3(elm, clear);
         if (option.name && option.keyframe) {
             var cssText = '';
+            var prefixed = getPrefixed().css;
             var plan = option.name + ' ' + option.time + 's';
-            cssText = '@-webkit-keyframes ' + option.name + ' {' + getCssText(option.keyframe) + '}';
-            addCSS(cssText);
+            cssText = '@' + prefixed + 'keyframes ' + option.name + ' {' + getCssText(option.keyframe, prefixed) + '}';
+            addCSS(cssText, option.name);
             if (!option.easing) {
                 option.easing = 'ease';
             }
@@ -247,65 +255,230 @@ window.EA = (function (window, document, undefined) {
             plan += ' ' + option.easing + ' ' + option.delay + 's ' + option.count + ' ' + option.back;
             setStyle3(elm, 'animation', plan);
         }
+
+        function clear () {
+            if (callback) {
+                callback();
+            }
+            if(!option.save) {
+                clearStyle3(elm);
+                removeCSS(option.name);
+            }
+        }
+    }
+
+    /**
+     * 删除关键帧动画
+     *
+     * @param {string} name 动画名称
+     */
+    EA.delete = function (name) {
+        removeCSS(name);
+    }
+
+    /**
+     * 创建关键帧
+     *
+     * @param {Object} elm dom对象
+     * @param {Object | Array} option 关键帧动作对象或数组
+     * @param {string} option.name 动画名称
+     * @param {Array} option.keyframe 关键帧动作
+     */
+    EA.init = function (option) {
+        if (option) {
+            var cssText = '';
+            var prefixed = getPrefixed().css;
+            if (is(option, 'array')) {
+                for (var i = 0, len = option.length; i < len; i++) {
+                    cssText = '@' + prefixed + 'keyframes ' + option[i].name + ' {' + getCssText(option[i].keyframe, prefixed) + '}';
+                    addCSS(cssText, option[i].name);
+                }
+            } else {
+                cssText = '@' + prefixed + 'keyframes ' + option.name + ' {' + getCssText(option.keyframe, prefixed) + '}';
+                addCSS(cssText, option.name);
+            }
+        }
+    }
+
+    /**
+     * 运行已定义的动画
+     *
+     * @param {Object} elm dom对象
+     * @param {Object} option 运动参数
+     * @param {string} option.name 动画名称
+     * @param {number} option.time 动画时间
+     * @param {string=} option.easing 缓动函数，可选参数
+     * @param {number=} option.delay 延迟时间，可选参数
+     * @param {number | string=} option.count 动画次数，可选参数默认为1，forever无限
+     * @param {boolean=} option.back 是否反向播放动画，可选参数
+     * @param {boolean=} option.save 是否保持动画结束时的状态
+     */
+    EA.run = function (elm, option, callback) {
+        setEnd3(elm, clear);
+        if (option.name) {
+            var plan = option.name + ' ' + option.time + 's';
+            if (!option.easing) {
+                option.easing = 'ease';
+            }
+            if (!option.delay) {
+                option.delay = 0;
+            }
+            if (!option.count) {
+                option.count = 1;
+            } else if (option.count === 'forever') {
+                option.count = 'infinite';
+            }
+            if(option.back == true) {
+                option.back = 'alternate';
+            } else {
+                option.back = 'normal';
+            }
+            plan += ' ' + option.easing + ' ' + option.delay + 's ' + option.count + ' ' + option.back;
+            setStyle3(elm, 'animation', plan);
+        }
+
+        function clear () {
+            if (callback) {
+                callback();
+            }
+            if(!option.save) {
+                clearStyle3(elm);
+            }
+        }
     }
 
     /**
      * 更新动画
      *
-     * @param {Object} elm dom对象
+     * @param {string} name 动画名字
      * @param {Array} keyframe 关键帧动作
      */
-    EA.update = function (elm, keyframe, callback) {
-        if (callback) {
-            setEnd3(callback);
-        }
+    EA.update = function (name, keyframe) {
         if (keyframe) {
-            var plan = '';
-            setStyle3(elm, 'animation', plan);
+            var keyframesRule = getKeyFramse(name);
+            for (var i = 0, len = keyframe.length; i < len; i++) {
+                var rule = keyframe[i];
+                keyframesRule[0].insertRule(keyframe[i]);
+            }
         }
+    }
+
+    /**
+     * 获得关键帧对象
+     *
+     * @param {string} name 动画名字
+     */
+    var getKeyFramse = function(name){
+        var styleSheet = document.styleSheets,
+        keyframesRule = [];
+        for (var i = 0, len = styleSheet.length; i < len; i++) {
+            [].slice.call(styleSheet[i].cssRules).forEach(function(item) {
+                if (item.type === CSSRule.KEYFRAMES_RULE && item.name === name) {
+                    keyframesRule.push(item);
+                }
+            });
+        }
+        return keyframesRule;
+    }
+
+    /**
+     * 获得浏览器前缀
+     *
+     */
+    function getPrefixed() {
+        var styles = window.getComputedStyle(document.documentElement, ''),
+        pre = (Array.prototype.slice
+            .call(styles)
+            .join('')
+            .match(/-(moz|webkit|ms)-/) || (styles.OLink === '' && ['', 'o'])
+        )[1],
+        dom = ('WebKit|Moz|MS|O').match(new RegExp('(' + pre + ')', 'i'))[1];
+        return {
+            dom: dom,
+            lowercase: pre,
+            uppercase: pre.toUpperCase(),
+            css: '-' + pre + '-',
+            js: pre[0].toUpperCase() + pre.substr(1)
+        };
     }
 
     /**
      * 解析参数生成css文本
      *
      * @param {Array} option 生成css文本需要的参数
+     * @param {string} prefixes 浏览器前缀
      */
-    function getCssText(option) {
+    function getCssText(option, prefixed) {
         var tmp = '';
         for (var i = 0, len = option.length;i < len;i++) {
             tmp += option[i];
         }
+        tmp = tmp.replace(/transform/g, prefixed + 'transform');
+        tmp = tmp.replace(/animation/g, prefixed + 'animation');
         return tmp;
     }
 
     /**
      * 向dom添加样式
      *
-     * @param {number} cssText css文本
+     * @param {string} cssText css文本
+     * @param {string} name keyframe名字
      */
-    function addCSS(cssText){
+    function addCSS(cssText, name) {
+        if (EA.animations[name]) {
+            return;
+        }
         var style = null, head = document.head || document.getElementsByTagName('head')[0];
         style = document.getElementsByTagName('style')[0];
         if (!style) {
             style = document.createElement('style');
             style.type = 'text/css';
         }
-        if(style.styleSheet){
-            var func = function(){
-                try{
-                    style.styleSheet.cssText = cssText;
-                }catch(e){
-
+        if (style.styleSheet) {
+            var func = function() {
+                try {
+                    style.styleSheet.cssText += cssText;
+                } catch(e) {
+                    log('addCSS faild');
                 }
             }
-            if(style.styleSheet.disabled){
+            if (style.styleSheet.disabled) {
                 setTimeout(func,10);
-            }else{
+            } else {
                 func();
             }
-        }else{
+        } else {
             var textNode = document.createTextNode(cssText);
             style.appendChild(textNode);
+        }
+        head.appendChild(style);
+        EA.animations[name] = cssText;
+    }
+
+    /**
+     * 从dom删除样式
+     *
+     * @param {string} name keyframe名字
+     */
+    function removeCSS(name) {
+        var style = null, head = document.head || document.getElementsByTagName('head')[0];
+        style = document.getElementsByTagName('style')[0];
+        var cssText = EA.animations[name];
+        if (style.styleSheet) {
+            var func = function() {
+                try {
+                    style.styleSheet.cssText = style.styleSheet.cssText.replace(cssText, '');
+                } catch(e) {
+                    log('removeCSS faild');
+                }
+            }
+            if (style.styleSheet.disabled) {
+                setTimeout(func,10);
+            } else {
+                func();
+            }
+        } else {
+            style.innerText = style.innerText.replace(cssText, '');
         }
         head.appendChild(style);
     }

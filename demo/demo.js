@@ -7,7 +7,7 @@
 $(document).ready(function() {
 
     // button demo event
-    $(".animateTest").click(function () {
+    $(".span3 div").click(function () {
         var tag = $(this).attr('tag');
         EA.trigger(this, tag);
     });
