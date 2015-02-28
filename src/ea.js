@@ -9,6 +9,9 @@ window.EA = (function (window, document, undefined) {
     EA = {};
     EA.animations = {};
 
+    //浏览器前缀对象，包含多种可用格式
+    var prefixed = getPrefixed();
+
     log(Modernizr);
 
     /**
@@ -232,9 +235,8 @@ window.EA = (function (window, document, undefined) {
         setEnd3(elm, clear);
         if (option.name && option.keyframe) {
             var cssText = '';
-            var prefixed = getPrefixed().css;
             var plan = option.name + ' ' + option.time + 's';
-            cssText = '@' + prefixed + 'keyframes ' + option.name + ' {' + getCssText(option.keyframe, prefixed) + '}';
+            cssText = '@' + prefixed.css + 'keyframes ' + option.name + ' {' + getCssText(option.keyframe, prefixed.css) + '}';
             addCSS(cssText, option.name);
             if (!option.easing) {
                 option.easing = 'ease';
@@ -287,14 +289,13 @@ window.EA = (function (window, document, undefined) {
     EA.init = function (option) {
         if (option) {
             var cssText = '';
-            var prefixed = getPrefixed().css;
             if (is(option, 'array')) {
                 for (var i = 0, len = option.length; i < len; i++) {
-                    cssText = '@' + prefixed + 'keyframes ' + option[i].name + ' {' + getCssText(option[i].keyframe, prefixed) + '}';
+                    cssText = '@' + prefixed.css + 'keyframes ' + option[i].name + ' {' + getCssText(option[i].keyframe, prefixed.css) + '}';
                     addCSS(cssText, option[i].name);
                 }
             } else {
-                cssText = '@' + prefixed + 'keyframes ' + option.name + ' {' + getCssText(option.keyframe, prefixed) + '}';
+                cssText = '@' + prefixed.css + 'keyframes ' + option.name + ' {' + getCssText(option.keyframe, prefixed.css) + '}';
                 addCSS(cssText, option.name);
             }
         }
@@ -504,15 +505,8 @@ window.EA = (function (window, document, undefined) {
      * @param {string} 属性值
      */
     function setStyle3 (elm, name, value) {
-        var wStyle = 'Webkit' + name.charAt(0).toUpperCase() + name.substring(1);
-        var mStyle = 'Moz' + name.charAt(0).toUpperCase() + name.substring(1);
-        var oSyle = 'O' + name.charAt(0).toUpperCase() + name.substring(1);
-        var msSyle = 'ms' + name.charAt(0).toUpperCase() + name.substring(1);
-        elm.style[name] = value;
-        elm.style[wStyle] = value;
-        elm.style[mStyle] = value;
-        elm.style[oSyle] = value;
-        elm.style[msSyle] = value;
+        var style = prefixed.js + name.charAt(0).toUpperCase() + name.substring(1);
+        elm.style[style] = value;
     }
 
     /**
