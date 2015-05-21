@@ -4,7 +4,7 @@
  * @date 2015-02-14
  */
 $(document).ready(function() {
-    EA.init([
+    ea().initKeyFrame([
         {
           name:'swing',
           keyframe:[
@@ -27,8 +27,9 @@ $(document).ready(function() {
         }
     ]);
 
+
     $('.span3').click(function() {
-        /*EA.create(this, {name:'swing', time:'1', keyframe:[
+        /*ea().create(this, {name:'swing', time:'1', keyframe:[
             '20% {transform: rotate(15deg);}',
         		'40% {transform: rotate(-10deg);}',
         		'60% {transform: rotate(5deg);}',
@@ -37,9 +38,10 @@ $(document).ready(function() {
             ]
         });*/
 
-        EA.update('tada', [
+        /*ea().update('tada', [
             '100% {transform: translate(100px);}'
-            ]);
-        EA.run(this, {name:'tada', time:1, save:true});
+          ]);
+        */
+        ea('.span3').run({name:'tada', time:1, save:false});
     });
 });
