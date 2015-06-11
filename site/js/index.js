@@ -38,10 +38,10 @@ $(document).ready(function() {
             ]
         });*/
 
-        /*ea().update('tada', [
+        ea().update('tada', [
             '100% {transform: translate(100px);}'
           ]);
-        */
+
         ea('.span3').run({name:'tada', time:1, save:false});
     });
 });
