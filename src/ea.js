@@ -152,7 +152,7 @@ EA.prototype = {
             this.setStyle3('transform', plan);
         }
 				else {
-            $(this.elm).animate(option, time, callback);
+            this.log('can not realize on css2');
         }
         return this;
     },
@@ -251,7 +251,7 @@ EA.prototype = {
             this.setStyle({opacity: 1});
         }
 				else {
-            $(this.elm).fadeIn(time, callback);
+            this.log('can not realize on css2');
         }
         return this;
     },
@@ -272,7 +272,7 @@ EA.prototype = {
             this.setStyle({opacity: 0});
         }
 				else {
-            $(this.elm).fadeOut(time, callback);
+            this.log('can not realize on css2');
         }
         return this;
     },
@@ -295,11 +295,11 @@ EA.prototype = {
             this.setEnd3(clear);
             if (this.is(className, 'array')) {
                 for (var i = 0, len = className.length;i < len; i++) {
-                    $(this.elm).addClass(className[i]);
+                    this.addClass(className[i]);
                 }
             }
 						else {
-                $(this.elm).addClass(className);
+                this.addClass(className);
             }
         }
 				else {
@@ -311,7 +311,7 @@ EA.prototype = {
                 callback();
             }
             if (!save) {
-                $(that.elm).removeClass(className);
+                that.removeClass(className);
             }
         }
         return this;
@@ -328,17 +328,17 @@ EA.prototype = {
             if (className) {
                 if (this.is(className, 'array')) {
                     for (var i = 0, len = className.length;i < len;i++) {
-                        $(this.elm).removeClass(className[i]);
+                        this.removeClass(className[i]);
                     }
                 }
 								else {
-                    $(this.elm).removeClass(className);
+                    this.removeClass(className);
                 }
             }
             this.clearStyle3();
         }
 				else {
-            $(this.elm).stop();
+            this.log('can not realize on css2');
         }
         return this;
     },
@@ -594,8 +594,24 @@ EA.prototype = {
      * @param {Function=} callback 回调函数
      */
     'setEnd3': function (callback) {
-        $(this.elm).one('webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimationend animationend', callback);
-        $(this.elm).one('webkitTransitionEnd mozTransitionEnd MSTransitionEnd otransitionend transitionend', callback);
+        var that = this;
+        var tmpA = function () {
+            callback();
+            that.removeHandler(that.elm, that.prefixed.lowercase === 'o' ? 'oanimationend'
+            : that.prefixed.lowercase + 'AnimationEnd', tmpA);
+            that.removeHandler(that.elm, 'animationend', tmpA);
+        };
+        var tmpT = function () {
+            callback();
+            that.removeHandler(that.elm, that.prefixed.lowercase + 'TransitionEnd', tmpT);
+            that.removeHandler(that.elm, 'transitionend', tmpT);
+        };
+        this.addHandler(this.elm, that.prefixed.lowercase === 'o' ? 'oanimationend'
+        : that.prefixed.lowercase + 'AnimationEnd', tmpA);
+        this.addHandler(this.elm, 'animationend', tmpA);
+        this.addHandler(this.elm, that.prefixed.lowercase === 'o' ? 'otransitionend'
+        : that.prefixed.lowercase + 'TransitionEnd', tmpT);
+        this.addHandler(this.elm, 'transitionend', tmpT);
     },
     /**
      * 设置元素样式
@@ -682,6 +698,28 @@ EA.prototype = {
         return ret;
     },
     /**
+     * 添加className
+     *
+     * @param {string} className css类名
+		 *
+     */
+    'addClass': function (className) {
+        if (this.elm.className.indexOf(className) > -1) {
+            this.elm.className += className;
+        }
+    },
+    /**
+     * 移除className
+     *
+     * @param {string} className css类名
+		 *
+     */
+    'removeClass': function (className) {
+        if (this.elm.className.indexOf(className) > -1) {
+            this.elm.className = this.elm.className.replace(className, '');
+        }
+    },
+    /**
      * 设置元素样式
      *
      * @param {string} msg 日志内容
@@ -690,6 +728,44 @@ EA.prototype = {
     'log': function (msg, level) {
         if (window.console) {
             window.console.log(msg);
+        }
+    },
+    /**
+     * 添加事件
+     *
+     * @param {Object} element dom 对象
+     * @param {string} type 事件类型
+     * @param {Function} handler 处理函数
+     *
+     */
+    'addHandler': function (element, type, handler) {
+        if (element.addEventListener) {
+            element.addEventListener(type, handler, false);
+        }
+        else if (element.attachEvent) {
+            element.attachEvent('on' + type, handler);
+        }
+        else {
+            element['on' + type] = handler;
+        }
+    },
+    /**
+     * 移除事件
+     *
+     * @param {Object} element dom 对象
+     * @param {string} type 事件类型
+     * @param {Function} handler 处理函数
+     *
+     */
+    'removeHandler': function (element, type, handler) {
+        if (element.removeEventListener) {
+            element.removeEventListener(type, handler, false);
+        }
+        else if (element.detachEvent) {
+            element.detachEvent('on' + type, handler);
+        }
+        else {
+            element['on' + type] = null;
         }
     }
 };
