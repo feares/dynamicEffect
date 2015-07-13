@@ -141,7 +141,7 @@ background-color: #2ecc71;
   line-height: 100px;
 }
 .demo-logo .logo {
-  background: url("../logo.gif") center 0 no-repeat;
+  background: url("../../logo.gif") center 0 no-repeat;
   background-size: 256px 186px;
   height: 186px;
   margin: 0 auto 26px;

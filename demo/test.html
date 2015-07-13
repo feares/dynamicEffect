@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en" class="dk_fouc has-js">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta charset="utf-8">
+    <title>Dynamic Effect</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="css/index.css" rel="stylesheet">
+    <link rel="shortcut icon" href="../favicon.ico">
+  </head>
+  <body>
+    <div class="container">
+      <h3 class="demo-panel-title">Buttons</h3>
+      <div class="row demo-row">
+        <div class="span3">
+          <div tag="" class="test">Test</div>
+        </div>
+      </div> <!-- /row -->
+      <h3 class="demo-panel-title">SVG</h3>
+      <div class="row demo-row" id="svg-test1">
+          <svg width="400px" height="400px">
+            <!--
+            <path d="M 50 0 A 50 50, 0, 1, 1, 0 50 L 50 50 Z" fill="red"/>
+            <text x="50" y="70" font-size="50" text-anchor="middle" fill="white">SVG</text>
+            -->
+            <!--
+            <path id="my_path" d="M 20,20 C 40,40 80,40 100,20" />
+            <text>
+              <textPath xlink:href="#my_path">This text follows a curve.</textPath>
+            </text>
+            -->
+            <!--
+            <text x="10" y="10">Hello World!
+                <tspan font-weight="bold" fill="red">This is bold and red</tspan>
+            </text>
+            -->
+            <!--
+            <svg width="5cm" height="4cm">
+                <image xlink:href="Penguins.jpg" x="0" y="0" height="50px" width="50px"/>
+            </svg>
+            -->
+            <desc>基本动画元素</desc>
+             <rect x="1" y="1" width="798" height="298" 
+                   fill="none" stroke="blue" stroke-width="2" />
+             <!-- 矩形位置和大小的动画 -->
+             <rect id="RectElement" x="300" y="100" width="300" height="100"
+                   fill="rgb(255,255,0)"  >
+               <animate attributeName="x" attributeType="XML"
+                        begin="0s" dur="9s" fill="freeze" from="300" to="0" />
+               <animate attributeName="y" attributeType="XML"
+                        begin="0s" dur="9s" fill="freeze" from="100" to="0" />
+               <animate attributeName="width" attributeType="XML"
+                        begin="0s" dur="9s" fill="freeze" from="300" to="800" />
+               <animate attributeName="height" attributeType="XML"
+                        begin="0s" dur="9s" fill="freeze" from="100" to="300" />
+             </rect>
+             <!-- 创建新的用户坐标空间，所以text是从新的(0,0)开始，后续的变换都是针对新坐标系的 -->
+             <g transform="translate(100,100)" >
+               <!-- 下面使用了set去动画visibility，然后使用animateMotion,
+            animate和animateTransform执行其他类型的动画 -->
+               <text id="TextElement" x="0" y="0"
+                     font-family="Verdana" font-size="35.27" visibility="hidden"  >
+                 It's alive!
+                 <set attributeName="visibility" attributeType="CSS" to="visible"
+                      begin="3s" dur="6s" fill="freeze" />
+                 <animateMotion path="M 0 0 L 100 100"
+                      begin="3s" dur="6s" fill="freeze" />
+                 <animate attributeName="fill" attributeType="CSS"
+                      from="rgb(0,0,255)" to="rgb(128,0,0)"
+                      begin="3s" dur="6s" fill="freeze" />
+                 <animateTransform attributeName="transform" attributeType="XML"
+                      type="rotate" from="-30" to="0"
+                      begin="3s" dur="6s" fill="freeze" />
+                 <animateTransform attributeName="transform" attributeType="XML"
+                      type="scale" from="1" to="3" additive="sum"
+                      begin="3s" dur="6s" fill="freeze" />
+               </text>
+             </g>
+          </svg>
+      </div> <!-- /row -->
+    </div> <!-- /container -->
+
+    <!-- Load JS here for greater good =============================-->
+    <script src="../src/jquery.min.js"></script>
+    <script src="../src/jquery-ui-1.10.0.custom.min.js"></script>
+    <script src="../src/ea.js"></script>
+    <script src="js/index.js"></script>
+
+<tester id="tagsinput_tag_autosize_tester" style="position: absolute; top: -9999px; left: -9999px; width: auto; font-size: 14px; font-family: sans-serif; font-weight: 400; letter-spacing: 0px; white-space: nowrap;"></tester>
+<div id="site-navbar" style="position: absolute; top: -4px; left: -3px; border: 0; z-index: 2000;padding:0;margin:0;">
+    <a href="https://github.com/feares/dynamicEffect" title="返回首页" style="background:none;">
+      <img src="../return-back.png" style="padding:0;margin:0;border:0; -webkit-box-shadow: none;-moz-box-shadow: none;box-shadow: none;">
+    </a>
+</div>
+</body>
+</html>
