@@ -1,0 +1,125 @@
+body {
+    background: #B8F1D2;
+}
+
+.container {
+    width: 980px;
+    margin: 0 auto;
+}
+
+.page {
+    display: none;
+    font-size: 0px;
+    margin: 0 auto;
+    width: 400px;
+}
+
+.page2 {
+    position: absolute;
+    top: -140px;
+    left: 380px;
+    overflow: hidden;
+}
+
+.show {
+    display: block;
+}
+
+.hide {
+    opacity: 0;
+}
+
+.inline {
+    display: inline-block;
+}
+
+.scroll .top {
+    width: 30px;
+    height: 30px;
+    border-radius: 10px 10px 0 0;
+    background-color: #513F06;
+    margin-left: 10px;
+}
+
+.scroll .middle {
+    width: 50px;
+    height: 250px;
+    background-color: #DCDDD2;
+}
+
+.scroll .bottom {
+    width: 30px;
+    height: 30px;
+    border-radius: 0 0 10px 10px;
+    background-color: #513F06;
+    margin-left: 10px;
+}
+
+.scroll-body {
+    width: 300px;
+    height: 210px;
+    vertical-align: top;
+    border: 20px #DCDDD2 solid;
+    border-bottom-style: inset;
+    margin-top: 30px;
+    overflow: hidden;
+    background: #fff;
+}
+
+.scroll-body .content ul {
+    width: 240px;
+    list-style: none;
+}
+
+.scroll-body .content li {
+    float: right;
+    display: inline;
+    margin-left: 34px;
+    width: 40px;
+    height: 100px;
+    font-size: 40px;
+    word-wrap: break-word;
+    word-break: nomal;
+    opacity: 0;
+}
+
+.scroll-img {
+    position: relative;
+    top: -138px;
+    left: -166px;
+    transform: scale(0.8, 0.8);
+    display: none;
+}
+
+.scroll .left {
+    box-shadow: 0 0 1px #D2CEA9 inset;
+}
+
+.scroll .right {
+    box-shadow: 0 0 1px #D2CEA9 inset;
+}
+
+.scroll-mask {
+    width: 350px;
+    height: 280px;
+    background-color: #B8F1D2;
+    vertical-align: top;
+    z-index: 2;
+    transform: translateX(-350px);
+    position: absolute;
+}
+
+.plate {
+    width: 500px;
+    height: 500px;
+    background: transparent;
+    margin: 0 auto;
+}
+
+.plate div {
+    width: 100px;
+    height: 90px;
+    position: absolute;
+    left: 225px;
+    top: 200px;
+}

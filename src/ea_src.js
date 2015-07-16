@@ -125,6 +125,9 @@ EA.prototype = {
      * @param {number=} option.right right位移，可选参数
      * @param {number=} option.bottom bottom位移，可选参数
      * @param {number=} option.left left位移，可选参数
+     * @param {number=} option.up up位移，可选参数
+     * @param {number=} option.down down位移，可选参数
+     * @param {number=} option.mix 混合动画，可选参数
      * @param {number} time 动画时间
      * @param {Function=} callback 回调函数，可选参数
 		 *
@@ -148,6 +151,15 @@ EA.prototype = {
         if (option.left) {
             plan += ' translateX(' + option.left + ')';
         }
+        if (option.up) {
+            plan += ' translateZ(' + option.up + ')';
+        }
+        if (option.down) {
+            plan += ' translateZ(-' + option.down + ')';
+        }
+        if (option.mix) {
+            plan += this.getStyle3('transform');
+        }
         this.setStyle3('transform', plan);
         return this;
     },
@@ -158,6 +170,7 @@ EA.prototype = {
      * @param {number=} option.x 相对于x轴角度，可选参数
      * @param {number=} option.y 相对于y轴角度，可选参数
      * @param {number=} option.p 3d视距，可选参数
+     * @param {number=} option.mix 混合动画，可选参数
      * @param {number} time 动画时间
      * @param {Function=} callback 回调函数，可选参数
 		 *
@@ -165,6 +178,9 @@ EA.prototype = {
      */
     'rotate': function (option, time, callback) {
         this.setStyle3('transition', this.getTime(time) + 's');
+        if (callback) {
+            this.setEnd3(callback);
+        }
         var plan = '';
         if (option.x) {
             plan += ' rotateX(' + option.x + 'deg)';
@@ -173,17 +189,19 @@ EA.prototype = {
             plan += ' rotateX(0deg)';
         }
         if (option.y) {
-            plan = ' rotateY(' + option.y + 'deg)';
+            plan += ' rotateY(' + option.y + 'deg)';
         }
 				else {
-            plan = ' rotateY(0deg)';
+            plan += ' rotateY(0deg)';
         }
         if (option.p) {
             plan = 'perspective(' + option.p + 'px)' + plan;
+            this.setStyle({'transform-style': 'preserve-3d'});
         }
-        if (callback) {
-            this.setEnd3(callback);
+        if (option.mix) {
+            plan += this.getStyle3('transform');
         }
+
         this.setStyle3('transform', plan);
         return this;
     },
@@ -193,6 +211,7 @@ EA.prototype = {
      * @param {Object} option 运动参数
      * @param {number=} option.x 相对于x轴角度，可选参数
      * @param {number=} option.y 相对于y轴角度，可选参数
+     * @param {number=} option.mix 混合动画，可选参数
      * @param {number} time 动画时间
      * @param {Function=} callback 回调函数，可选参数
 		 *
@@ -211,11 +230,15 @@ EA.prototype = {
             plan += ' skewX(0deg)';
         }
         if (option.y) {
-            plan = ' skewY(' + option.y + 'deg)';
+            plan += ' skewY(' + option.y + 'deg)';
         }
 				else {
             plan += ' skewY(0deg)';
         }
+        if (option.mix) {
+            plan += this.getStyle3('transform');
+        }
+
         this.setStyle3('transform', plan);
         return this;
     },
@@ -528,6 +551,9 @@ EA.prototype = {
 		 * @return {number}
      */
     'getTime': function (time, fixed) {
+        if (!time) {
+            return 0;
+        }
         if (!fixed) {
             fixed = 1;
         }
@@ -536,12 +562,23 @@ EA.prototype = {
     /**
      * 设置css3样式
      *
-     * @param {string} name 属性明
+     * @param {string} name 属性名
      * @param {string} value 属性值
      */
     'setStyle3': function (name, value) {
         var style = this.prefixed.js + name.charAt(0).toUpperCase() + name.substring(1);
         this.elm.style[style] = value;
+    },
+    /**
+     * 获取css3样式
+     *
+     * @param {string} name 属性名
+     *
+     * @return {string}
+     */
+    'getStyle3': function (name) {
+        var style = this.prefixed.js + name.charAt(0).toUpperCase() + name.substring(1);
+        return this.elm.style[style];
     },
     /**
      * 清除css3样式
