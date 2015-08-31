@@ -4,17 +4,33 @@
  * @date 2015-02-14
  */
 
+/**
+ * class 动效库实例
+ *
+ * @param {string|Object} selector id、class 选择器或dom对象
+ * @return {Object} 生成后的EA对象
+ */
 var EA = function (selector) {
     return new EA.prototype.Init(selector);
 };
 
 EA.prototype = {
+
+    /**
+     * 构造EA对象
+     *
+     * @param {string|Object} selector id、class 选择器或dom对象
+     * @return {Object} 生成后的EA对象
+     */
     'Init': function (selector) {
         EA.prototype.prefixed = this.getPrefixed();
         if (!selector) {
             return this;
         }
-        if (this.is(selector, 'dom')) {
+        if (selector.jquery) {
+            this.elm = selector[0];
+        }
+        else if (this.is(selector, 'dom')) {
             this.elm = selector;
         }
         else if (selector.indexOf('#') === 0) {
@@ -28,22 +44,49 @@ EA.prototype = {
         }
         return this;
     },
-    'version': '0.0.1',
     'constructor': EA,
+
+    /**
+     * @const 版本号
+     *
+     * @public
+     */
+    'version': '0.0.1',
+
+    /**
+     * 浏览器前缀
+     *
+     * @public
+     */
     'prefixed': null,
+
+    /**
+     * 动画名称集合
+     *
+     * @public
+     */
     'animations': {},
+
+    /**
+     * 返回当前版本号
+     *
+     * @return {string} 当前版本号
+     */
+    'getVersion': function () {
+        return this.version;
+    },
+
 		/**
-		* 获得浏览器前缀
-		*
-		* @return {Object}
-		*/
+		 * 获得浏览器前缀
+		 *
+		 * @return {Object}
+		 */
     'getPrefixed': function () {
         var styles = window.getComputedStyle(document.documentElement, '');
         var pre = (Array.prototype.slice
             .call(styles)
             .join('')
-            .match(/-(moz|webkit|ms)-/) || (styles.OLink === '' && ['', 'o'])
-        )[1];
+            .match(/-(moz|webkit|ms)-/) || (styles.OLink === '' && ['', 'o']))[1];
         var dom = ('WebKit|Moz|MS|O').match(new RegExp('(' + pre + ')', 'i'))[1];
         return {
             dom: dom,
@@ -53,22 +96,23 @@ EA.prototype = {
             js: pre[0].toUpperCase() + pre.substr(1)
         };
     },
+
 		/**
-		* 创建动画
-		*
-		* @param {Object} option 运动参数
-		* @param {string} option.name 动画名称
-		* @param {number} option.time 动画时间
-		* @param {string=} option.easing 缓动函数，可选参数
-		* @param {number=} option.delay 延迟时间，可选参数
-		* @param {number | string=} option.count 动画次数，可选参数默认为1，forever无限
-		* @param {boolean=} option.back 是否反向播放动画，可选参数
-		* @param {boolean=} option.save 是否保持动画结束时的状态
-		* @param {Array} option.keyframe 关键帧动作
-		* @param {Function=} callback 回调函数，可选
-		*
-		* @return {Object}
-		*/
+		 * 创建动画
+		 *
+		 * @param {Object} option 运动参数
+		 * @param {string} option.name 动画名称
+		 * @param {number} option.time 动画时间
+		 * @param {string=} option.easing 缓动函数，可选参数
+		 * @param {number=} option.delay 延迟时间，可选参数
+		 * @param {number | string=} option.count 动画次数，可选参数默认为1，forever无限
+		 * @param {boolean=} option.back 是否反向播放动画，可选参数
+		 * @param {boolean=} option.save 是否保持动画结束时的状态
+		 * @param {Array} option.keyframe 关键帧动作
+		 * @param {Function=} callback 回调函数，可选
+		 *
+		 * @return {Object}
+		 */
     'create': function (option, callback) {
         var that = this;
         this.setEnd3(clear);
@@ -117,6 +161,7 @@ EA.prototype = {
             }
         }
     },
+
 		/**
      * 移动元素
      *
@@ -140,16 +185,16 @@ EA.prototype = {
             this.setEnd3(callback);
         }
         if (option.top) {
-            plan += ' translateY(' + option.top + ')';
+            plan += ' translateY(-' + option.top + ')';
         }
         if (option.right) {
-            plan += ' translateX(-' + option.right + ')';
+            plan += ' translateX(' + option.right + ')';
         }
         if (option.bottom) {
-            plan += ' translateY(-' + option.bottom + ')';
+            plan += ' translateY(' + option.bottom + ')';
         }
         if (option.left) {
-            plan += ' translateX(' + option.left + ')';
+            plan += ' translateX(-' + option.left + ')';
         }
         if (option.up) {
             plan += ' translateZ(' + option.up + ')';
@@ -163,6 +208,7 @@ EA.prototype = {
         this.setStyle3('transform', plan);
         return this;
     },
+
     /**
      * 旋转元素
      *
@@ -205,6 +251,7 @@ EA.prototype = {
         this.setStyle3('transform', plan);
         return this;
     },
+
     /**
      * 扭曲元素
      *
@@ -242,6 +289,7 @@ EA.prototype = {
         this.setStyle3('transform', plan);
         return this;
     },
+
     /**
      * 显示元素
      *
@@ -258,6 +306,7 @@ EA.prototype = {
         this.setStyle({opacity: 1});
         return this;
     },
+
     /**
      * 隐藏元素
      *
@@ -274,6 +323,7 @@ EA.prototype = {
         this.setStyle({opacity: 0});
         return this;
     },
+
     /**
      * 触发动画，用于对写好的cssanimation调用
      *
@@ -291,7 +341,7 @@ EA.prototype = {
         var that = this;
         this.setEnd3(clear);
         if (this.is(className, 'array')) {
-            for (var i = 0, len = className.length;i < len; i++) {
+            for (var i = 0, len = className.length; i < len; i++) {
                 this.addClass(className[i]);
             }
         }
@@ -309,6 +359,7 @@ EA.prototype = {
         }
         return this;
     },
+
     /**
      * 停止动画
      *
@@ -319,7 +370,7 @@ EA.prototype = {
     'stop': function (className) {
         if (className) {
             if (this.is(className, 'array')) {
-                for (var i = 0, len = className.length;i < len;i++) {
+                for (var i = 0, len = className.length; i < len; i++) {
                     this.removeClass(className[i]);
                 }
             }
@@ -330,6 +381,7 @@ EA.prototype = {
         this.clearStyle3();
         return this;
     },
+
     /**
      * 删除关键帧动画
      *
@@ -338,6 +390,7 @@ EA.prototype = {
     'delete': function (name) {
         this.removeCSS(name);
     },
+
     /**
      * 创建关键帧
      *
@@ -362,6 +415,7 @@ EA.prototype = {
             }
         }
     },
+
     /**
      * 运行已定义的动画
      *
@@ -420,6 +474,7 @@ EA.prototype = {
             }
         }
     },
+
 		/**
      * 更新动画
      *
@@ -434,6 +489,7 @@ EA.prototype = {
             }
         }
     },
+
     /**
      * 获得关键帧对象
      *
@@ -454,6 +510,7 @@ EA.prototype = {
         }
         return keyframesRule;
     },
+
     /**
      * 解析参数生成css文本
      *
@@ -464,13 +521,14 @@ EA.prototype = {
      */
     'getCssText': function (option, prefixed) {
         var tmp = '';
-        for (var i = 0, len = option.length;i < len;i++) {
+        for (var i = 0, len = option.length; i < len; i++) {
             tmp += option[i];
         }
         tmp = tmp.replace(/transform/g, prefixed + 'transform');
         tmp = tmp.replace(/animation/g, prefixed + 'animation');
         return tmp;
     },
+
     /**
      * 向dom添加样式
      *
@@ -511,6 +569,7 @@ EA.prototype = {
         head.appendChild(style);
         this.animations[name] = cssText;
     },
+
     /**
      * 从dom删除样式
      *
@@ -542,6 +601,7 @@ EA.prototype = {
         }
         head.appendChild(style);
     },
+
     /**
      * 格式化时间
      *
@@ -559,6 +619,7 @@ EA.prototype = {
         }
         return (time / 1000).toFixed(fixed);
     },
+
     /**
      * 设置css3样式
      *
@@ -569,6 +630,7 @@ EA.prototype = {
         var style = this.prefixed.js + name.charAt(0).toUpperCase() + name.substring(1);
         this.elm.style[style] = value;
     },
+
     /**
      * 获取css3样式
      *
@@ -580,6 +642,7 @@ EA.prototype = {
         var style = this.prefixed.js + name.charAt(0).toUpperCase() + name.substring(1);
         return this.elm.style[style];
     },
+
     /**
      * 清除css3样式
      *
@@ -590,6 +653,7 @@ EA.prototype = {
         this.setStyle3('transform', '');
         this.setStyle3('animation', '');
     },
+
     /**
      * 设置动画回调函数
      *
@@ -615,6 +679,7 @@ EA.prototype = {
         : that.prefixed.lowercase + 'TransitionEnd', tmpT);
         this.addHandler(this.elm, 'transitionend', tmpT);
     },
+
     /**
      * 设置元素样式
      *
@@ -639,6 +704,7 @@ EA.prototype = {
             }
         }
     },
+
     /**
      * 类型判断
      *
@@ -699,6 +765,7 @@ EA.prototype = {
         }
         return ret;
     },
+
     /**
      * 添加className
      *
@@ -710,6 +777,7 @@ EA.prototype = {
             this.elm.className += className;
         }
     },
+
     /**
      * 移除className
      *
@@ -721,6 +789,7 @@ EA.prototype = {
             this.elm.className = this.elm.className.replace(className, '');
         }
     },
+
     /**
      * 设置元素样式
      *
@@ -732,6 +801,7 @@ EA.prototype = {
             window.console.log(msg);
         }
     },
+
     /**
      * 添加事件
      *
@@ -751,6 +821,7 @@ EA.prototype = {
             element['on' + type] = handler;
         }
     },
+
     /**
      * 移除事件
      *
