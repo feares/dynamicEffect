@@ -1,0 +1,2587 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>EA - EA</title>
+
+    <link rel="stylesheet" href="../assets/vendor/prettify/prettify-min.css">
+    <link rel="stylesheet" href="../assets/css/main.css" id="site_styles">
+    <link rel="stylesheet" href="../assets/vendor/bootstrap/css/bootstrap.min.css">
+    <link rel="shortcut icon" type="image/png" href="../assets/favicon.png">
+</head>
+<body class="yui3-smart" _assetsPath="../assets">
+ <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+               <a class="navbar-brand mainlogo" href="https://github.com/feares/dynamicEffect">
+             
+            <img alt="EA" src="../assets/css/logo.png" title="EA">
+            
+                EA
+          </a>
+            </div>
+            <div id="navbar" class="navbar-collapse collapse">
+                 <ul class="nav navbar-nav">
+                    
+                    <li><a href="https://github.com/feares/dynamicEffect">首页</a>
+                    </li>
+                    
+                    <li><a href="/">文档</a>
+                    </li>
+                    
+                    <li><a href="https://github.com/feares/dynamicEffect">关于</a>
+                    </li>
+                    
+                </ul>
+               <div class="navbar-form navbar-right filterAPi" autocomplete="off">
+                <input type="text" id='txtSearchAPI' class="form-control search-query" placeholder="查找API" />
+                 <ul id="filterList" class="filterItems dropdown-menu" role="menu"></ul>
+                </div>
+            </div>
+        </div>
+    </nav>
+    <div id="sidebar">
+    <h3>模块/类</h3>
+        <div id="api-tabview-filter">
+            <input id='txtSearch' type="search" class="form-control" placeholder="筛选">
+        </div>
+        <dl id="sidebar_list">
+             
+                <dt>
+                    <span class="glyphicon glyphicon-minus"></span>
+                    <a href="../modules/EA.html">EA</a>
+                </dt>
+                <dd>
+                    <ul>
+                   
+                       <li>
+                            
+                           <a href="../classes/EA.html">EA</a>
+                           <ul>
+                                
+                           </ul>
+                       </li>
+                    
+                    </ul>
+                </dd>
+             
+        </dl>
+</div>
+
+    <div class="stdoc-content">
+        <div class="apidocs">
+            <div id="docs-main">
+                <div class="content">
+                    <div class="page-header">
+    <h1>EA <small>Class</small></h1>
+</div>
+ <div class="well well-small sign-left3">
+      <div class="stdoc-code"><p>EA 动效库实例</p>
+</div>
+ </div>
+
+<div class="well well-small sign-left2 container-fluid" id="classesItems">
+    <div class="row">
+
+        <div class="index-section methods col-sm-4">
+            <h3>方法</h3>
+            
+            <ul class="index-list methods">
+                
+                    <li class="index-item method">
+                        <a href="#" data-tabid="#method" data-anchor="#method_create" data-tablink="create">create</a>
+
+                        
+                        
+                    </li>
+                
+                    <li class="index-item method">
+                        <a href="#" data-tabid="#method" data-anchor="#method_getVersion" data-tablink="getVersion">getVersion</a>
+
+                        
+                        
+                    </li>
+                
+                    <li class="index-item method">
+                        <a href="#" data-tabid="#method" data-anchor="#method_hide" data-tablink="hide">hide</a>
+
+                        
+                        
+                    </li>
+                
+                    <li class="index-item method">
+                        <a href="#" data-tabid="#method" data-anchor="#method_initKeyFrame" data-tablink="initKeyFrame">initKeyFrame</a>
+
+                        
+                        
+                    </li>
+                
+                    <li class="index-item method">
+                        <a href="#" data-tabid="#method" data-anchor="#method_move" data-tablink="move">move</a>
+
+                        
+                        
+                    </li>
+                
+                    <li class="index-item method">
+                        <a href="#" data-tabid="#method" data-anchor="#method_rotate" data-tablink="rotate">rotate</a>
+
+                        
+                        
+                    </li>
+                
+                    <li class="index-item method">
+                        <a href="#" data-tabid="#method" data-anchor="#method_run" data-tablink="run">run</a>
+
+                        
+                        
+                    </li>
+                
+                    <li class="index-item method">
+                        <a href="#" data-tabid="#method" data-anchor="#method_show" data-tablink="show">show</a>
+
+                        
+                        
+                    </li>
+                
+                    <li class="index-item method">
+                        <a href="#" data-tabid="#method" data-anchor="#method_skew" data-tablink="skew">skew</a>
+
+                        
+                        
+                    </li>
+                
+                    <li class="index-item method">
+                        <a href="#" data-tabid="#method" data-anchor="#method_stop" data-tablink="stop">stop</a>
+
+                        
+                        
+                    </li>
+                
+                    <li class="index-item method">
+                        <a href="#" data-tabid="#method" data-anchor="#method_trigger" data-tablink="trigger">trigger</a>
+
+                        
+                        
+                    </li>
+                
+                    <li class="index-item method">
+                        <a href="#" data-tabid="#method" data-anchor="#method_update" data-tablink="update">update</a>
+
+                        
+                        
+                    </li>
+                
+            </ul>
+            
+        </div>
+
+        <div class="index-section properties col-sm-4">
+            <h3>属性</h3>
+            
+            <ul class="index-list properties">
+                
+                    <li class="index-item property">
+                        <a href="#" data-tabid="#property" data-anchor="#property_version" data-tablink="version">version</a>
+
+                        
+                        
+                    </li>
+                
+            </ul>
+            
+        </div>
+
+        <div class="index-section events col-sm-4">
+            <h3>事件</h3>
+            
+        </div>
+    </div>
+</div>
+
+<div>
+    <ul id="itemTab" class="nav nav-tabs">
+        <li class="active"><a data-toggle="tab" href="#class">详情</a></li>
+        
+            <li><a data-toggle="tab" href="#method">方法</a></li>
+        
+        
+            <li><a data-toggle="tab" href="#property">属性</a></li>
+        
+        
+    </ul>
+
+    <div class="tab-content">
+        <div id="class" class="tab-pane active">
+            <div class="well well-small classDetail sign-left1">
+            
+
+            
+
+            
+                <div class="foundat">
+                    代码位置: <a href="../files/ea_code_ea_ea.js.html#l35"><code>ea&#x2F;code&#x2F;ea&#x2F;ea.js:35</code></a>
+                </div>
+            
+
+            
+                
+                    模块: <a href="../modules/EA.html">EA</a>
+                
+            
+
+            
+        </div>
+
+        
+            
+                <div class="constructor">
+                    <h2>Constructor</h2>
+                    <div id="method_EA" class="method item">
+    <h3 class="name">EA</h3>
+    <code>
+    EA
+    
+        <div class="args">
+            <span class="paren">(</span><ul class="args-list inline commas">
+            
+                <li class="arg">
+                    
+                        selector
+                    
+                </li>
+            
+            </ul><span class="paren">)</span>
+        </div>
+    
+    </code>
+
+    
+        <span class="returns-inline">
+            <span class="type">Object</span>
+        </span>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                代码位置
+                
+            
+        
+        
+        <a href="../files/ea_code_ea_ea.js.html#l35"><code>ea&#x2F;code&#x2F;ea&#x2F;ea.js:35</code></a>
+        
+        </p>
+
+
+        
+
+        
+    </div>
+
+    <div class="description well well-small sign-left3">
+        
+    </div>
+
+    
+        <div class="params">
+            <h4>参数:</h4>
+
+            <table class="table table-bordered">
+            <tr class='active'><th>名称</th><th>类型</th><!--<th>flag</th>--><th>描述</th></tr>
+            
+                <tr class="param">
+                    
+                       <td> <code class="param-name">selector</code>
+                       <td> <span class="type">String | Object</span>
+                       <!--<td>
+                    
+
+                    
+                  </td>-->
+                    <td><div class="param-description">
+                        <p>id、class 选择器或dom对象</p>
+
+                    </div>
+
+                    
+                </tr>
+            
+            </table>
+        </div>
+    
+
+    
+        <div class="returns">
+            <h4>返回:</h4>
+
+            <div class="returns-description">
+                
+                    
+                        [<span class="type">Object</span>]
+                    
+                    <p>生成后的EA对象</p>
+
+                
+            </div>
+        </div>
+    
+
+    
+        <div class="example">
+            <h4>示例:</h4>
+            <ul class="nav nav-tabs example-list">
+                
+                <li role="presentation"  class="active"  _no='0'> <a>init</a></li>
+                
+            </ul>
+
+            <div class="example-content ">
+                <div class="stdoc-code"><pre class="code prettyprint"><code>&lt;html&gt;
+    &lt;body&gt;
+        &lt;div id="id"&gt;div1&lt;/div&gt;
+        &lt;div class="className"&gt;div2&lt;/div&gt;
+        &lt;div id="div3"&gt;div3&lt;/div&gt;
+        &lt;div id="div4"&gt;div4&lt;/div&gt;
+    &lt;/body&gt;
+    &lt;script&gt;
+        require.config({
+            baseUrl: &#39;./res&#39;
+        });
+        require([&#39;ea&#39;], function (ea) {
+            var name1 = ea(&#39;#id&#39;);
+            console.log(name1);
+            var name2 = ea(&#39;.className&#39;);
+            console.log(name2);
+            var name3 = ea(document.getElementById(&#39;div3&#39;));
+            console.log(name3);
+            var name4 = ea($(&#39;#div4&#39;));
+            console.log(name4);
+        });
+    &lt;/script&gt;
+&lt;/html&gt;</code></pre>
+</div>
+            </div>
+
+             <button class="btn btn-info btn-viewDemo" type="button">运行代码</button>
+            <button class="btn btn-info btn-editDemo" type="button">编辑代码</button>
+        </div>
+    
+</div>
+
+                </div>
+            
+        </div>
+
+        
+            <div id="method" class="tab-pane">
+                <h2 class="off-left">方法</h2>
+
+                
+                    <div id="method_create" class="method item">
+    <h3 class="name">create</h3>
+    <code>
+    create
+    
+        <div class="args">
+            <span class="paren">(</span><ul class="args-list inline commas">
+            
+                <li class="arg">
+                    
+                        option
+                    
+                </li>
+            
+                <li class="arg">
+                    
+                        callback
+                    
+                </li>
+            
+            </ul><span class="paren">)</span>
+        </div>
+    
+    </code>
+
+    
+        <span class="returns-inline">
+            <span class="type">Object</span>
+        </span>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+        <span class="flag chainable">chainable</span>
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                代码位置
+                
+            
+        
+        
+        <a href="../files/ea_code_ea_ea.js.html#l93"><code>ea&#x2F;code&#x2F;ea&#x2F;ea.js:93</code></a>
+        
+        </p>
+
+
+        
+
+        
+    </div>
+
+    <div class="description well well-small sign-left3">
+        <div class="stdoc-code"><p>创建动画</p>
+</div>
+    </div>
+
+    
+        <div class="params">
+            <h4>参数:</h4>
+
+            <table class="table table-bordered">
+            <tr class='active'><th>名称</th><th>类型</th><!--<th>flag</th>--><th>描述</th></tr>
+            
+                <tr class="param">
+                    
+                       <td> <code class="param-name">option</code>
+                       <td> <span class="type">Object</span>
+                       <!--<td>
+                    
+
+                    
+                  </td>-->
+                    <td><div class="param-description">
+                        <p>运动参数</p>
+
+                    </div>
+
+                    
+                        <table class="table table-bordered">
+                         <tr class='active'><th>名称</th><th>类型</th><!--<th>flag</th>--><th>描述</th></tr>
+                           
+                            <tr class="param">
+                            
+                                   <td> <code class="param-name">name</code>
+                                   <td> <span class="type">String</span>
+                                   <!--<td>
+                                
+
+                                
+                              </td>-->
+                                <td><div class="param-description">
+                                    <p>动画名称</p>
+
+                                </div>
+                                
+                            </tr>
+                            
+                            <tr class="param">
+                            
+                                   <td> <code class="param-name">time</code>
+                                   <td> <span class="type">Number</span>
+                                   <!--<td>
+                                
+
+                                
+                              </td>-->
+                                <td><div class="param-description">
+                                    <p>动画时间</p>
+
+                                </div>
+                                
+                            </tr>
+                            
+                            <tr class="param">
+                            
+                                   <td> <code class="param-name">easing</code>
+                                   <td> <span class="type">String=</span>
+                                   <!--<td>
+                                
+
+                                
+                              </td>-->
+                                <td><div class="param-description">
+                                    <p>缓动函数，可选参数</p>
+
+                                </div>
+                                
+                            </tr>
+                            
+                            <tr class="param">
+                            
+                                   <td> <code class="param-name">delay</code>
+                                   <td> <span class="type">Number=</span>
+                                   <!--<td>
+                                
+
+                                
+                              </td>-->
+                                <td><div class="param-description">
+                                    <p>延迟时间，可选参数</p>
+
+                                </div>
+                                
+                            </tr>
+                            
+                            <tr class="param">
+                            
+                                   <td> <code class="param-name">count</code>
+                                   <td> <span class="type">Number | string=</span>
+                                   <!--<td>
+                                
+
+                                
+                              </td>-->
+                                <td><div class="param-description">
+                                    <p>动画次数，可选参数默认为1，forever无限</p>
+
+                                </div>
+                                
+                            </tr>
+                            
+                            <tr class="param">
+                            
+                                   <td> <code class="param-name">back</code>
+                                   <td> <span class="type">Boolean=</span>
+                                   <!--<td>
+                                
+
+                                
+                              </td>-->
+                                <td><div class="param-description">
+                                    <p>是否反向播放动画，可选参数</p>
+
+                                </div>
+                                
+                            </tr>
+                            
+                            <tr class="param">
+                            
+                                   <td> <code class="param-name">save</code>
+                                   <td> <span class="type">Boolean=</span>
+                                   <!--<td>
+                                
+
+                                
+                              </td>-->
+                                <td><div class="param-description">
+                                    <p>是否保持动画结束时的状态</p>
+
+                                </div>
+                                
+                            </tr>
+                            
+                            <tr class="param">
+                            
+                                   <td> <code class="param-name">keyframe</code>
+                                   <td> <span class="type">Array</span>
+                                   <!--<td>
+                                
+
+                                
+                              </td>-->
+                                <td><div class="param-description">
+                                    <p>关键帧动作</p>
+
+                                </div>
+                                
+                            </tr>
+                            
+                        </table>
+                        </td>
+                    
+                </tr>
+            
+                <tr class="param">
+                    
+                       <td> <code class="param-name">callback</code>
+                       <td> <span class="type">Function=</span>
+                       <!--<td>
+                    
+
+                    
+                  </td>-->
+                    <td><div class="param-description">
+                        <p>回调函数，可选</p>
+
+                    </div>
+
+                    
+                </tr>
+            
+            </table>
+        </div>
+    
+
+    
+        <div class="returns">
+            <h4>返回:</h4>
+
+            <div class="returns-description">
+                
+                    
+                        [<span class="type">Object</span>]
+                    
+                    <p>EA实例</p>
+
+                
+            </div>
+        </div>
+    
+
+    
+</div>
+
+                
+                    <div id="method_getVersion" class="method item">
+    <h3 class="name">getVersion</h3>
+    <code>
+    getVersion
+    
+        <span class="paren">()</span>
+    
+    </code>
+
+    
+        <span class="returns-inline">
+            <span class="type">String</span>
+        </span>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                代码位置
+                
+            
+        
+        
+        <a href="../files/ea_code_ea_ea.js.html#l81"><code>ea&#x2F;code&#x2F;ea&#x2F;ea.js:81</code></a>
+        
+        </p>
+
+
+        
+
+        
+    </div>
+
+    <div class="description well well-small sign-left3">
+        <div class="stdoc-code"><p>返回当前版本号</p>
+</div>
+    </div>
+
+    
+
+    
+        <div class="returns">
+            <h4>返回:</h4>
+
+            <div class="returns-description">
+                
+                    
+                        [<span class="type">String</span>]
+                    
+                    <p>当前版本号</p>
+
+                
+            </div>
+        </div>
+    
+
+    
+</div>
+
+                
+                    <div id="method_hide" class="method item">
+    <h3 class="name">hide</h3>
+    <code>
+    hide
+    
+        <div class="args">
+            <span class="paren">(</span><ul class="args-list inline commas">
+            
+                <li class="arg">
+                    
+                        time
+                    
+                </li>
+            
+                <li class="arg">
+                    
+                        callback
+                    
+                </li>
+            
+            </ul><span class="paren">)</span>
+        </div>
+    
+    </code>
+
+    
+        <span class="returns-inline">
+            <span class="type">Object</span>
+        </span>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+        <span class="flag chainable">chainable</span>
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                代码位置
+                
+            
+        
+        
+        <a href="../files/ea_code_ea_ea.js.html#l317"><code>ea&#x2F;code&#x2F;ea&#x2F;ea.js:317</code></a>
+        
+        </p>
+
+
+        
+
+        
+    </div>
+
+    <div class="description well well-small sign-left3">
+        <div class="stdoc-code"><p>隐藏元素</p>
+</div>
+    </div>
+
+    
+        <div class="params">
+            <h4>参数:</h4>
+
+            <table class="table table-bordered">
+            <tr class='active'><th>名称</th><th>类型</th><!--<th>flag</th>--><th>描述</th></tr>
+            
+                <tr class="param">
+                    
+                       <td> <code class="param-name">time</code>
+                       <td> <span class="type">Number</span>
+                       <!--<td>
+                    
+
+                    
+                  </td>-->
+                    <td><div class="param-description">
+                        <p>动画时间</p>
+
+                    </div>
+
+                    
+                </tr>
+            
+                <tr class="param">
+                    
+                       <td> <code class="param-name">callback</code>
+                       <td> <span class="type">Function=</span>
+                       <!--<td>
+                    
+
+                    
+                  </td>-->
+                    <td><div class="param-description">
+                        <p>回调函数，可选参数</p>
+
+                    </div>
+
+                    
+                </tr>
+            
+            </table>
+        </div>
+    
+
+    
+        <div class="returns">
+            <h4>返回:</h4>
+
+            <div class="returns-description">
+                
+                    
+                        [<span class="type">Object</span>]
+                    
+                    <p>EA实例</p>
+
+                
+            </div>
+        </div>
+    
+
+    
+</div>
+
+                
+                    <div id="method_initKeyFrame" class="method item">
+    <h3 class="name">initKeyFrame</h3>
+    <code>
+    initKeyFrame
+    
+        <div class="args">
+            <span class="paren">(</span><ul class="args-list inline commas">
+            
+                <li class="arg">
+                    
+                        option
+                    
+                </li>
+            
+            </ul><span class="paren">)</span>
+        </div>
+    
+    </code>
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                代码位置
+                
+            
+        
+        
+        <a href="../files/ea_code_ea_ea.js.html#l410"><code>ea&#x2F;code&#x2F;ea&#x2F;ea.js:410</code></a>
+        
+        </p>
+
+
+        
+
+        
+    </div>
+
+    <div class="description well well-small sign-left3">
+        <div class="stdoc-code"><p>创建关键帧</p>
+</div>
+    </div>
+
+    
+        <div class="params">
+            <h4>参数:</h4>
+
+            <table class="table table-bordered">
+            <tr class='active'><th>名称</th><th>类型</th><!--<th>flag</th>--><th>描述</th></tr>
+            
+                <tr class="param">
+                    
+                       <td> <code class="param-name">option</code>
+                       <td> <span class="type">Object | Array</span>
+                       <!--<td>
+                    
+
+                    
+                  </td>-->
+                    <td><div class="param-description">
+                        <p>关键帧动作对象或数组</p>
+
+                    </div>
+
+                    
+                        <table class="table table-bordered">
+                         <tr class='active'><th>名称</th><th>类型</th><!--<th>flag</th>--><th>描述</th></tr>
+                           
+                            <tr class="param">
+                            
+                                   <td> <code class="param-name">name</code>
+                                   <td> <span class="type">String</span>
+                                   <!--<td>
+                                
+
+                                
+                              </td>-->
+                                <td><div class="param-description">
+                                    <p>动画名称</p>
+
+                                </div>
+                                
+                            </tr>
+                            
+                            <tr class="param">
+                            
+                                   <td> <code class="param-name">keyframe</code>
+                                   <td> <span class="type">Array</span>
+                                   <!--<td>
+                                
+
+                                
+                              </td>-->
+                                <td><div class="param-description">
+                                    <p>关键帧动作</p>
+
+                                </div>
+                                
+                            </tr>
+                            
+                        </table>
+                        </td>
+                    
+                </tr>
+            
+            </table>
+        </div>
+    
+
+    
+
+    
+</div>
+
+                
+                    <div id="method_move" class="method item">
+    <h3 class="name">move</h3>
+    <code>
+    move
+    
+        <div class="args">
+            <span class="paren">(</span><ul class="args-list inline commas">
+            
+                <li class="arg">
+                    
+                        option
+                    
+                </li>
+            
+                <li class="arg">
+                    
+                        time
+                    
+                </li>
+            
+                <li class="arg">
+                    
+                        callback
+                    
+                </li>
+            
+            </ul><span class="paren">)</span>
+        </div>
+    
+    </code>
+
+    
+        <span class="returns-inline">
+            <span class="type">Object</span>
+        </span>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+        <span class="flag chainable">chainable</span>
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                代码位置
+                
+            
+        
+        
+        <a href="../files/ea_code_ea_ea.js.html#l160"><code>ea&#x2F;code&#x2F;ea&#x2F;ea.js:160</code></a>
+        
+        </p>
+
+
+        
+
+        
+    </div>
+
+    <div class="description well well-small sign-left3">
+        <div class="stdoc-code"><p>移动元素</p>
+</div>
+    </div>
+
+    
+        <div class="params">
+            <h4>参数:</h4>
+
+            <table class="table table-bordered">
+            <tr class='active'><th>名称</th><th>类型</th><!--<th>flag</th>--><th>描述</th></tr>
+            
+                <tr class="param">
+                    
+                       <td> <code class="param-name">option</code>
+                       <td> <span class="type">Object</span>
+                       <!--<td>
+                    
+
+                    
+                  </td>-->
+                    <td><div class="param-description">
+                        <p>运动参数</p>
+
+                    </div>
+
+                    
+                        <table class="table table-bordered">
+                         <tr class='active'><th>名称</th><th>类型</th><!--<th>flag</th>--><th>描述</th></tr>
+                           
+                            <tr class="param">
+                            
+                                   <td> <code class="param-name">top</code>
+                                   <td> <span class="type">Number=</span>
+                                   <!--<td>
+                                
+
+                                
+                              </td>-->
+                                <td><div class="param-description">
+                                    <p>top位移，可选参数</p>
+
+                                </div>
+                                
+                            </tr>
+                            
+                            <tr class="param">
+                            
+                                   <td> <code class="param-name">right</code>
+                                   <td> <span class="type">Number=</span>
+                                   <!--<td>
+                                
+
+                                
+                              </td>-->
+                                <td><div class="param-description">
+                                    <p>right位移，可选参数</p>
+
+                                </div>
+                                
+                            </tr>
+                            
+                            <tr class="param">
+                            
+                                   <td> <code class="param-name">bottom</code>
+                                   <td> <span class="type">Number=</span>
+                                   <!--<td>
+                                
+
+                                
+                              </td>-->
+                                <td><div class="param-description">
+                                    <p>bottom位移，可选参数</p>
+
+                                </div>
+                                
+                            </tr>
+                            
+                            <tr class="param">
+                            
+                                   <td> <code class="param-name">left</code>
+                                   <td> <span class="type">Number=</span>
+                                   <!--<td>
+                                
+
+                                
+                              </td>-->
+                                <td><div class="param-description">
+                                    <p>left位移，可选参数</p>
+
+                                </div>
+                                
+                            </tr>
+                            
+                            <tr class="param">
+                            
+                                   <td> <code class="param-name">up</code>
+                                   <td> <span class="type">Number=</span>
+                                   <!--<td>
+                                
+
+                                
+                              </td>-->
+                                <td><div class="param-description">
+                                    <p>up位移，可选参数</p>
+
+                                </div>
+                                
+                            </tr>
+                            
+                            <tr class="param">
+                            
+                                   <td> <code class="param-name">down</code>
+                                   <td> <span class="type">Number=</span>
+                                   <!--<td>
+                                
+
+                                
+                              </td>-->
+                                <td><div class="param-description">
+                                    <p>down位移，可选参数</p>
+
+                                </div>
+                                
+                            </tr>
+                            
+                            <tr class="param">
+                            
+                                   <td> <code class="param-name">mix</code>
+                                   <td> <span class="type">Number=</span>
+                                   <!--<td>
+                                
+
+                                
+                              </td>-->
+                                <td><div class="param-description">
+                                    <p>混合动画，可选参数</p>
+
+                                </div>
+                                
+                            </tr>
+                            
+                        </table>
+                        </td>
+                    
+                </tr>
+            
+                <tr class="param">
+                    
+                       <td> <code class="param-name">time</code>
+                       <td> <span class="type">Number</span>
+                       <!--<td>
+                    
+
+                    
+                  </td>-->
+                    <td><div class="param-description">
+                        <p>动画时间</p>
+
+                    </div>
+
+                    
+                </tr>
+            
+                <tr class="param">
+                    
+                       <td> <code class="param-name">callback</code>
+                       <td> <span class="type">Function=</span>
+                       <!--<td>
+                    
+
+                    
+                  </td>-->
+                    <td><div class="param-description">
+                        <p>回调函数，可选参数</p>
+
+                    </div>
+
+                    
+                </tr>
+            
+            </table>
+        </div>
+    
+
+    
+        <div class="returns">
+            <h4>返回:</h4>
+
+            <div class="returns-description">
+                
+                    
+                        [<span class="type">Object</span>]
+                    
+                    <p>EA实例</p>
+
+                
+            </div>
+        </div>
+    
+
+    
+</div>
+
+                
+                    <div id="method_rotate" class="method item">
+    <h3 class="name">rotate</h3>
+    <code>
+    rotate
+    
+        <div class="args">
+            <span class="paren">(</span><ul class="args-list inline commas">
+            
+                <li class="arg">
+                    
+                        option
+                    
+                </li>
+            
+                <li class="arg">
+                    
+                        time
+                    
+                </li>
+            
+                <li class="arg">
+                    
+                        callback
+                    
+                </li>
+            
+            </ul><span class="paren">)</span>
+        </div>
+    
+    </code>
+
+    
+        <span class="returns-inline">
+            <span class="type">Object</span>
+        </span>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+        <span class="flag chainable">chainable</span>
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                代码位置
+                
+            
+        
+        
+        <a href="../files/ea_code_ea_ea.js.html#l209"><code>ea&#x2F;code&#x2F;ea&#x2F;ea.js:209</code></a>
+        
+        </p>
+
+
+        
+
+        
+    </div>
+
+    <div class="description well well-small sign-left3">
+        <div class="stdoc-code"><p>旋转元素</p>
+</div>
+    </div>
+
+    
+        <div class="params">
+            <h4>参数:</h4>
+
+            <table class="table table-bordered">
+            <tr class='active'><th>名称</th><th>类型</th><!--<th>flag</th>--><th>描述</th></tr>
+            
+                <tr class="param">
+                    
+                       <td> <code class="param-name">option</code>
+                       <td> <span class="type">Object</span>
+                       <!--<td>
+                    
+
+                    
+                  </td>-->
+                    <td><div class="param-description">
+                        <p>运动参数</p>
+
+                    </div>
+
+                    
+                        <table class="table table-bordered">
+                         <tr class='active'><th>名称</th><th>类型</th><!--<th>flag</th>--><th>描述</th></tr>
+                           
+                            <tr class="param">
+                            
+                                   <td> <code class="param-name">x</code>
+                                   <td> <span class="type">Number=</span>
+                                   <!--<td>
+                                
+
+                                
+                              </td>-->
+                                <td><div class="param-description">
+                                    <p>相对于x轴角度，可选参数</p>
+
+                                </div>
+                                
+                            </tr>
+                            
+                            <tr class="param">
+                            
+                                   <td> <code class="param-name">y</code>
+                                   <td> <span class="type">Number=</span>
+                                   <!--<td>
+                                
+
+                                
+                              </td>-->
+                                <td><div class="param-description">
+                                    <p>相对于y轴角度，可选参数</p>
+
+                                </div>
+                                
+                            </tr>
+                            
+                            <tr class="param">
+                            
+                                   <td> <code class="param-name">p</code>
+                                   <td> <span class="type">Number=</span>
+                                   <!--<td>
+                                
+
+                                
+                              </td>-->
+                                <td><div class="param-description">
+                                    <p>3d视距，可选参数</p>
+
+                                </div>
+                                
+                            </tr>
+                            
+                            <tr class="param">
+                            
+                                   <td> <code class="param-name">mix</code>
+                                   <td> <span class="type">Number=</span>
+                                   <!--<td>
+                                
+
+                                
+                              </td>-->
+                                <td><div class="param-description">
+                                    <p>混合动画，可选参数</p>
+
+                                </div>
+                                
+                            </tr>
+                            
+                        </table>
+                        </td>
+                    
+                </tr>
+            
+                <tr class="param">
+                    
+                       <td> <code class="param-name">time</code>
+                       <td> <span class="type">Number</span>
+                       <!--<td>
+                    
+
+                    
+                  </td>-->
+                    <td><div class="param-description">
+                        <p>动画时间</p>
+
+                    </div>
+
+                    
+                </tr>
+            
+                <tr class="param">
+                    
+                       <td> <code class="param-name">callback</code>
+                       <td> <span class="type">Function=</span>
+                       <!--<td>
+                    
+
+                    
+                  </td>-->
+                    <td><div class="param-description">
+                        <p>回调函数，可选参数</p>
+
+                    </div>
+
+                    
+                </tr>
+            
+            </table>
+        </div>
+    
+
+    
+        <div class="returns">
+            <h4>返回:</h4>
+
+            <div class="returns-description">
+                
+                    
+                        [<span class="type">Object</span>]
+                    
+                    <p>EA实例</p>
+
+                
+            </div>
+        </div>
+    
+
+    
+</div>
+
+                
+                    <div id="method_run" class="method item">
+    <h3 class="name">run</h3>
+    <code>
+    run
+    
+        <div class="args">
+            <span class="paren">(</span><ul class="args-list inline commas">
+            
+                <li class="arg">
+                    
+                        option
+                    
+                </li>
+            
+                <li class="arg">
+                    
+                        callback
+                    
+                </li>
+            
+            </ul><span class="paren">)</span>
+        </div>
+    
+    </code>
+
+    
+        <span class="returns-inline">
+            <span class="type">Object</span>
+        </span>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+        <span class="flag chainable">chainable</span>
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                代码位置
+                
+            
+        
+        
+        <a href="../files/ea_code_ea_ea.js.html#l436"><code>ea&#x2F;code&#x2F;ea&#x2F;ea.js:436</code></a>
+        
+        </p>
+
+
+        
+
+        
+    </div>
+
+    <div class="description well well-small sign-left3">
+        <div class="stdoc-code"><p>运行已定义的动画</p>
+</div>
+    </div>
+
+    
+        <div class="params">
+            <h4>参数:</h4>
+
+            <table class="table table-bordered">
+            <tr class='active'><th>名称</th><th>类型</th><!--<th>flag</th>--><th>描述</th></tr>
+            
+                <tr class="param">
+                    
+                       <td> <code class="param-name">option</code>
+                       <td> <span class="type">Object</span>
+                       <!--<td>
+                    
+
+                    
+                  </td>-->
+                    <td><div class="param-description">
+                        <p>运动参数</p>
+
+                    </div>
+
+                    
+                        <table class="table table-bordered">
+                         <tr class='active'><th>名称</th><th>类型</th><!--<th>flag</th>--><th>描述</th></tr>
+                           
+                            <tr class="param">
+                            
+                                   <td> <code class="param-name">name</code>
+                                   <td> <span class="type">String</span>
+                                   <!--<td>
+                                
+
+                                
+                              </td>-->
+                                <td><div class="param-description">
+                                    <p>动画名称</p>
+
+                                </div>
+                                
+                            </tr>
+                            
+                            <tr class="param">
+                            
+                                   <td> <code class="param-name">time</code>
+                                   <td> <span class="type">Number</span>
+                                   <!--<td>
+                                
+
+                                
+                              </td>-->
+                                <td><div class="param-description">
+                                    <p>动画时间</p>
+
+                                </div>
+                                
+                            </tr>
+                            
+                            <tr class="param">
+                            
+                                   <td> <code class="param-name">easing</code>
+                                   <td> <span class="type">String=</span>
+                                   <!--<td>
+                                
+
+                                
+                              </td>-->
+                                <td><div class="param-description">
+                                    <p>缓动函数，可选参数</p>
+
+                                </div>
+                                
+                            </tr>
+                            
+                            <tr class="param">
+                            
+                                   <td> <code class="param-name">delay</code>
+                                   <td> <span class="type">Number=</span>
+                                   <!--<td>
+                                
+
+                                
+                              </td>-->
+                                <td><div class="param-description">
+                                    <p>延迟时间，可选参数</p>
+
+                                </div>
+                                
+                            </tr>
+                            
+                            <tr class="param">
+                            
+                                   <td> <code class="param-name">count</code>
+                                   <td> <span class="type">Number | string=</span>
+                                   <!--<td>
+                                
+
+                                
+                              </td>-->
+                                <td><div class="param-description">
+                                    <p>动画次数，可选参数默认为1，forever无限</p>
+
+                                </div>
+                                
+                            </tr>
+                            
+                            <tr class="param">
+                            
+                                   <td> <code class="param-name">back</code>
+                                   <td> <span class="type">Boolean=</span>
+                                   <!--<td>
+                                
+
+                                
+                              </td>-->
+                                <td><div class="param-description">
+                                    <p>是否反向播放动画，可选参数</p>
+
+                                </div>
+                                
+                            </tr>
+                            
+                            <tr class="param">
+                            
+                                   <td> <code class="param-name">save</code>
+                                   <td> <span class="type">Boolean=</span>
+                                   <!--<td>
+                                
+
+                                
+                              </td>-->
+                                <td><div class="param-description">
+                                    <p>是否保持动画结束时的状态</p>
+
+                                </div>
+                                
+                            </tr>
+                            
+                        </table>
+                        </td>
+                    
+                </tr>
+            
+                <tr class="param">
+                    
+                       <td> <code class="param-name">callback</code>
+                       <td> <span class="type">Function=</span>
+                       <!--<td>
+                    
+
+                    
+                  </td>-->
+                    <td><div class="param-description">
+                        <p>回调函数</p>
+
+                    </div>
+
+                    
+                </tr>
+            
+            </table>
+        </div>
+    
+
+    
+        <div class="returns">
+            <h4>返回:</h4>
+
+            <div class="returns-description">
+                
+                    
+                        [<span class="type">Object</span>]
+                    
+                    <p>EA实例</p>
+
+                
+            </div>
+        </div>
+    
+
+    
+</div>
+
+                
+                    <div id="method_show" class="method item">
+    <h3 class="name">show</h3>
+    <code>
+    show
+    
+        <div class="args">
+            <span class="paren">(</span><ul class="args-list inline commas">
+            
+                <li class="arg">
+                    
+                        time
+                    
+                </li>
+            
+                <li class="arg">
+                    
+                        callback
+                    
+                </li>
+            
+            </ul><span class="paren">)</span>
+        </div>
+    
+    </code>
+
+    
+        <span class="returns-inline">
+            <span class="type">Object</span>
+        </span>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+        <span class="flag chainable">chainable</span>
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                代码位置
+                
+            
+        
+        
+        <a href="../files/ea_code_ea_ea.js.html#l296"><code>ea&#x2F;code&#x2F;ea&#x2F;ea.js:296</code></a>
+        
+        </p>
+
+
+        
+
+        
+    </div>
+
+    <div class="description well well-small sign-left3">
+        <div class="stdoc-code"><p>显示元素</p>
+</div>
+    </div>
+
+    
+        <div class="params">
+            <h4>参数:</h4>
+
+            <table class="table table-bordered">
+            <tr class='active'><th>名称</th><th>类型</th><!--<th>flag</th>--><th>描述</th></tr>
+            
+                <tr class="param">
+                    
+                       <td> <code class="param-name">time</code>
+                       <td> <span class="type">Number</span>
+                       <!--<td>
+                    
+
+                    
+                  </td>-->
+                    <td><div class="param-description">
+                        <p>动画时间</p>
+
+                    </div>
+
+                    
+                </tr>
+            
+                <tr class="param">
+                    
+                       <td> <code class="param-name">callback</code>
+                       <td> <span class="type">Function=</span>
+                       <!--<td>
+                    
+
+                    
+                  </td>-->
+                    <td><div class="param-description">
+                        <p>回调函数，可选参数</p>
+
+                    </div>
+
+                    
+                </tr>
+            
+            </table>
+        </div>
+    
+
+    
+        <div class="returns">
+            <h4>返回:</h4>
+
+            <div class="returns-description">
+                
+                    
+                        [<span class="type">Object</span>]
+                    
+                    <p>EA实例</p>
+
+                
+            </div>
+        </div>
+    
+
+    
+</div>
+
+                
+                    <div id="method_skew" class="method item">
+    <h3 class="name">skew</h3>
+    <code>
+    skew
+    
+        <div class="args">
+            <span class="paren">(</span><ul class="args-list inline commas">
+            
+                <li class="arg">
+                    
+                        option
+                    
+                </li>
+            
+                <li class="arg">
+                    
+                        time
+                    
+                </li>
+            
+                <li class="arg">
+                    
+                        callback
+                    
+                </li>
+            
+            </ul><span class="paren">)</span>
+        </div>
+    
+    </code>
+
+    
+        <span class="returns-inline">
+            <span class="type">Object</span>
+        </span>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+        <span class="flag chainable">chainable</span>
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                代码位置
+                
+            
+        
+        
+        <a href="../files/ea_code_ea_ea.js.html#l256"><code>ea&#x2F;code&#x2F;ea&#x2F;ea.js:256</code></a>
+        
+        </p>
+
+
+        
+
+        
+    </div>
+
+    <div class="description well well-small sign-left3">
+        <div class="stdoc-code"><p>扭曲元素</p>
+</div>
+    </div>
+
+    
+        <div class="params">
+            <h4>参数:</h4>
+
+            <table class="table table-bordered">
+            <tr class='active'><th>名称</th><th>类型</th><!--<th>flag</th>--><th>描述</th></tr>
+            
+                <tr class="param">
+                    
+                       <td> <code class="param-name">option</code>
+                       <td> <span class="type">Object</span>
+                       <!--<td>
+                    
+
+                    
+                  </td>-->
+                    <td><div class="param-description">
+                        <p>运动参数</p>
+
+                    </div>
+
+                    
+                        <table class="table table-bordered">
+                         <tr class='active'><th>名称</th><th>类型</th><!--<th>flag</th>--><th>描述</th></tr>
+                           
+                            <tr class="param">
+                            
+                                   <td> <code class="param-name">x</code>
+                                   <td> <span class="type">Number=</span>
+                                   <!--<td>
+                                
+
+                                
+                              </td>-->
+                                <td><div class="param-description">
+                                    <p>相对于x轴角度，可选参数</p>
+
+                                </div>
+                                
+                            </tr>
+                            
+                            <tr class="param">
+                            
+                                   <td> <code class="param-name">y</code>
+                                   <td> <span class="type">Number=</span>
+                                   <!--<td>
+                                
+
+                                
+                              </td>-->
+                                <td><div class="param-description">
+                                    <p>相对于y轴角度，可选参数</p>
+
+                                </div>
+                                
+                            </tr>
+                            
+                            <tr class="param">
+                            
+                                   <td> <code class="param-name">mix</code>
+                                   <td> <span class="type">Number=</span>
+                                   <!--<td>
+                                
+
+                                
+                              </td>-->
+                                <td><div class="param-description">
+                                    <p>混合动画，可选参数</p>
+
+                                </div>
+                                
+                            </tr>
+                            
+                        </table>
+                        </td>
+                    
+                </tr>
+            
+                <tr class="param">
+                    
+                       <td> <code class="param-name">time</code>
+                       <td> <span class="type">Number</span>
+                       <!--<td>
+                    
+
+                    
+                  </td>-->
+                    <td><div class="param-description">
+                        <p>动画时间</p>
+
+                    </div>
+
+                    
+                </tr>
+            
+                <tr class="param">
+                    
+                       <td> <code class="param-name">callback</code>
+                       <td> <span class="type">Function=</span>
+                       <!--<td>
+                    
+
+                    
+                  </td>-->
+                    <td><div class="param-description">
+                        <p>回调函数，可选参数</p>
+
+                    </div>
+
+                    
+                </tr>
+            
+            </table>
+        </div>
+    
+
+    
+        <div class="returns">
+            <h4>返回:</h4>
+
+            <div class="returns-description">
+                
+                    
+                        [<span class="type">Object</span>]
+                    
+                    <p>EA实例</p>
+
+                
+            </div>
+        </div>
+    
+
+    
+</div>
+
+                
+                    <div id="method_stop" class="method item">
+    <h3 class="name">stop</h3>
+    <code>
+    stop
+    
+        <div class="args">
+            <span class="paren">(</span><ul class="args-list inline commas">
+            
+                <li class="arg">
+                    
+                        className
+                    
+                </li>
+            
+            </ul><span class="paren">)</span>
+        </div>
+    
+    </code>
+
+    
+        <span class="returns-inline">
+            <span class="type">Object</span>
+        </span>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+        <span class="flag chainable">chainable</span>
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                代码位置
+                
+            
+        
+        
+        <a href="../files/ea_code_ea_ea.js.html#l376"><code>ea&#x2F;code&#x2F;ea&#x2F;ea.js:376</code></a>
+        
+        </p>
+
+
+        
+
+        
+    </div>
+
+    <div class="description well well-small sign-left3">
+        <div class="stdoc-code"><p>停止动画</p>
+</div>
+    </div>
+
+    
+        <div class="params">
+            <h4>参数:</h4>
+
+            <table class="table table-bordered">
+            <tr class='active'><th>名称</th><th>类型</th><!--<th>flag</th>--><th>描述</th></tr>
+            
+                <tr class="param">
+                    
+                       <td> <code class="param-name">className</code>
+                       <td> <span class="type">String | Array</span>
+                       <!--<td>
+                    
+
+                    
+                  </td>-->
+                    <td><div class="param-description">
+                        <p>要触发css类名，多个用数组</p>
+
+                    </div>
+
+                    
+                </tr>
+            
+            </table>
+        </div>
+    
+
+    
+        <div class="returns">
+            <h4>返回:</h4>
+
+            <div class="returns-description">
+                
+                    
+                        [<span class="type">Object</span>]
+                    
+                    <p>EA实例</p>
+
+                
+            </div>
+        </div>
+    
+
+    
+</div>
+
+                
+                    <div id="method_trigger" class="method item">
+    <h3 class="name">trigger</h3>
+    <code>
+    trigger
+    
+        <div class="args">
+            <span class="paren">(</span><ul class="args-list inline commas">
+            
+                <li class="arg">
+                    
+                        className
+                    
+                </li>
+            
+                <li class="arg">
+                    
+                        save
+                    
+                </li>
+            
+                <li class="arg">
+                    
+                        callback
+                    
+                </li>
+            
+            </ul><span class="paren">)</span>
+        </div>
+    
+    </code>
+
+    
+        <span class="returns-inline">
+            <span class="type">Object</span>
+        </span>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+        <span class="flag chainable">chainable</span>
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                代码位置
+                
+            
+        
+        
+        <a href="../files/ea_code_ea_ea.js.html#l338"><code>ea&#x2F;code&#x2F;ea&#x2F;ea.js:338</code></a>
+        
+        </p>
+
+
+        
+
+        
+    </div>
+
+    <div class="description well well-small sign-left3">
+        <div class="stdoc-code"><p>触发动画，用于对写好的cssanimation调用</p>
+</div>
+    </div>
+
+    
+        <div class="params">
+            <h4>参数:</h4>
+
+            <table class="table table-bordered">
+            <tr class='active'><th>名称</th><th>类型</th><!--<th>flag</th>--><th>描述</th></tr>
+            
+                <tr class="param">
+                    
+                       <td> <code class="param-name">className</code>
+                       <td> <span class="type">String | Array</span>
+                       <!--<td>
+                    
+
+                    
+                  </td>-->
+                    <td><div class="param-description">
+                        <p>要触发css类名，多个用数组</p>
+
+                    </div>
+
+                    
+                </tr>
+            
+                <tr class="param">
+                    
+                       <td> <code class="param-name">save</code>
+                       <td> <span class="type">Boolean=</span>
+                       <!--<td>
+                    
+
+                    
+                  </td>-->
+                    <td><div class="param-description">
+                        <p>是否保持动画结束时的状态</p>
+
+                    </div>
+
+                    
+                </tr>
+            
+                <tr class="param">
+                    
+                       <td> <code class="param-name">callback</code>
+                       <td> <span class="type">Function=</span>
+                       <!--<td>
+                    
+
+                    
+                  </td>-->
+                    <td><div class="param-description">
+                        <p>回调函数，可选参数</p>
+
+                    </div>
+
+                    
+                </tr>
+            
+            </table>
+        </div>
+    
+
+    
+        <div class="returns">
+            <h4>返回:</h4>
+
+            <div class="returns-description">
+                
+                    
+                        [<span class="type">Object</span>]
+                    
+                    <p>EA实例</p>
+
+                
+            </div>
+        </div>
+    
+
+    
+</div>
+
+                
+                    <div id="method_update" class="method item">
+    <h3 class="name">update</h3>
+    <code>
+    update
+    
+        <div class="args">
+            <span class="paren">(</span><ul class="args-list inline commas">
+            
+                <li class="arg">
+                    
+                        name
+                    
+                </li>
+            
+                <li class="arg">
+                    
+                        keyframe
+                    
+                </li>
+            
+            </ul><span class="paren">)</span>
+        </div>
+    
+    </code>
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                代码位置
+                
+            
+        
+        
+        <a href="../files/ea_code_ea_ea.js.html#l497"><code>ea&#x2F;code&#x2F;ea&#x2F;ea.js:497</code></a>
+        
+        </p>
+
+
+        
+
+        
+    </div>
+
+    <div class="description well well-small sign-left3">
+        <div class="stdoc-code"><p>更新动画</p>
+</div>
+    </div>
+
+    
+        <div class="params">
+            <h4>参数:</h4>
+
+            <table class="table table-bordered">
+            <tr class='active'><th>名称</th><th>类型</th><!--<th>flag</th>--><th>描述</th></tr>
+            
+                <tr class="param">
+                    
+                       <td> <code class="param-name">name</code>
+                       <td> <span class="type">String</span>
+                       <!--<td>
+                    
+
+                    
+                  </td>-->
+                    <td><div class="param-description">
+                        <p>动画名字</p>
+
+                    </div>
+
+                    
+                </tr>
+            
+                <tr class="param">
+                    
+                       <td> <code class="param-name">keyframe</code>
+                       <td> <span class="type">Array</span>
+                       <!--<td>
+                    
+
+                    
+                  </td>-->
+                    <td><div class="param-description">
+                        <p>关键帧动作</p>
+
+                    </div>
+
+                    
+                </tr>
+            
+            </table>
+        </div>
+    
+
+    
+
+    
+</div>
+
+                
+            </div>
+        
+
+        
+            <div id="property" class="tab-pane">
+                <h2 class="off-left">属性</h2>
+
+                
+                    <div id="property_version" class="property item">
+    <h3 class="name"><code>version</code></h3>
+    <span class="type">String</span>
+
+    
+
+    
+
+    
+        <span class="flag final">final</span>
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                代码位置
+                
+            
+        
+        
+        <a href="../files/ea_code_ea_ea.js.html#l12"><code>ea&#x2F;code&#x2F;ea&#x2F;ea.js:12</code></a>
+        
+        </p>
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <div class="stdoc-code"><p>版本号</p>
+</div>
+    </div>
+
+    
+
+    
+
+    
+</div>
+
+                
+            </div>
+        
+
+        
+    </div>
+</div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+<a id="gotoTop" class='well well-small' href='#'>
+    Top
+</a>
+<script src="../assets/vendor/jquery/jquery-1.8.2.min.js"></script>
+<script src="../assets/vendor/bootstrap/js/bootstrap.min.js"></script>
+<script src="../assets/vendor/prettify/prettify-min.js"></script>
+<script src="../assets/js/config.js"></script>
+<script src="../assets/js/doc.js"></script>
+</body>
+</html>

@@ -1,0 +1,1068 @@
+{
+    "project": {
+        "name": "EA",
+        "version": "1.0.0",
+        "url": "https://github.com/feares/dynamicEffect",
+        "navs": [
+            {
+                "name": "首页",
+                "url": "https://github.com/feares/dynamicEffect"
+            },
+            {
+                "name": "文档",
+                "url": "/"
+            },
+            {
+                "name": "关于",
+                "url": "https://github.com/feares/dynamicEffect"
+            }
+        ]
+    },
+    "files": {
+        "ea/code/ea/ea.js": {
+            "name": "ea/code/ea/ea.js",
+            "modules": {
+                "EA": 1
+            },
+            "classes": {
+                "EA": 1
+            },
+            "fors": {},
+            "namespaces": {}
+        }
+    },
+    "modules": {
+        "EA": {
+            "name": "EA",
+            "submodules": {},
+            "classes": {
+                "EA": 1
+            },
+            "fors": {},
+            "namespaces": {},
+            "tag": "module",
+            "file": "ea/code/ea/ea.js",
+            "line": 35,
+            "description": "EA is easy animation",
+            "author": "donkunshan(dongkunshan@baidu.com)",
+            "date": "2015-02-14"
+        }
+    },
+    "classes": {
+        "EA": {
+            "name": "EA",
+            "shortname": "EA",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "module": "EA",
+            "namespace": "",
+            "file": "ea/code/ea/ea.js",
+            "line": 35,
+            "description": "EA 动效库实例",
+            "is_constructor": 1,
+            "params": [
+                {
+                    "name": "selector",
+                    "description": "id、class 选择器或dom对象",
+                    "type": "String|Object"
+                }
+            ],
+            "return": {
+                "description": "生成后的EA对象",
+                "type": "Object"
+            },
+            "example": [
+                "\t<html>\n\t    <body>\n\t        <div id=\"id\">div1</div>\n\t        <div class=\"className\">div2</div>\n\t        <div id=\"div3\">div3</div>\n\t        <div id=\"div4\">div4</div>\n\t    </body>\n\t    <script>\n\t        require.config({\n\t            baseUrl: './res'\n\t        });\n\t        require(['ea'], function (ea) {\n\t            var name1 = ea('#id');\n\t            console.log(name1);\n\t            var name2 = ea('.className');\n\t            console.log(name2);\n\t            var name3 = ea(document.getElementById('div3'));\n\t            console.log(name3);\n\t            var name4 = ea($('#div4'));\n\t            console.log(name4);\n\t        });\n\t    </script>\n\t</html>\n\t"
+            ],
+            "exampleTitles": [
+                "init"
+            ]
+        }
+    },
+    "classitems": [
+        {
+            "file": "ea/code/ea/ea.js",
+            "line": 12,
+            "description": "版本号",
+            "itemtype": "property",
+            "name": "version",
+            "type": "{String}",
+            "final": 1,
+            "class": "EA",
+            "module": "EA"
+        },
+        {
+            "file": "ea/code/ea/ea.js",
+            "line": 21,
+            "description": "浏览器前缀",
+            "access": "public",
+            "tagname": "",
+            "class": "EA",
+            "module": "EA"
+        },
+        {
+            "file": "ea/code/ea/ea.js",
+            "line": 28,
+            "description": "动画名称集合",
+            "access": "public",
+            "tagname": "",
+            "class": "EA",
+            "module": "EA"
+        },
+        {
+            "file": "ea/code/ea/ea.js",
+            "line": 52,
+            "description": "构造EA对象",
+            "params": [
+                {
+                    "name": "selector",
+                    "description": "id、class 选择器或dom对象",
+                    "type": "String|Object"
+                }
+            ],
+            "return": {
+                "description": "生成后的EA对象",
+                "type": "Object"
+            },
+            "class": "EA",
+            "module": "EA"
+        },
+        {
+            "file": "ea/code/ea/ea.js",
+            "line": 81,
+            "description": "返回当前版本号",
+            "itemtype": "method",
+            "name": "getVersion",
+            "return": {
+                "description": "当前版本号",
+                "type": "String"
+            },
+            "class": "EA",
+            "module": "EA"
+        },
+        {
+            "file": "ea/code/ea/ea.js",
+            "line": 93,
+            "description": "创建动画",
+            "itemtype": "method",
+            "name": "create",
+            "params": [
+                {
+                    "name": "option",
+                    "description": "运动参数",
+                    "type": "Object",
+                    "props": [
+                        {
+                            "name": "name",
+                            "description": "动画名称",
+                            "type": "String"
+                        },
+                        {
+                            "name": "time",
+                            "description": "动画时间",
+                            "type": "Number"
+                        },
+                        {
+                            "name": "easing",
+                            "description": "缓动函数，可选参数",
+                            "type": "String="
+                        },
+                        {
+                            "name": "delay",
+                            "description": "延迟时间，可选参数",
+                            "type": "Number="
+                        },
+                        {
+                            "name": "count",
+                            "description": "动画次数，可选参数默认为1，forever无限",
+                            "type": "Number | string="
+                        },
+                        {
+                            "name": "back",
+                            "description": "是否反向播放动画，可选参数",
+                            "type": "Boolean="
+                        },
+                        {
+                            "name": "save",
+                            "description": "是否保持动画结束时的状态",
+                            "type": "Boolean="
+                        },
+                        {
+                            "name": "keyframe",
+                            "description": "关键帧动作",
+                            "type": "Array"
+                        }
+                    ]
+                },
+                {
+                    "name": "callback",
+                    "description": "回调函数，可选",
+                    "type": "Function="
+                }
+            ],
+            "chainable": 1,
+            "return": {
+                "description": "EA实例",
+                "type": "Object"
+            },
+            "class": "EA",
+            "module": "EA"
+        },
+        {
+            "file": "ea/code/ea/ea.js",
+            "line": 160,
+            "description": "移动元素",
+            "itemtype": "method",
+            "name": "move",
+            "params": [
+                {
+                    "name": "option",
+                    "description": "运动参数",
+                    "type": "Object",
+                    "props": [
+                        {
+                            "name": "top",
+                            "description": "top位移，可选参数",
+                            "type": "Number="
+                        },
+                        {
+                            "name": "right",
+                            "description": "right位移，可选参数",
+                            "type": "Number="
+                        },
+                        {
+                            "name": "bottom",
+                            "description": "bottom位移，可选参数",
+                            "type": "Number="
+                        },
+                        {
+                            "name": "left",
+                            "description": "left位移，可选参数",
+                            "type": "Number="
+                        },
+                        {
+                            "name": "up",
+                            "description": "up位移，可选参数",
+                            "type": "Number="
+                        },
+                        {
+                            "name": "down",
+                            "description": "down位移，可选参数",
+                            "type": "Number="
+                        },
+                        {
+                            "name": "mix",
+                            "description": "混合动画，可选参数",
+                            "type": "Number="
+                        }
+                    ]
+                },
+                {
+                    "name": "time",
+                    "description": "动画时间",
+                    "type": "Number"
+                },
+                {
+                    "name": "callback",
+                    "description": "回调函数，可选参数",
+                    "type": "Function="
+                }
+            ],
+            "chainable": 1,
+            "return": {
+                "description": "EA实例",
+                "type": "Object"
+            },
+            "class": "EA",
+            "module": "EA"
+        },
+        {
+            "file": "ea/code/ea/ea.js",
+            "line": 209,
+            "description": "旋转元素",
+            "itemtype": "method",
+            "name": "rotate",
+            "params": [
+                {
+                    "name": "option",
+                    "description": "运动参数",
+                    "type": "Object",
+                    "props": [
+                        {
+                            "name": "x",
+                            "description": "相对于x轴角度，可选参数",
+                            "type": "Number="
+                        },
+                        {
+                            "name": "y",
+                            "description": "相对于y轴角度，可选参数",
+                            "type": "Number="
+                        },
+                        {
+                            "name": "p",
+                            "description": "3d视距，可选参数",
+                            "type": "Number="
+                        },
+                        {
+                            "name": "mix",
+                            "description": "混合动画，可选参数",
+                            "type": "Number="
+                        }
+                    ]
+                },
+                {
+                    "name": "time",
+                    "description": "动画时间",
+                    "type": "Number"
+                },
+                {
+                    "name": "callback",
+                    "description": "回调函数，可选参数",
+                    "type": "Function="
+                }
+            ],
+            "chainable": 1,
+            "return": {
+                "description": "EA实例",
+                "type": "Object"
+            },
+            "class": "EA",
+            "module": "EA"
+        },
+        {
+            "file": "ea/code/ea/ea.js",
+            "line": 256,
+            "description": "扭曲元素",
+            "itemtype": "method",
+            "name": "skew",
+            "params": [
+                {
+                    "name": "option",
+                    "description": "运动参数",
+                    "type": "Object",
+                    "props": [
+                        {
+                            "name": "x",
+                            "description": "相对于x轴角度，可选参数",
+                            "type": "Number="
+                        },
+                        {
+                            "name": "y",
+                            "description": "相对于y轴角度，可选参数",
+                            "type": "Number="
+                        },
+                        {
+                            "name": "mix",
+                            "description": "混合动画，可选参数",
+                            "type": "Number="
+                        }
+                    ]
+                },
+                {
+                    "name": "time",
+                    "description": "动画时间",
+                    "type": "Number"
+                },
+                {
+                    "name": "callback",
+                    "description": "回调函数，可选参数",
+                    "type": "Function="
+                }
+            ],
+            "chainable": 1,
+            "return": {
+                "description": "EA实例",
+                "type": "Object"
+            },
+            "class": "EA",
+            "module": "EA"
+        },
+        {
+            "file": "ea/code/ea/ea.js",
+            "line": 296,
+            "description": "显示元素",
+            "itemtype": "method",
+            "name": "show",
+            "params": [
+                {
+                    "name": "time",
+                    "description": "动画时间",
+                    "type": "Number"
+                },
+                {
+                    "name": "callback",
+                    "description": "回调函数，可选参数",
+                    "type": "Function="
+                }
+            ],
+            "chainable": 1,
+            "return": {
+                "description": "EA实例",
+                "type": "Object"
+            },
+            "class": "EA",
+            "module": "EA"
+        },
+        {
+            "file": "ea/code/ea/ea.js",
+            "line": 317,
+            "description": "隐藏元素",
+            "itemtype": "method",
+            "name": "hide",
+            "params": [
+                {
+                    "name": "time",
+                    "description": "动画时间",
+                    "type": "Number"
+                },
+                {
+                    "name": "callback",
+                    "description": "回调函数，可选参数",
+                    "type": "Function="
+                }
+            ],
+            "chainable": 1,
+            "return": {
+                "description": "EA实例",
+                "type": "Object"
+            },
+            "class": "EA",
+            "module": "EA"
+        },
+        {
+            "file": "ea/code/ea/ea.js",
+            "line": 338,
+            "description": "触发动画，用于对写好的cssanimation调用",
+            "itemtype": "method",
+            "name": "trigger",
+            "params": [
+                {
+                    "name": "className",
+                    "description": "要触发css类名，多个用数组",
+                    "type": "String | Array"
+                },
+                {
+                    "name": "save",
+                    "description": "是否保持动画结束时的状态",
+                    "type": "Boolean="
+                },
+                {
+                    "name": "callback",
+                    "description": "回调函数，可选参数",
+                    "type": "Function="
+                }
+            ],
+            "chainable": 1,
+            "return": {
+                "description": "EA实例",
+                "type": "Object"
+            },
+            "class": "EA",
+            "module": "EA"
+        },
+        {
+            "file": "ea/code/ea/ea.js",
+            "line": 376,
+            "description": "停止动画",
+            "itemtype": "method",
+            "name": "stop",
+            "params": [
+                {
+                    "name": "className",
+                    "description": "要触发css类名，多个用数组",
+                    "type": "String | Array"
+                }
+            ],
+            "chainable": 1,
+            "return": {
+                "description": "EA实例",
+                "type": "Object"
+            },
+            "class": "EA",
+            "module": "EA"
+        },
+        {
+            "file": "ea/code/ea/ea.js",
+            "line": 400,
+            "description": "删除关键帧动画",
+            "delete": "getVersion",
+            "params": [
+                {
+                    "name": "name",
+                    "description": "动画名称",
+                    "type": "String"
+                }
+            ],
+            "class": "EA",
+            "module": "EA"
+        },
+        {
+            "file": "ea/code/ea/ea.js",
+            "line": 410,
+            "description": "创建关键帧",
+            "itemtype": "method",
+            "name": "initKeyFrame",
+            "params": [
+                {
+                    "name": "option",
+                    "description": "关键帧动作对象或数组",
+                    "type": "Object | Array",
+                    "props": [
+                        {
+                            "name": "name",
+                            "description": "动画名称",
+                            "type": "String"
+                        },
+                        {
+                            "name": "keyframe",
+                            "description": "关键帧动作",
+                            "type": "Array"
+                        }
+                    ]
+                }
+            ],
+            "class": "EA",
+            "module": "EA"
+        },
+        {
+            "file": "ea/code/ea/ea.js",
+            "line": 436,
+            "description": "运行已定义的动画",
+            "itemtype": "method",
+            "name": "run",
+            "params": [
+                {
+                    "name": "option",
+                    "description": "运动参数",
+                    "type": "Object",
+                    "props": [
+                        {
+                            "name": "name",
+                            "description": "动画名称",
+                            "type": "String"
+                        },
+                        {
+                            "name": "time",
+                            "description": "动画时间",
+                            "type": "Number"
+                        },
+                        {
+                            "name": "easing",
+                            "description": "缓动函数，可选参数",
+                            "type": "String="
+                        },
+                        {
+                            "name": "delay",
+                            "description": "延迟时间，可选参数",
+                            "type": "Number="
+                        },
+                        {
+                            "name": "count",
+                            "description": "动画次数，可选参数默认为1，forever无限",
+                            "type": "Number | string="
+                        },
+                        {
+                            "name": "back",
+                            "description": "是否反向播放动画，可选参数",
+                            "type": "Boolean="
+                        },
+                        {
+                            "name": "save",
+                            "description": "是否保持动画结束时的状态",
+                            "type": "Boolean="
+                        }
+                    ]
+                },
+                {
+                    "name": "callback",
+                    "description": "回调函数",
+                    "type": "Function="
+                }
+            ],
+            "chainable": 1,
+            "return": {
+                "description": "EA实例",
+                "type": "Object"
+            },
+            "class": "EA",
+            "module": "EA"
+        },
+        {
+            "file": "ea/code/ea/ea.js",
+            "line": 497,
+            "description": "更新动画",
+            "itemtype": "method",
+            "name": "update",
+            "params": [
+                {
+                    "name": "name",
+                    "description": "动画名字",
+                    "type": "String"
+                },
+                {
+                    "name": "keyframe",
+                    "description": "关键帧动作",
+                    "type": "Array"
+                }
+            ],
+            "class": "EA",
+            "module": "EA"
+        },
+        {
+            "file": "ea/code/ea/ea.js",
+            "line": 516,
+            "description": "获得浏览器前缀",
+            "return": {
+                "description": "",
+                "type": "Object"
+            },
+            "class": "EA",
+            "module": "EA"
+        },
+        {
+            "file": "ea/code/ea/ea.js",
+            "line": 537,
+            "description": "获得关键帧对象",
+            "params": [
+                {
+                    "name": "name",
+                    "description": "动画名字",
+                    "type": "String"
+                }
+            ],
+            "return": {
+                "description": "",
+                "type": "Object"
+            },
+            "class": "EA",
+            "module": "EA"
+        },
+        {
+            "file": "ea/code/ea/ea.js",
+            "line": 558,
+            "description": "解析参数生成css文本",
+            "params": [
+                {
+                    "name": "option",
+                    "description": "生成css文本需要的参数",
+                    "type": "Array"
+                },
+                {
+                    "name": "prefixed",
+                    "description": "浏览器前缀",
+                    "type": "String"
+                }
+            ],
+            "return": {
+                "description": "",
+                "type": "Object"
+            },
+            "class": "EA",
+            "module": "EA"
+        },
+        {
+            "file": "ea/code/ea/ea.js",
+            "line": 576,
+            "description": "向dom添加样式",
+            "params": [
+                {
+                    "name": "cssText",
+                    "description": "css文本",
+                    "type": "String"
+                },
+                {
+                    "name": "name",
+                    "description": "keyframe名字",
+                    "type": "String"
+                }
+            ],
+            "class": "EA",
+            "module": "EA"
+        },
+        {
+            "file": "ea/code/ea/ea.js",
+            "line": 617,
+            "description": "从dom删除样式",
+            "params": [
+                {
+                    "name": "name",
+                    "description": "keyframe名字",
+                    "type": "String"
+                }
+            ],
+            "class": "EA",
+            "module": "EA"
+        },
+        {
+            "file": "ea/code/ea/ea.js",
+            "line": 649,
+            "description": "格式化时间",
+            "params": [
+                {
+                    "name": "time",
+                    "description": "时间，单位是毫秒数",
+                    "type": "Number"
+                },
+                {
+                    "name": "fixed",
+                    "description": "时间精度，换算成秒小数点儿后的精度位数，可选参数",
+                    "type": "Number="
+                }
+            ],
+            "return": {
+                "description": "",
+                "type": "Number"
+            },
+            "class": "EA",
+            "module": "EA"
+        },
+        {
+            "file": "ea/code/ea/ea.js",
+            "line": 667,
+            "description": "设置css3样式",
+            "params": [
+                {
+                    "name": "element",
+                    "description": "dom 对象",
+                    "type": "Object"
+                },
+                {
+                    "name": "prefixed",
+                    "description": "js属性前缀",
+                    "type": "String"
+                },
+                {
+                    "name": "name",
+                    "description": "属性名",
+                    "type": "String"
+                },
+                {
+                    "name": "value",
+                    "description": "属性值",
+                    "type": "String"
+                }
+            ],
+            "class": "EA",
+            "module": "EA"
+        },
+        {
+            "file": "ea/code/ea/ea.js",
+            "line": 680,
+            "description": "获取css3样式",
+            "params": [
+                {
+                    "name": "element",
+                    "description": "dom 对象",
+                    "type": "Object"
+                },
+                {
+                    "name": "prefixed",
+                    "description": "js属性前缀",
+                    "type": "String"
+                },
+                {
+                    "name": "name",
+                    "description": "属性名",
+                    "type": "String"
+                }
+            ],
+            "return": {
+                "description": "",
+                "type": "String"
+            },
+            "class": "EA",
+            "module": "EA"
+        },
+        {
+            "file": "ea/code/ea/ea.js",
+            "line": 694,
+            "description": "清除css3样式",
+            "params": [
+                {
+                    "name": "element",
+                    "description": "dom 对象",
+                    "type": "Object"
+                },
+                {
+                    "name": "prefixed",
+                    "description": "js属性前缀",
+                    "type": "String"
+                }
+            ],
+            "class": "EA",
+            "module": "EA"
+        },
+        {
+            "file": "ea/code/ea/ea.js",
+            "line": 706,
+            "description": "设置动画回调函数",
+            "params": [
+                {
+                    "name": "element",
+                    "description": "dom 对象",
+                    "type": "Object"
+                },
+                {
+                    "name": "prefixed",
+                    "description": "js属性前缀",
+                    "type": "String"
+                },
+                {
+                    "name": "callback",
+                    "description": "回调函数",
+                    "type": "Function="
+                }
+            ],
+            "class": "EA",
+            "module": "EA"
+        },
+        {
+            "file": "ea/code/ea/ea.js",
+            "line": 733,
+            "description": "设置元素样式",
+            "params": [
+                {
+                    "name": "element",
+                    "description": "dom 对象",
+                    "type": "Object"
+                },
+                {
+                    "name": "json",
+                    "description": "属性集合",
+                    "type": "Object"
+                }
+            ],
+            "class": "EA",
+            "module": "EA"
+        },
+        {
+            "file": "ea/code/ea/ea.js",
+            "line": 759,
+            "description": "类型判断",
+            "params": [
+                {
+                    "name": "obj",
+                    "description": "数据对象",
+                    "type": "Object"
+                },
+                {
+                    "name": "type",
+                    "description": "要匹配的类型",
+                    "type": "String"
+                }
+            ],
+            "return": {
+                "description": "",
+                "type": "?number"
+            },
+            "class": "EA",
+            "module": "EA"
+        },
+        {
+            "file": "ea/code/ea/ea.js",
+            "line": 820,
+            "description": "添加className",
+            "params": [
+                {
+                    "name": "element",
+                    "description": "dom 对象",
+                    "type": "Object"
+                },
+                {
+                    "name": "className",
+                    "description": "css类名",
+                    "type": "String"
+                }
+            ],
+            "class": "EA",
+            "module": "EA"
+        },
+        {
+            "file": "ea/code/ea/ea.js",
+            "line": 833,
+            "description": "移除className",
+            "params": [
+                {
+                    "name": "element",
+                    "description": "dom 对象",
+                    "type": "Object"
+                },
+                {
+                    "name": "className",
+                    "description": "css类名",
+                    "type": "String"
+                }
+            ],
+            "class": "EA",
+            "module": "EA"
+        },
+        {
+            "file": "ea/code/ea/ea.js",
+            "line": 847,
+            "description": "设置元素样式",
+            "params": [
+                {
+                    "name": "msg",
+                    "description": "日志内容",
+                    "type": "String"
+                },
+                {
+                    "name": "level",
+                    "description": "日志级别，可选参数",
+                    "type": "String="
+                }
+            ],
+            "class": "EA",
+            "module": "EA"
+        },
+        {
+            "file": "ea/code/ea/ea.js",
+            "line": 861,
+            "description": "添加事件",
+            "params": [
+                {
+                    "name": "element",
+                    "description": "dom 对象",
+                    "type": "Object"
+                },
+                {
+                    "name": "type",
+                    "description": "事件类型",
+                    "type": "String"
+                },
+                {
+                    "name": "handler",
+                    "description": "处理函数",
+                    "type": "Function"
+                }
+            ],
+            "class": "EA",
+            "module": "EA"
+        },
+        {
+            "file": "ea/code/ea/ea.js",
+            "line": 881,
+            "description": "移除事件",
+            "params": [
+                {
+                    "name": "element",
+                    "description": "dom 对象",
+                    "type": "Object"
+                },
+                {
+                    "name": "type",
+                    "description": "事件类型",
+                    "type": "String"
+                },
+                {
+                    "name": "handler",
+                    "description": "处理函数",
+                    "type": "Function"
+                }
+            ],
+            "class": "EA",
+            "module": "EA"
+        }
+    ],
+    "warnings": [
+        {
+            "message": "unknown tag: date",
+            "line": "  EA is easy animation:1"
+        },
+        {
+            "message": "unknown tag: demo",
+            "line": " ea/code/ea/ea.js:35"
+        },
+        {
+            "message": "unknown tag: delete",
+            "line": " ea/code/ea/ea.js:400"
+        },
+        {
+            "message": "Missing item type\n浏览器前缀",
+            "line": " ea/code/ea/ea.js:21"
+        },
+        {
+            "message": "Missing item type\n动画名称集合",
+            "line": " ea/code/ea/ea.js:28"
+        },
+        {
+            "message": "Missing item type\n构造EA对象",
+            "line": " ea/code/ea/ea.js:52"
+        },
+        {
+            "message": "Missing item type\n删除关键帧动画",
+            "line": " ea/code/ea/ea.js:400"
+        },
+        {
+            "message": "Missing item type\n获得浏览器前缀",
+            "line": " ea/code/ea/ea.js:516"
+        },
+        {
+            "message": "Missing item type\n获得关键帧对象",
+            "line": " ea/code/ea/ea.js:537"
+        },
+        {
+            "message": "Missing item type\n解析参数生成css文本",
+            "line": " ea/code/ea/ea.js:558"
+        },
+        {
+            "message": "Missing item type\n向dom添加样式",
+            "line": " ea/code/ea/ea.js:576"
+        },
+        {
+            "message": "Missing item type\n从dom删除样式",
+            "line": " ea/code/ea/ea.js:617"
+        },
+        {
+            "message": "Missing item type\n格式化时间",
+            "line": " ea/code/ea/ea.js:649"
+        },
+        {
+            "message": "Missing item type\n设置css3样式",
+            "line": " ea/code/ea/ea.js:667"
+        },
+        {
+            "message": "Missing item type\n获取css3样式",
+            "line": " ea/code/ea/ea.js:680"
+        },
+        {
+            "message": "Missing item type\n清除css3样式",
+            "line": " ea/code/ea/ea.js:694"
+        },
+        {
+            "message": "Missing item type\n设置动画回调函数",
+            "line": " ea/code/ea/ea.js:706"
+        },
+        {
+            "message": "Missing item type\n设置元素样式",
+            "line": " ea/code/ea/ea.js:733"
+        },
+        {
+            "message": "Missing item type\n类型判断",
+            "line": " ea/code/ea/ea.js:759"
+        },
+        {
+            "message": "Missing item type\n添加className",
+            "line": " ea/code/ea/ea.js:820"
+        },
+        {
+            "message": "Missing item type\n移除className",
+            "line": " ea/code/ea/ea.js:833"
+        },
+        {
+            "message": "Missing item type\n设置元素样式",
+            "line": " ea/code/ea/ea.js:847"
+        },
+        {
+            "message": "Missing item type\n添加事件",
+            "line": " ea/code/ea/ea.js:861"
+        },
+        {
+            "message": "Missing item type\n移除事件",
+            "line": " ea/code/ea/ea.js:881"
+        }
+    ]
+}
