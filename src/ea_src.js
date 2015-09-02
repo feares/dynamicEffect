@@ -1,14 +1,22 @@
 /**
+ * EA is easy animation
+ *
+ * @module EA
  * @file EA is easy animation
  * @author donkunshan(dongkunshan@baidu.com)
  * @date 2015-02-14
  */
 
 /**
- * class 动效库实例
+ * EA 动效库实例
  *
+ * @constructor
+ * @class EA
  * @param {string|Object} selector id、class 选择器或dom对象
+ *
  * @return {Object} 生成后的EA对象
+ *
+ * @demo init.html
  */
 var EA = function (selector) {
     return new EA.prototype.Init(selector);
@@ -100,6 +108,7 @@ EA.prototype = {
 		/**
 		 * 创建动画
 		 *
+     * @method create
 		 * @param {Object} option 运动参数
 		 * @param {string} option.name 动画名称
 		 * @param {number} option.time 动画时间
@@ -111,14 +120,17 @@ EA.prototype = {
 		 * @param {Array} option.keyframe 关键帧动作
 		 * @param {Function=} callback 回调函数，可选
 		 *
-		 * @return {Object}
+     * @chainable
+     * @return {Object} EA实例
+     *
+     * @demo create.html
 		 */
     'create': function (option, callback) {
         var that = this;
         this.setEnd3(clear);
         if (option.name && option.keyframe) {
             var cssText = '';
-            var plan = option.name + ' ' + option.time + 's';
+            var plan = option.name + ' ' + this.getTime(option.time) + 's';
             cssText = '@' + this.prefixed.css + 'keyframes ' + option.name
 						+ ' {' + this.getCssText(option.keyframe, this.prefixed.css) + '}';
             this.addCSS(cssText, option.name);
@@ -165,6 +177,7 @@ EA.prototype = {
 		/**
      * 移动元素
      *
+     * @method move
      * @param {Object} option 运动参数
      * @param {number=} option.top top位移，可选参数
      * @param {number=} option.right right位移，可选参数
@@ -175,8 +188,11 @@ EA.prototype = {
      * @param {number=} option.mix 混合动画，可选参数
      * @param {number} time 动画时间
      * @param {Function=} callback 回调函数，可选参数
-		 *
-		 * @return {Object}
+     *
+     * @chainable
+     * @return {Object} EA实例
+     *
+     * @demo move.html
      */
     'move': function (option, time, callback) {
         var plan = '';
@@ -185,22 +201,22 @@ EA.prototype = {
             this.setEnd3(callback);
         }
         if (option.top) {
-            plan += ' translateY(-' + option.top + ')';
+            plan += ' translateY(-' + option.top + 'px)';
         }
         if (option.right) {
-            plan += ' translateX(' + option.right + ')';
+            plan += ' translateX(' + option.right + 'px)';
         }
         if (option.bottom) {
-            plan += ' translateY(' + option.bottom + ')';
+            plan += ' translateY(' + option.bottom + 'px)';
         }
         if (option.left) {
-            plan += ' translateX(-' + option.left + ')';
+            plan += ' translateX(-' + option.left + 'px)';
         }
         if (option.up) {
-            plan += ' translateZ(' + option.up + ')';
+            plan += ' translateZ(' + option.up + 'px)';
         }
         if (option.down) {
-            plan += ' translateZ(-' + option.down + ')';
+            plan += ' translateZ(-' + option.down + 'px)';
         }
         if (option.mix) {
             plan += this.getStyle3('transform');
@@ -212,6 +228,7 @@ EA.prototype = {
     /**
      * 旋转元素
      *
+     * @method rotate
      * @param {Object} option 运动参数
      * @param {number=} option.x 相对于x轴角度，可选参数
      * @param {number=} option.y 相对于y轴角度，可选参数
@@ -219,8 +236,11 @@ EA.prototype = {
      * @param {number=} option.mix 混合动画，可选参数
      * @param {number} time 动画时间
      * @param {Function=} callback 回调函数，可选参数
-		 *
-		 * @return {Object}
+     *
+     * @chainable
+     * @return {Object} EA实例
+     *
+     * @demo rotate.html
      */
     'rotate': function (option, time, callback) {
         this.setStyle3('transition', this.getTime(time) + 's');
@@ -255,14 +275,18 @@ EA.prototype = {
     /**
      * 扭曲元素
      *
+     * @method skew
      * @param {Object} option 运动参数
      * @param {number=} option.x 相对于x轴角度，可选参数
      * @param {number=} option.y 相对于y轴角度，可选参数
      * @param {number=} option.mix 混合动画，可选参数
      * @param {number} time 动画时间
      * @param {Function=} callback 回调函数，可选参数
-		 *
-		 * @return {Object}
+     *
+     * @chainable
+     * @return {Object} EA实例
+     *
+     * @demo skew.html
      */
     'skew': function (option, time, callback) {
         this.setStyle3('transition', this.getTime(time) + 's');
@@ -291,12 +315,53 @@ EA.prototype = {
     },
 
     /**
+    * 缩放元素
+    *
+    * @method scale
+    * @param {Object} option 运动参数
+    * @param {number=} option.x x轴缩放比例，可选参数
+    * @param {number=} option.y y轴缩放比例，可选参数
+    * @param {number=} option.mix 混合动画，可选参数
+    * @param {number} time 动画时间
+    * @param {Function=} callback 回调函数，可选参数
+    *
+    * @chainable
+    * @return {Object} EA实例
+    *
+    * @demo scale.html
+    */
+    'scale': function (option, time, callback) {
+        this.setStyle3('transition', this.getTime(time) + 's');
+        if (callback) {
+            this.setEnd3(callback);
+        }
+        if (!option.x) {
+            option.x = 1;
+        }
+        if (!option.y) {
+            option.y = 1;
+        }
+        var plan = ' scale(' + option.x + ',' + option.y + ')';
+
+        if (option.mix) {
+            plan += this.getStyle3('transform');
+        }
+
+        this.setStyle3('transform', plan);
+        return this;
+    },
+
+    /**
      * 显示元素
      *
+     * @method show
      * @param {number} time 动画时间
      * @param {Function=} callback 回调函数，可选参数
-		 *
-		 * @return {Object}
+     *
+     * @chainable
+     * @return {Object} EA实例
+     *
+     * @demo show.html
      */
     'show': function (time, callback) {
         this.setStyle3('transition', this.getTime(time) + 's');
@@ -310,10 +375,14 @@ EA.prototype = {
     /**
      * 隐藏元素
      *
+     * @method hide
      * @param {number} time 动画时间
      * @param {Function=} callback 回调函数，可选参数
-		 *
-		 * @return {Object}
+     *
+     * @chainable
+     * @return {Object} EA实例
+     *
+     * @demo hide.html
      */
     'hide': function (time, callback) {
         this.setStyle3('transition', this.getTime(time) + 's');
@@ -327,11 +396,15 @@ EA.prototype = {
     /**
      * 触发动画，用于对写好的cssanimation调用
      *
+     * @method trigger
      * @param {string | Array} className 要触发css类名，多个用数组
      * @param {boolean=} save 是否保持动画结束时的状态
      * @param {Function=} callback 回调函数，可选参数
-		 *
-		 * @return {Object}
+     *
+     * @chainable
+     * @return {Object} EA实例
+     *
+     * @demo trigger.html
      */
     'trigger': function (className, save, callback) {
         if (this.is(save, 'function')) {
@@ -361,11 +434,15 @@ EA.prototype = {
     },
 
     /**
-     * 停止动画
+     * 停止动画，用于trigger触发的动画
      *
+     * @method stop
      * @param {string | Array} className 要触发css类名，多个用数组
-		 *
-		 * @return {Object}
+     *
+     * @chainable
+     * @return {Object} EA实例
+     *
+     * @demo stop.html
      */
     'stop': function (className) {
         if (className) {
@@ -385,7 +462,10 @@ EA.prototype = {
     /**
      * 删除关键帧动画
      *
+     * @method delete
      * @param {string} name 动画名称
+     *
+     * @demo delete.html
      */
     'delete': function (name) {
         this.removeCSS(name);
@@ -394,9 +474,12 @@ EA.prototype = {
     /**
      * 创建关键帧
      *
+     * @method initKeyFrame
      * @param {Object | Array} option 关键帧动作对象或数组
      * @param {string} option.name 动画名称
      * @param {Array} option.keyframe 关键帧动作
+     *
+     * @demo run.html
      */
     'initKeyFrame': function (option) {
         if (option) {
@@ -419,6 +502,7 @@ EA.prototype = {
     /**
      * 运行已定义的动画
      *
+     * @method run
      * @param {Object} option 运动参数
      * @param {string} option.name 动画名称
      * @param {number} option.time 动画时间
@@ -427,15 +511,18 @@ EA.prototype = {
      * @param {number | string=} option.count 动画次数，可选参数默认为1，forever无限
      * @param {boolean=} option.back 是否反向播放动画，可选参数
      * @param {boolean=} option.save 是否保持动画结束时的状态
-		 * @param {Function=} callback 回调函数
-		 *
-		 * @return {Object}
+     * @param {Function=} callback 回调函数
+     *
+     * @chainable
+     * @return {Object} EA实例
+     *
+     * @demo run.html
      */
     'run': function (option, callback) {
         var that = this;
         this.setEnd3(clear);
         if (option.name) {
-            var plan = option.name + ' ' + option.time + 's';
+            var plan = option.name + ' ' + this.getTime(option.time) + 's';
             if (!option.easing) {
                 option.easing = 'ease';
             }
@@ -475,11 +562,14 @@ EA.prototype = {
         }
     },
 
-		/**
+    /**
      * 更新动画
      *
+     * @method update
      * @param {string} name 动画名字
      * @param {Array} keyframe 关键帧动作
+     *
+     * @demo update.html
      */
     'update': function (name, keyframe) {
         var keyframesRule = this.getKeyFramse(name);
@@ -773,8 +863,8 @@ EA.prototype = {
 		 *
      */
     'addClass': function (className) {
-        if (this.elm.className.indexOf(className) > -1) {
-            this.elm.className += className;
+        if (this.elm.className.indexOf(className) === -1) {
+            this.elm.className += ' ' + className;
         }
     },
 
@@ -786,6 +876,7 @@ EA.prototype = {
      */
     'removeClass': function (className) {
         if (this.elm.className.indexOf(className) > -1) {
+            this.elm.className = this.elm.className.replace(' ' + className, '');
             this.elm.className = this.elm.className.replace(className, '');
         }
     },

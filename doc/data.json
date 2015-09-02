@@ -140,12 +140,18 @@
                 "description": "当前版本号",
                 "type": "String"
             },
+            "example": [
+                "\t<html>\n\t    <script>\n\t        require.config({\n\t            baseUrl: './res'\n\t        });\n\t        require(['ea'], function (ea) {\n\t            var version = ea().getVersion();\n\t            console.log(version);\n\t        });\n\t    </script>\n\t</html>\n\t"
+            ],
+            "exampleTitles": [
+                "version"
+            ],
             "class": "EA",
             "module": "EA"
         },
         {
             "file": "ea/code/ea/ea.js",
-            "line": 93,
+            "line": 95,
             "description": "创建动画",
             "itemtype": "method",
             "name": "create",
@@ -208,12 +214,18 @@
                 "description": "EA实例",
                 "type": "Object"
             },
+            "example": [
+                "\t<html>\n\t    <body>\n\t        <style>\n\t            .container {\n\t               width: 500px;\n\t               margin: 200px auto;\n\t            }\n\t            #demo-div {\n\t                width: 100px;\n\t                height: 100px;\n\t                margin-left: 200px;\n\t                background: #b8f1d2;\n\t            }\n\t        </style>\n\t        <div class=\"container\">\n\t            <div id=\"demo-div\" class=\"ea-rule\"></div>\n\t        </div>\n\t    </body>\n\t    <script>\n\t        require.config({\n\t            baseUrl: './res'\n\t        });\n\t        require(['ea'], function (ea) {\n\t            ea('#demo-div').create({\n\t                name: 'swing',\n\t                time: 2000,\n\t                keyframe: [\n\t                    '20% {transform: rotate(15deg);}',\n\t                    '40% {transform: rotate(-10deg);}',\n\t                    '60% {transform: rotate(5deg);}',\n\t                    '80% {transform: rotate(-5deg);}',\n\t                    '100% {transform: rotate(0deg);}'\n\t                ]\n\t            });\n\t        });\n\t    </script>\n\t</html>\n\t"
+            ],
+            "exampleTitles": [
+                "create"
+            ],
             "class": "EA",
             "module": "EA"
         },
         {
             "file": "ea/code/ea/ea.js",
-            "line": 160,
+            "line": 164,
             "description": "移动元素",
             "itemtype": "method",
             "name": "move",
@@ -276,12 +288,18 @@
                 "description": "EA实例",
                 "type": "Object"
             },
+            "example": [
+                "\t<html>\n\t    <body>\n\t        <style>\n\t            .container {\n\t               width: 500px;\n\t               margin: 200px auto;\n\t            }\n\t            #demo-div {\n\t                width: 100px;\n\t                height: 100px;\n\t                margin-left: 200px;\n\t                background: #b8f1d2;\n\t            }\n\t        </style>\n\t        <div class=\"container\">\n\t            <div id=\"demo-div\"></div>\n\t        </div>\n\t    </body>\n\t    <script>\n\t        require.config({\n\t            baseUrl: './res'\n\t        });\n\t        require(['ea'], function (ea) {\n\t            ea('#demo-div').move({\n\t                right: '50',\n\t                bottom: '50'\n\t            }, 2000);\n\t        });\n\t    </script>\n\t</html>\n\t"
+            ],
+            "exampleTitles": [
+                "move"
+            ],
             "class": "EA",
             "module": "EA"
         },
         {
             "file": "ea/code/ea/ea.js",
-            "line": 209,
+            "line": 215,
             "description": "旋转元素",
             "itemtype": "method",
             "name": "rotate",
@@ -329,12 +347,18 @@
                 "description": "EA实例",
                 "type": "Object"
             },
+            "example": [
+                "\t<html>\n\t    <body>\n\t        <style>\n\t            .container {\n\t               width: 500px;\n\t               margin: 200px auto;\n\t            }\n\t            #demo-div {\n\t                width: 100px;\n\t                height: 100px;\n\t                margin-left: 200px;\n\t                background: #b8f1d2;\n\t            }\n\t        </style>\n\t        <div class=\"container\">\n\t            <div id=\"demo-div\"></div>\n\t        </div>\n\t    </body>\n\t    <script>\n\t        require.config({\n\t            baseUrl: './res'\n\t        });\n\t        require(['ea'], function (ea) {\n\t            ea('#demo-div').rotate({\n\t                x: 20,\n\t                y: 50,\n\t                p: 100\n\t            }, 2000);\n\t        });\n\t    </script>\n\t</html>\n\t"
+            ],
+            "exampleTitles": [
+                "rotate"
+            ],
             "class": "EA",
             "module": "EA"
         },
         {
             "file": "ea/code/ea/ea.js",
-            "line": 256,
+            "line": 264,
             "description": "扭曲元素",
             "itemtype": "method",
             "name": "skew",
@@ -377,12 +401,72 @@
                 "description": "EA实例",
                 "type": "Object"
             },
+            "example": [
+                "\t<html>\n\t    <body>\n\t        <style>\n\t            .container {\n\t               width: 500px;\n\t               margin: 200px auto;\n\t            }\n\t            #demo-div {\n\t                width: 100px;\n\t                height: 100px;\n\t                margin-left: 200px;\n\t                background: #b8f1d2;\n\t            }\n\t        </style>\n\t        <div class=\"container\">\n\t            <div id=\"demo-div\"></div>\n\t        </div>\n\t    </body>\n\t    <script>\n\t        require.config({\n\t            baseUrl: './res'\n\t        });\n\t        require(['ea'], function (ea) {\n\t            ea('#demo-div').skew({\n\t                x: 20,\n\t                y: 50\n\t            }, 2000);\n\t        });\n\t    </script>\n\t</html>\n\t"
+            ],
+            "exampleTitles": [
+                "skew"
+            ],
             "class": "EA",
             "module": "EA"
         },
         {
             "file": "ea/code/ea/ea.js",
-            "line": 296,
+            "line": 306,
+            "description": "缩放元素",
+            "itemtype": "method",
+            "name": "scale",
+            "params": [
+                {
+                    "name": "option",
+                    "description": "运动参数",
+                    "type": "Object",
+                    "props": [
+                        {
+                            "name": "x",
+                            "description": "x轴缩放比例，可选参数",
+                            "type": "Number="
+                        },
+                        {
+                            "name": "y",
+                            "description": "y轴缩放比例，可选参数",
+                            "type": "Number="
+                        },
+                        {
+                            "name": "mix",
+                            "description": "混合动画，可选参数",
+                            "type": "Number="
+                        }
+                    ]
+                },
+                {
+                    "name": "time",
+                    "description": "动画时间",
+                    "type": "Number"
+                },
+                {
+                    "name": "callback",
+                    "description": "回调函数，可选参数",
+                    "type": "Function="
+                }
+            ],
+            "chainable": 1,
+            "return": {
+                "description": "EA实例",
+                "type": "Object"
+            },
+            "example": [
+                "\t<html>\n\t    <body>\n\t        <style>\n\t            .container {\n\t               width: 500px;\n\t               margin: 200px auto;\n\t            }\n\t            #demo-div {\n\t                width: 100px;\n\t                height: 100px;\n\t                margin-left: 200px;\n\t                background: #b8f1d2;\n\t            }\n\t        </style>\n\t        <div class=\"container\">\n\t            <div id=\"demo-div\"></div>\n\t        </div>\n\t    </body>\n\t    <script>\n\t        require.config({\n\t            baseUrl: './res'\n\t        });\n\t        require(['ea'], function (ea) {\n\t            ea('#demo-div').scale({\n\t                x: 1.2,\n\t                y: 1.4\n\t            }, 2000);\n\t        });\n\t    </script>\n\t</html>\n\t"
+            ],
+            "exampleTitles": [
+                "scale"
+            ],
+            "class": "EA",
+            "module": "EA"
+        },
+        {
+            "file": "ea/code/ea/ea.js",
+            "line": 343,
             "description": "显示元素",
             "itemtype": "method",
             "name": "show",
@@ -403,12 +487,18 @@
                 "description": "EA实例",
                 "type": "Object"
             },
+            "example": [
+                "\t<html>\n\t    <body>\n\t        <style>\n\t            .container {\n\t               width: 500px;\n\t               margin: 200px auto;\n\t            }\n\t            #demo-div {\n\t                width: 100px;\n\t                height: 100px;\n\t                margin-left: 200px;\n\t                background: #b8f1d2;\n\t            }\n\t        </style>\n\t        <div class=\"container\">\n\t            <div id=\"demo-div\"></div>\n\t        </div>\n\t    </body>\n\t    <script>\n\t        require.config({\n\t            baseUrl: './res'\n\t        });\n\t        require(['ea'], function (ea) {\n\t            ea('#demo-div').show(2000);\n\t        });\n\t    </script>\n\t</html>\n\t"
+            ],
+            "exampleTitles": [
+                "show"
+            ],
             "class": "EA",
             "module": "EA"
         },
         {
             "file": "ea/code/ea/ea.js",
-            "line": 317,
+            "line": 366,
             "description": "隐藏元素",
             "itemtype": "method",
             "name": "hide",
@@ -429,12 +519,18 @@
                 "description": "EA实例",
                 "type": "Object"
             },
+            "example": [
+                "\t<html>\n\t    <body>\n\t        <style>\n\t            .container {\n\t               width: 500px;\n\t               margin: 200px auto;\n\t            }\n\t            #demo-div {\n\t                width: 100px;\n\t                height: 100px;\n\t                margin-left: 200px;\n\t                background: #b8f1d2;\n\t            }\n\t        </style>\n\t        <div class=\"container\">\n\t            <div id=\"demo-div\"></div>\n\t        </div>\n\t    </body>\n\t    <script>\n\t        require.config({\n\t            baseUrl: './res'\n\t        });\n\t        require(['ea'], function (ea) {\n\t            ea('#demo-div').hide(2000);\n\t        });\n\t    </script>\n\t</html>\n\t"
+            ],
+            "exampleTitles": [
+                "hide"
+            ],
             "class": "EA",
             "module": "EA"
         },
         {
             "file": "ea/code/ea/ea.js",
-            "line": 338,
+            "line": 389,
             "description": "触发动画，用于对写好的cssanimation调用",
             "itemtype": "method",
             "name": "trigger",
@@ -460,12 +556,18 @@
                 "description": "EA实例",
                 "type": "Object"
             },
+            "example": [
+                "\t<html>\n\t    <body>\n\t        <style>\n\t            .container {\n\t               width: 500px;\n\t               margin: 200px auto;\n\t            }\n\t            #demo-div {\n\t                width: 100px;\n\t                height: 100px;\n\t                margin-left: 200px;\n\t                background: #b8f1d2;\n\t            }\n\t            .ea-rule {\n\t            \t-webkit-animation: 2s ease;\n\t            \t   -moz-animation: 2s ease;\n\t            \t    -ms-animation: 2s ease;\n\t            \t     -o-animation: 2s ease;\n\t            \t        animation: 2s ease;\n\t            }\n\t            .ea-flash {\n\t\t\t            -webkit-animation-name: ea-flash;\n\t\t\t            -moz-animation-name: ea-flash;\n\t\t\t            -ms-animation-name: ea-flash;\n\t\t\t            -o-animation-name: ea-flash;\n\t\t\t            animation-name: ea-flash;\n\t            }\n\t\n\t            @-webkit-keyframes ea-flash {\n\t\t\t            0%, 50%, 100% {\n\t\t\t\t\t            opacity: 1;\n\t\t\t            }\n\t\t\t            25%, 75% {\n\t\t\t\t\t            opacity: 0;\n\t\t\t            }\n\t            }\n\t\n\t            @-moz-keyframes ea-flash {\n\t\t\t            0%, 50%, 100% {\n\t\t\t\t\t            opacity: 1;\n\t\t\t            }\n\t\t\t            25%, 75% {\n\t\t\t\t\t            opacity: 0;\n\t\t\t            }\n\t            }\n\t\n\t            @-ms-keyframes ea-flash {\n\t\t\t            0%, 50%, 100% {\n\t\t\t\t\t            opacity: 1;\n\t\t\t            }\n\t\t\t            25%, 75% {\n\t\t\t\t\t            opacity: 0;\n\t\t\t            }\n\t            }\n\t\n\t            @-o-keyframes ea-flash {\n\t\t\t            0%, 50%, 100% {\n\t\t\t\t\t            opacity: 1;\n\t\t\t            }\n\t\t\t            25%, 75% {\n\t\t\t\t\t            opacity: 0;\n\t\t\t            }\n\t            }\n\t\n\t            @keyframes ea-flash {\n\t\t\t            0%, 50%, 100% {\n\t\t\t\t\t            opacity: 1;\n\t\t\t            }\n\t\t\t            25%, 75% {\n\t\t\t\t\t            opacity: 0;\n\t\t\t            }\n\t            }\n\t        </style>\n\t        <div class=\"container\">\n\t            <div id=\"demo-div\" class=\"ea-rule\"></div>\n\t        </div>\n\t    </body>\n\t    <script>\n\t        require.config({\n\t            baseUrl: './res'\n\t        });\n\t        require(['ea'], function (ea) {\n\t            ea('#demo-div').trigger('ea-flash', true);\n\t        });\n\t    </script>\n\t</html>\n\t"
+            ],
+            "exampleTitles": [
+                "trigger"
+            ],
             "class": "EA",
             "module": "EA"
         },
         {
             "file": "ea/code/ea/ea.js",
-            "line": 376,
+            "line": 429,
             "description": "停止动画",
             "itemtype": "method",
             "name": "stop",
@@ -481,14 +583,21 @@
                 "description": "EA实例",
                 "type": "Object"
             },
+            "example": [
+                "\t<html>\n\t    <body>\n\t        <style>\n\t            .container {\n\t               width: 500px;\n\t               margin: 200px auto;\n\t            }\n\t            #demo-div {\n\t                width: 100px;\n\t                height: 100px;\n\t                margin-left: 200px;\n\t                background: #b8f1d2;\n\t            }\n\t            .ea-rule {\n\t            \t-webkit-animation: 2s ease;\n\t            \t   -moz-animation: 2s ease;\n\t            \t    -ms-animation: 2s ease;\n\t            \t     -o-animation: 2s ease;\n\t            \t        animation: 2s ease;\n\t            }\n\t            .ea-flash {\n\t\t\t            -webkit-animation-name: ea-flash;\n\t\t\t            -moz-animation-name: ea-flash;\n\t\t\t            -ms-animation-name: ea-flash;\n\t\t\t            -o-animation-name: ea-flash;\n\t\t\t            animation-name: ea-flash;\n\t            }\n\t\n\t            @-webkit-keyframes ea-flash {\n\t\t\t            0%, 50%, 100% {\n\t\t\t\t\t            opacity: 1;\n\t\t\t            }\n\t\t\t            25%, 75% {\n\t\t\t\t\t            opacity: 0;\n\t\t\t            }\n\t            }\n\t\n\t            @-moz-keyframes ea-flash {\n\t\t\t            0%, 50%, 100% {\n\t\t\t\t\t            opacity: 1;\n\t\t\t            }\n\t\t\t            25%, 75% {\n\t\t\t\t\t            opacity: 0;\n\t\t\t            }\n\t            }\n\t\n\t            @-ms-keyframes ea-flash {\n\t\t\t            0%, 50%, 100% {\n\t\t\t\t\t            opacity: 1;\n\t\t\t            }\n\t\t\t            25%, 75% {\n\t\t\t\t\t            opacity: 0;\n\t\t\t            }\n\t            }\n\t\n\t            @-o-keyframes ea-flash {\n\t\t\t            0%, 50%, 100% {\n\t\t\t\t\t            opacity: 1;\n\t\t\t            }\n\t\t\t            25%, 75% {\n\t\t\t\t\t            opacity: 0;\n\t\t\t            }\n\t            }\n\t\n\t            @keyframes ea-flash {\n\t\t\t            0%, 50%, 100% {\n\t\t\t\t\t            opacity: 1;\n\t\t\t            }\n\t\t\t            25%, 75% {\n\t\t\t\t\t            opacity: 0;\n\t\t\t            }\n\t            }\n\t        </style>\n\t        <div class=\"container\">\n\t            <div id=\"demo-div\" class=\"ea-rule\"></div>\n\t        </div>\n\t    </body>\n\t    <script>\n\t        require.config({\n\t            baseUrl: './res'\n\t        });\n\t        require(['ea'], function (ea) {\n\t            ea('#demo-div').trigger('ea-flash', true);\n\t            ea('#demo-div').stop('ea-flash');\n\t        });\n\t    </script>\n\t</html>\n\t"
+            ],
+            "exampleTitles": [
+                "stop"
+            ],
             "class": "EA",
             "module": "EA"
         },
         {
             "file": "ea/code/ea/ea.js",
-            "line": 400,
+            "line": 455,
             "description": "删除关键帧动画",
-            "delete": "getVersion",
+            "itemtype": "method",
+            "name": "delete",
             "params": [
                 {
                     "name": "name",
@@ -496,12 +605,18 @@
                     "type": "String"
                 }
             ],
+            "example": [
+                "\t<html>\n\t    <body>\n\t        <style>\n\t            .container {\n\t               width: 500px;\n\t               margin: 200px auto;\n\t            }\n\t            #demo-div {\n\t                width: 100px;\n\t                height: 100px;\n\t                margin-left: 200px;\n\t                background: #b8f1d2;\n\t            }\n\t        </style>\n\t        <div class=\"container\">\n\t            <div id=\"demo-div\" class=\"ea-rule\"></div>\n\t        </div>\n\t    </body>\n\t    <script>\n\t        require.config({\n\t            baseUrl: './res'\n\t        });\n\t        require(['ea'], function (ea) {\n\t            ea('#demo-div').create({\n\t                name: 'swing',\n\t                time: 2000,\n\t                keyframe: [\n\t                    '20% {transform: rotate(15deg);}',\n\t                    '40% {transform: rotate(-10deg);}',\n\t                    '60% {transform: rotate(5deg);}',\n\t                    '80% {transform: rotate(-5deg);}',\n\t                    '100% {transform: rotate(0deg);}'\n\t                ]\n\t            });\n\t            setTimeout(function () {\n\t                ea().delete('swing');\n\t            }, 3000);\n\t        });\n\t    </script>\n\t</html>\n\t"
+            ],
+            "exampleTitles": [
+                "delete"
+            ],
             "class": "EA",
             "module": "EA"
         },
         {
             "file": "ea/code/ea/ea.js",
-            "line": 410,
+            "line": 467,
             "description": "创建关键帧",
             "itemtype": "method",
             "name": "initKeyFrame",
@@ -524,12 +639,18 @@
                     ]
                 }
             ],
+            "example": [
+                "\t<html>\n\t    <body>\n\t        <style>\n\t            .container {\n\t               width: 500px;\n\t               margin: 200px auto;\n\t            }\n\t            #demo-div {\n\t                width: 100px;\n\t                height: 100px;\n\t                margin-left: 200px;\n\t                background: #b8f1d2;\n\t            }\n\t        </style>\n\t        <div class=\"container\">\n\t            <div id=\"demo-div\" class=\"ea-rule\"></div>\n\t        </div>\n\t    </body>\n\t    <script>\n\t        require.config({\n\t            baseUrl: './res'\n\t        });\n\t        require(['ea'], function (ea) {\n\t            ea().initKeyFrame([\n\t                {\n\t                  name:'tada',\n\t                  keyframe:[\n\t                      '0% {transform: scale(1);}',\n\t                      '10%, 20% {transform: scale(0.9) rotate(-3deg);}',\n\t                      '30%, 50%, 70%, 90% {transform: scale(1.1) rotate(3deg);}',\n\t                      '40%, 60%, 80% {transform: scale(1.1) rotate(-3deg);}',\n\t                      '100% {transform: scale(1) rotate(0);}'\n\t                      ]\n\t                }\n\t            ]);\n\t            ea('#demo-div').run({\n\t                name: 'tada',\n\t                time: 2000,\n\t                save: false\n\t            });\n\t        });\n\t    </script>\n\t</html>\n\t"
+            ],
+            "exampleTitles": [
+                "run"
+            ],
             "class": "EA",
             "module": "EA"
         },
         {
             "file": "ea/code/ea/ea.js",
-            "line": 436,
+            "line": 495,
             "description": "运行已定义的动画",
             "itemtype": "method",
             "name": "run",
@@ -587,12 +708,18 @@
                 "description": "EA实例",
                 "type": "Object"
             },
+            "example": [
+                "\t<html>\n\t    <body>\n\t        <style>\n\t            .container {\n\t               width: 500px;\n\t               margin: 200px auto;\n\t            }\n\t            #demo-div {\n\t                width: 100px;\n\t                height: 100px;\n\t                margin-left: 200px;\n\t                background: #b8f1d2;\n\t            }\n\t        </style>\n\t        <div class=\"container\">\n\t            <div id=\"demo-div\" class=\"ea-rule\"></div>\n\t        </div>\n\t    </body>\n\t    <script>\n\t        require.config({\n\t            baseUrl: './res'\n\t        });\n\t        require(['ea'], function (ea) {\n\t            ea().initKeyFrame([\n\t                {\n\t                  name:'tada',\n\t                  keyframe:[\n\t                      '0% {transform: scale(1);}',\n\t                      '10%, 20% {transform: scale(0.9) rotate(-3deg);}',\n\t                      '30%, 50%, 70%, 90% {transform: scale(1.1) rotate(3deg);}',\n\t                      '40%, 60%, 80% {transform: scale(1.1) rotate(-3deg);}',\n\t                      '100% {transform: scale(1) rotate(0);}'\n\t                      ]\n\t                }\n\t            ]);\n\t            ea('#demo-div').run({\n\t                name: 'tada',\n\t                time: 2000,\n\t                save: false\n\t            });\n\t        });\n\t    </script>\n\t</html>\n\t"
+            ],
+            "exampleTitles": [
+                "run"
+            ],
             "class": "EA",
             "module": "EA"
         },
         {
             "file": "ea/code/ea/ea.js",
-            "line": 497,
+            "line": 558,
             "description": "更新动画",
             "itemtype": "method",
             "name": "update",
@@ -608,12 +735,18 @@
                     "type": "Array"
                 }
             ],
+            "example": [
+                "\t<html>\n\t    <body>\n\t        <style>\n\t            .container {\n\t               width: 500px;\n\t               margin: 200px auto;\n\t            }\n\t            #demo-div {\n\t                width: 100px;\n\t                height: 100px;\n\t                margin-left: 200px;\n\t                background: #b8f1d2;\n\t            }\n\t        </style>\n\t        <div class=\"container\">\n\t            <div id=\"demo-div\" class=\"ea-rule\"></div>\n\t        </div>\n\t    </body>\n\t    <script>\n\t        require.config({\n\t            baseUrl: './res'\n\t        });\n\t        require(['ea'], function (ea) {\n\t            ea().initKeyFrame([\n\t                {\n\t                  name:'tada',\n\t                  keyframe:[\n\t                      '0% {transform: scale(1);}',\n\t                      '10%, 20% {transform: scale(0.9) rotate(-3deg);}',\n\t                      '30%, 50%, 70%, 90% {transform: scale(1.1) rotate(3deg);}',\n\t                      '40%, 60%, 80% {transform: scale(1.1) rotate(-3deg);}',\n\t                      '100% {transform: scale(1) rotate(0);}'\n\t                      ]\n\t                }\n\t            ]);\n\t            ea().update('tada', [\n\t                '100% {transform: translate(100px);}'\n\t            ]);\n\t            ea('#demo-div').run({\n\t                name: 'tada',\n\t                time: 2000,\n\t                save: true\n\t            });\n\t        });\n\t    </script>\n\t</html>\n\t"
+            ],
+            "exampleTitles": [
+                "update"
+            ],
             "class": "EA",
             "module": "EA"
         },
         {
             "file": "ea/code/ea/ea.js",
-            "line": 516,
+            "line": 579,
             "description": "获得浏览器前缀",
             "return": {
                 "description": "",
@@ -624,7 +757,7 @@
         },
         {
             "file": "ea/code/ea/ea.js",
-            "line": 537,
+            "line": 600,
             "description": "获得关键帧对象",
             "params": [
                 {
@@ -642,7 +775,7 @@
         },
         {
             "file": "ea/code/ea/ea.js",
-            "line": 558,
+            "line": 621,
             "description": "解析参数生成css文本",
             "params": [
                 {
@@ -665,7 +798,7 @@
         },
         {
             "file": "ea/code/ea/ea.js",
-            "line": 576,
+            "line": 639,
             "description": "向dom添加样式",
             "params": [
                 {
@@ -684,7 +817,7 @@
         },
         {
             "file": "ea/code/ea/ea.js",
-            "line": 617,
+            "line": 680,
             "description": "从dom删除样式",
             "params": [
                 {
@@ -698,7 +831,7 @@
         },
         {
             "file": "ea/code/ea/ea.js",
-            "line": 649,
+            "line": 712,
             "description": "格式化时间",
             "params": [
                 {
@@ -721,7 +854,7 @@
         },
         {
             "file": "ea/code/ea/ea.js",
-            "line": 667,
+            "line": 730,
             "description": "设置css3样式",
             "params": [
                 {
@@ -750,7 +883,7 @@
         },
         {
             "file": "ea/code/ea/ea.js",
-            "line": 680,
+            "line": 743,
             "description": "获取css3样式",
             "params": [
                 {
@@ -778,7 +911,7 @@
         },
         {
             "file": "ea/code/ea/ea.js",
-            "line": 694,
+            "line": 757,
             "description": "清除css3样式",
             "params": [
                 {
@@ -797,7 +930,7 @@
         },
         {
             "file": "ea/code/ea/ea.js",
-            "line": 706,
+            "line": 769,
             "description": "设置动画回调函数",
             "params": [
                 {
@@ -821,7 +954,7 @@
         },
         {
             "file": "ea/code/ea/ea.js",
-            "line": 733,
+            "line": 796,
             "description": "设置元素样式",
             "params": [
                 {
@@ -840,7 +973,7 @@
         },
         {
             "file": "ea/code/ea/ea.js",
-            "line": 759,
+            "line": 822,
             "description": "类型判断",
             "params": [
                 {
@@ -863,7 +996,7 @@
         },
         {
             "file": "ea/code/ea/ea.js",
-            "line": 820,
+            "line": 883,
             "description": "添加className",
             "params": [
                 {
@@ -882,7 +1015,7 @@
         },
         {
             "file": "ea/code/ea/ea.js",
-            "line": 833,
+            "line": 896,
             "description": "移除className",
             "params": [
                 {
@@ -901,7 +1034,7 @@
         },
         {
             "file": "ea/code/ea/ea.js",
-            "line": 847,
+            "line": 911,
             "description": "设置元素样式",
             "params": [
                 {
@@ -920,7 +1053,7 @@
         },
         {
             "file": "ea/code/ea/ea.js",
-            "line": 861,
+            "line": 925,
             "description": "添加事件",
             "params": [
                 {
@@ -944,7 +1077,7 @@
         },
         {
             "file": "ea/code/ea/ea.js",
-            "line": 881,
+            "line": 945,
             "description": "移除事件",
             "params": [
                 {
@@ -977,8 +1110,60 @@
             "line": " ea/code/ea/ea.js:35"
         },
         {
-            "message": "unknown tag: delete",
-            "line": " ea/code/ea/ea.js:400"
+            "message": "unknown tag: demo",
+            "line": " ea/code/ea/ea.js:81"
+        },
+        {
+            "message": "unknown tag: demo",
+            "line": " ea/code/ea/ea.js:95"
+        },
+        {
+            "message": "unknown tag: demo",
+            "line": " ea/code/ea/ea.js:164"
+        },
+        {
+            "message": "unknown tag: demo",
+            "line": " ea/code/ea/ea.js:215"
+        },
+        {
+            "message": "unknown tag: demo",
+            "line": " ea/code/ea/ea.js:264"
+        },
+        {
+            "message": "unknown tag: demo",
+            "line": " ea/code/ea/ea.js:306"
+        },
+        {
+            "message": "unknown tag: demo",
+            "line": " ea/code/ea/ea.js:343"
+        },
+        {
+            "message": "unknown tag: demo",
+            "line": " ea/code/ea/ea.js:366"
+        },
+        {
+            "message": "unknown tag: demo",
+            "line": " ea/code/ea/ea.js:389"
+        },
+        {
+            "message": "unknown tag: demo",
+            "line": " ea/code/ea/ea.js:429"
+        },
+        {
+            "message": "unknown tag: demo",
+            "line": " ea/code/ea/ea.js:455"
+        },
+        {
+            "message": "unknown tag: demo",
+            "line": " ea/code/ea/ea.js:467"
+        },
+        {
+            "message": "unknown tag: demo",
+            "line": " ea/code/ea/ea.js:495"
+        },
+        {
+            "message": "unknown tag: demo",
+            "line": " ea/code/ea/ea.js:558"
         },
         {
             "message": "Missing item type\n浏览器前缀",
@@ -993,76 +1178,72 @@
             "line": " ea/code/ea/ea.js:52"
         },
         {
-            "message": "Missing item type\n删除关键帧动画",
-            "line": " ea/code/ea/ea.js:400"
-        },
-        {
             "message": "Missing item type\n获得浏览器前缀",
-            "line": " ea/code/ea/ea.js:516"
+            "line": " ea/code/ea/ea.js:579"
         },
         {
             "message": "Missing item type\n获得关键帧对象",
-            "line": " ea/code/ea/ea.js:537"
+            "line": " ea/code/ea/ea.js:600"
         },
         {
             "message": "Missing item type\n解析参数生成css文本",
-            "line": " ea/code/ea/ea.js:558"
+            "line": " ea/code/ea/ea.js:621"
         },
         {
             "message": "Missing item type\n向dom添加样式",
-            "line": " ea/code/ea/ea.js:576"
+            "line": " ea/code/ea/ea.js:639"
         },
         {
             "message": "Missing item type\n从dom删除样式",
-            "line": " ea/code/ea/ea.js:617"
-        },
-        {
-            "message": "Missing item type\n格式化时间",
-            "line": " ea/code/ea/ea.js:649"
-        },
-        {
-            "message": "Missing item type\n设置css3样式",
-            "line": " ea/code/ea/ea.js:667"
-        },
-        {
-            "message": "Missing item type\n获取css3样式",
             "line": " ea/code/ea/ea.js:680"
         },
         {
+            "message": "Missing item type\n格式化时间",
+            "line": " ea/code/ea/ea.js:712"
+        },
+        {
+            "message": "Missing item type\n设置css3样式",
+            "line": " ea/code/ea/ea.js:730"
+        },
+        {
+            "message": "Missing item type\n获取css3样式",
+            "line": " ea/code/ea/ea.js:743"
+        },
+        {
             "message": "Missing item type\n清除css3样式",
-            "line": " ea/code/ea/ea.js:694"
+            "line": " ea/code/ea/ea.js:757"
         },
         {
             "message": "Missing item type\n设置动画回调函数",
-            "line": " ea/code/ea/ea.js:706"
+            "line": " ea/code/ea/ea.js:769"
         },
         {
             "message": "Missing item type\n设置元素样式",
-            "line": " ea/code/ea/ea.js:733"
+            "line": " ea/code/ea/ea.js:796"
         },
         {
             "message": "Missing item type\n类型判断",
-            "line": " ea/code/ea/ea.js:759"
+            "line": " ea/code/ea/ea.js:822"
         },
         {
             "message": "Missing item type\n添加className",
-            "line": " ea/code/ea/ea.js:820"
+            "line": " ea/code/ea/ea.js:883"
         },
         {
             "message": "Missing item type\n移除className",
-            "line": " ea/code/ea/ea.js:833"
+            "line": " ea/code/ea/ea.js:896"
         },
         {
             "message": "Missing item type\n设置元素样式",
-            "line": " ea/code/ea/ea.js:847"
+            "line": " ea/code/ea/ea.js:911"
         },
         {
             "message": "Missing item type\n添加事件",
-            "line": " ea/code/ea/ea.js:861"
+            "line": " ea/code/ea/ea.js:925"
         },
         {
             "message": "Missing item type\n移除事件",
-            "line": " ea/code/ea/ea.js:881"
+            "line": " ea/code/ea/ea.js:945"
         }
     ]
 }

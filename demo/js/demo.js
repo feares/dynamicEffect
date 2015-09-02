@@ -18,8 +18,8 @@ $(document).ready(function() {
 
     $("#div1").click(function () {
         var that = this;
-        ea(this).move({left:'10px'}, 1000, function () {
-            ea(that).move({left:'0px'}, 1000);
+        ea(this).move({left:'10'}, 1000, function () {
+            ea(that).move({left:'0'}, 1000);
         });
     });
 
@@ -41,8 +41,8 @@ $(document).ready(function() {
         var that = this;
         ea(this).hide(1000, function () {
             ea(that).show(1000);
-        }).move({left:'10px'}, 1000, function () {
-            ea(that).move({left:'0px'}, 1000);
+        }).move({left:'10'}, 1000, function () {
+            ea(that).move({left:'0'}, 1000);
         });
     });
 

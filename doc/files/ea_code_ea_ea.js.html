@@ -170,6 +170,8 @@ define(function (require) {
        * @method getVersion
        *
        * @return {string} 当前版本号
+       *
+       * @demo version.html
        */
       &#x27;getVersion&#x27;: function () {
           return version;
@@ -193,13 +195,15 @@ define(function (require) {
        *
        * @chainable
        * @return {Object} EA实例
+       *
+       * @demo create.html
        */
       &#x27;create&#x27;: function (option, callback) {
           var that = this;
           setEnd3(this.elm, prefixed.lowercase, clear);
           if (option.name &amp;&amp; option.keyframe) {
               var cssText = &#x27;&#x27;;
-              var plan = option.name + &#x27; &#x27; + option.time + &#x27;s&#x27;;
+              var plan = option.name + &#x27; &#x27; + getTime(option.time) + &#x27;s&#x27;;
               cssText = &#x27;@&#x27; + prefixed.css + &#x27;keyframes &#x27; + option.name
               + &#x27; {&#x27; + getCssText(option.keyframe, prefixed.css) + &#x27;}&#x27;;
               addCSS(cssText, option.name);
@@ -260,6 +264,8 @@ define(function (require) {
        *
        * @chainable
        * @return {Object} EA实例
+       *
+       * @demo move.html
        */
       &#x27;move&#x27;: function (option, time, callback) {
           var plan = &#x27;&#x27;;
@@ -268,22 +274,22 @@ define(function (require) {
               setEnd3(this.elm, prefixed.lowercase, callback);
           }
           if (option.top) {
-              plan += &#x27; translateY(-&#x27; + option.top + &#x27;)&#x27;;
+              plan += &#x27; translateY(-&#x27; + option.top + &#x27;px)&#x27;;
           }
           if (option.right) {
-              plan += &#x27; translateX(&#x27; + option.right + &#x27;)&#x27;;
+              plan += &#x27; translateX(&#x27; + option.right + &#x27;px)&#x27;;
           }
           if (option.bottom) {
-              plan += &#x27; translateY(&#x27; + option.bottom + &#x27;)&#x27;;
+              plan += &#x27; translateY(&#x27; + option.bottom + &#x27;px)&#x27;;
           }
           if (option.left) {
-              plan += &#x27; translateX(-&#x27; + option.left + &#x27;)&#x27;;
+              plan += &#x27; translateX(-&#x27; + option.left + &#x27;px)&#x27;;
           }
           if (option.up) {
-              plan += &#x27; translateZ(&#x27; + option.up + &#x27;)&#x27;;
+              plan += &#x27; translateZ(&#x27; + option.up + &#x27;px)&#x27;;
           }
           if (option.down) {
-              plan += &#x27; translateZ(-&#x27; + option.down + &#x27;)&#x27;;
+              plan += &#x27; translateZ(-&#x27; + option.down + &#x27;px)&#x27;;
           }
           if (option.mix) {
               plan += getStyle3(this.elm, prefixed.js, &#x27;transform&#x27;);
@@ -306,6 +312,8 @@ define(function (require) {
        *
        * @chainable
        * @return {Object} EA实例
+       *
+       * @demo rotate.html
        */
       &#x27;rotate&#x27;: function (option, time, callback) {
           setStyle3(this.elm, prefixed.js, &#x27;transition&#x27;, getTime(time) + &#x27;s&#x27;);
@@ -327,7 +335,7 @@ define(function (require) {
           }
           if (option.p) {
               plan = &#x27;perspective(&#x27; + option.p + &#x27;px)&#x27; + plan;
-              this.setStyle(this.elm, {
+              setStyle(this.elm, {
                   &#x27;transform-style&#x27;: &#x27;preserve-3d&#x27;
               });
           }
@@ -352,6 +360,8 @@ define(function (require) {
        *
        * @chainable
        * @return {Object} EA实例
+       *
+       * @demo skew.html
        */
       &#x27;skew&#x27;: function (option, time, callback) {
           setStyle3(this.elm, prefixed.js, &#x27;transition&#x27;, getTime(time) + &#x27;s&#x27;);
@@ -380,6 +390,43 @@ define(function (require) {
       },
 
       /**
+       * 缩放元素
+       *
+       * @method scale
+       * @param {Object} option 运动参数
+       * @param {number=} option.x x轴缩放比例，可选参数
+       * @param {number=} option.y y轴缩放比例，可选参数
+       * @param {number=} option.mix 混合动画，可选参数
+       * @param {number} time 动画时间
+       * @param {Function=} callback 回调函数，可选参数
+       *
+       * @chainable
+       * @return {Object} EA实例
+       *
+       * @demo scale.html
+       */
+      &#x27;scale&#x27;: function (option, time, callback) {
+          setStyle3(this.elm, prefixed.js, &#x27;transition&#x27;, getTime(time) + &#x27;s&#x27;);
+          if (callback) {
+              setEnd3(this.elm, prefixed.lowercase, callback);
+          }
+          if (!option.x) {
+              option.x = 1;
+          }
+          if (!option.y) {
+              option.y = 1;
+          }
+          var plan = &#x27; scale(&#x27; + option.x + &#x27;,&#x27; + option.y + &#x27;)&#x27;;
+
+          if (option.mix) {
+              plan += getStyle3(this.elm, prefixed.js, &#x27;transform&#x27;);
+          }
+
+          setStyle3(this.elm, prefixed.js, &#x27;transform&#x27;, plan);
+          return this;
+      },
+
+      /**
        * 显示元素
        *
        * @method show
@@ -388,6 +435,8 @@ define(function (require) {
        *
        * @chainable
        * @return {Object} EA实例
+       *
+       * @demo show.html
        */
       &#x27;show&#x27;: function (time, callback) {
           setStyle3(this.elm, prefixed.js, &#x27;transition&#x27;, getTime(time) + &#x27;s&#x27;);
@@ -409,6 +458,8 @@ define(function (require) {
        *
        * @chainable
        * @return {Object} EA实例
+       *
+       * @demo hide.html
        */
       &#x27;hide&#x27;: function (time, callback) {
           setStyle3(this.elm, prefixed.js, &#x27;transition&#x27;, getTime(time) + &#x27;s&#x27;);
@@ -431,6 +482,8 @@ define(function (require) {
        *
        * @chainable
        * @return {Object} EA实例
+       *
+       * @demo trigger.html
        */
       &#x27;trigger&#x27;: function (className, save, callback) {
           if (is(save, &#x27;function&#x27;)) {
@@ -467,6 +520,8 @@ define(function (require) {
        *
        * @chainable
        * @return {Object} EA实例
+       *
+       * @demo stop.html
        */
       &#x27;stop&#x27;: function (className) {
           if (className) {
@@ -486,8 +541,10 @@ define(function (require) {
       /**
        * 删除关键帧动画
        *
-       * @delete getVersion
+       * @method delete
        * @param {string} name 动画名称
+       *
+       * @demo delete.html
        */
       &#x27;delete&#x27;: function (name) {
           removeCSS(name);
@@ -500,6 +557,8 @@ define(function (require) {
        * @param {Object | Array} option 关键帧动作对象或数组
        * @param {string} option.name 动画名称
        * @param {Array} option.keyframe 关键帧动作
+       *
+       * @demo run.html
        */
       &#x27;initKeyFrame&#x27;: function (option) {
           if (option) {
@@ -535,12 +594,14 @@ define(function (require) {
        *
        * @chainable
        * @return {Object} EA实例
+       *
+       * @demo run.html
        */
       &#x27;run&#x27;: function (option, callback) {
           var that = this;
           setEnd3(this.elm, prefixed.lowercase, clear);
           if (option.name) {
-              var plan = option.name + &#x27; &#x27; + option.time + &#x27;s&#x27;;
+              var plan = option.name + &#x27; &#x27; + getTime(option.time) + &#x27;s&#x27;;
               if (!option.easing) {
                   option.easing = &#x27;ease&#x27;;
               }
@@ -586,6 +647,8 @@ define(function (require) {
        * @method update
        * @param {string} name 动画名字
        * @param {Array} keyframe 关键帧动作
+       *
+       * @demo update.html
        */
       &#x27;update&#x27;: function (name, keyframe) {
           var keyframesRule = getKeyFramse(name);
@@ -829,7 +892,7 @@ define(function (require) {
           }
       }
       else {
-          if (arguments.length === 1) {
+          if (arguments.length === 2) {
               for (var j in json) {
                   if (json.hasOwnProperty(j)) {
                       element.style[j] = json[j];
@@ -912,7 +975,7 @@ define(function (require) {
    */
   function addClass(element, className) {
       if (element.className.indexOf(className) === -1) {
-          element.className += className;
+          element.className += &#x27; &#x27; + className;
       }
   }
 
@@ -926,6 +989,7 @@ define(function (require) {
   function removeClass(element, className) {
       var classValue = element.className;
       if (classValue.indexOf(className) &gt; -1) {
+          element.className = classValue.replace(&#x27; &#x27; + className, &#x27;&#x27;);
           element.className = classValue.replace(className, &#x27;&#x27;);
       }
   }

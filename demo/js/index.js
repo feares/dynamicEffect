@@ -29,19 +29,26 @@ $(document).ready(function() {
 
 
     $('.span3').click(function() {
-        /*ea().create(this, {name:'swing', time:'1', keyframe:[
-            '20% {transform: rotate(15deg);}',
-        		'40% {transform: rotate(-10deg);}',
-        		'60% {transform: rotate(5deg);}',
-        		'80% {transform: rotate(-5deg);}',
-        		'100% {transform: rotate(0deg);}'
-            ]
+        /*ea().create({
+              name: 'swing',
+              time: 1000,
+              keyframe: [
+                  '20% {transform: rotate(15deg);}',
+        		      '40% {transform: rotate(-10deg);}',
+        		      '60% {transform: rotate(5deg);}',
+        		      '80% {transform: rotate(-5deg);}',
+        		      '100% {transform: rotate(0deg);}'
+              ]
         });*/
 
         ea().update('tada', [
             '100% {transform: translate(100px);}'
-          ]);
+        ]);
 
-        ea('.span3').run({name:'tada', time:1, save:false});
+        ea('.span3').run({
+            name: 'tada',
+            time: 1000,
+            save: false
+        });
     });
 });

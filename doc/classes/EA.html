@@ -102,6 +102,13 @@
                     </li>
                 
                     <li class="index-item method">
+                        <a href="#" data-tabid="#method" data-anchor="#method_delete" data-tablink="delete">delete</a>
+
+                        
+                        
+                    </li>
+                
+                    <li class="index-item method">
                         <a href="#" data-tabid="#method" data-anchor="#method_getVersion" data-tablink="getVersion">getVersion</a>
 
                         
@@ -138,6 +145,13 @@
                 
                     <li class="index-item method">
                         <a href="#" data-tabid="#method" data-anchor="#method_run" data-tablink="run">run</a>
+
+                        
+                        
+                    </li>
+                
+                    <li class="index-item method">
+                        <a href="#" data-tabid="#method" data-anchor="#method_scale" data-tablink="scale">scale</a>
 
                         
                         
@@ -456,7 +470,7 @@
             
         
         
-        <a href="../files/ea_code_ea_ea.js.html#l93"><code>ea&#x2F;code&#x2F;ea&#x2F;ea.js:93</code></a>
+        <a href="../files/ea_code_ea_ea.js.html#l95"><code>ea&#x2F;code&#x2F;ea&#x2F;ea.js:95</code></a>
         
         </p>
 
@@ -667,6 +681,208 @@
     
 
     
+        <div class="example">
+            <h4>示例:</h4>
+            <ul class="nav nav-tabs example-list">
+                
+                <li role="presentation"  class="active"  _no='0'> <a>create</a></li>
+                
+            </ul>
+
+            <div class="example-content ">
+                <div class="stdoc-code"><pre class="code prettyprint"><code>&lt;html&gt;
+    &lt;body&gt;
+        &lt;style&gt;
+            .container {
+               width: 500px;
+               margin: 200px auto;
+            }
+            #demo-div {
+                width: 100px;
+                height: 100px;
+                margin-left: 200px;
+                background: #b8f1d2;
+            }
+        &lt;/style&gt;
+        &lt;div class="container"&gt;
+            &lt;div id="demo-div" class="ea-rule"&gt;&lt;/div&gt;
+        &lt;/div&gt;
+    &lt;/body&gt;
+    &lt;script&gt;
+        require.config({
+            baseUrl: &#39;./res&#39;
+        });
+        require([&#39;ea&#39;], function (ea) {
+            ea(&#39;#demo-div&#39;).create({
+                name: &#39;swing&#39;,
+                time: 2000,
+                keyframe: [
+                    &#39;20% {transform: rotate(15deg);}&#39;,
+                    &#39;40% {transform: rotate(-10deg);}&#39;,
+                    &#39;60% {transform: rotate(5deg);}&#39;,
+                    &#39;80% {transform: rotate(-5deg);}&#39;,
+                    &#39;100% {transform: rotate(0deg);}&#39;
+                ]
+            });
+        });
+    &lt;/script&gt;
+&lt;/html&gt;</code></pre>
+</div>
+            </div>
+
+             <button class="btn btn-info btn-viewDemo" type="button">运行代码</button>
+            <button class="btn btn-info btn-editDemo" type="button">编辑代码</button>
+        </div>
+    
+</div>
+
+                
+                    <div id="method_delete" class="method item">
+    <h3 class="name">delete</h3>
+    <code>
+    delete
+    
+        <div class="args">
+            <span class="paren">(</span><ul class="args-list inline commas">
+            
+                <li class="arg">
+                    
+                        name
+                    
+                </li>
+            
+            </ul><span class="paren">)</span>
+        </div>
+    
+    </code>
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                代码位置
+                
+            
+        
+        
+        <a href="../files/ea_code_ea_ea.js.html#l455"><code>ea&#x2F;code&#x2F;ea&#x2F;ea.js:455</code></a>
+        
+        </p>
+
+
+        
+
+        
+    </div>
+
+    <div class="description well well-small sign-left3">
+        <div class="stdoc-code"><p>删除关键帧动画</p>
+</div>
+    </div>
+
+    
+        <div class="params">
+            <h4>参数:</h4>
+
+            <table class="table table-bordered">
+            <tr class='active'><th>名称</th><th>类型</th><!--<th>flag</th>--><th>描述</th></tr>
+            
+                <tr class="param">
+                    
+                       <td> <code class="param-name">name</code>
+                       <td> <span class="type">String</span>
+                       <!--<td>
+                    
+
+                    
+                  </td>-->
+                    <td><div class="param-description">
+                        <p>动画名称</p>
+
+                    </div>
+
+                    
+                </tr>
+            
+            </table>
+        </div>
+    
+
+    
+
+    
+        <div class="example">
+            <h4>示例:</h4>
+            <ul class="nav nav-tabs example-list">
+                
+                <li role="presentation"  class="active"  _no='0'> <a>delete</a></li>
+                
+            </ul>
+
+            <div class="example-content ">
+                <div class="stdoc-code"><pre class="code prettyprint"><code>&lt;html&gt;
+    &lt;body&gt;
+        &lt;style&gt;
+            .container {
+               width: 500px;
+               margin: 200px auto;
+            }
+            #demo-div {
+                width: 100px;
+                height: 100px;
+                margin-left: 200px;
+                background: #b8f1d2;
+            }
+        &lt;/style&gt;
+        &lt;div class="container"&gt;
+            &lt;div id="demo-div" class="ea-rule"&gt;&lt;/div&gt;
+        &lt;/div&gt;
+    &lt;/body&gt;
+    &lt;script&gt;
+        require.config({
+            baseUrl: &#39;./res&#39;
+        });
+        require([&#39;ea&#39;], function (ea) {
+            ea(&#39;#demo-div&#39;).create({
+                name: &#39;swing&#39;,
+                time: 2000,
+                keyframe: [
+                    &#39;20% {transform: rotate(15deg);}&#39;,
+                    &#39;40% {transform: rotate(-10deg);}&#39;,
+                    &#39;60% {transform: rotate(5deg);}&#39;,
+                    &#39;80% {transform: rotate(-5deg);}&#39;,
+                    &#39;100% {transform: rotate(0deg);}&#39;
+                ]
+            });
+            setTimeout(function () {
+                ea().delete(&#39;swing&#39;);
+            }, 3000);
+        });
+    &lt;/script&gt;
+&lt;/html&gt;</code></pre>
+</div>
+            </div>
+
+             <button class="btn btn-info btn-viewDemo" type="button">运行代码</button>
+            <button class="btn btn-info btn-editDemo" type="button">编辑代码</button>
+        </div>
+    
 </div>
 
                 
@@ -742,6 +958,33 @@
     
 
     
+        <div class="example">
+            <h4>示例:</h4>
+            <ul class="nav nav-tabs example-list">
+                
+                <li role="presentation"  class="active"  _no='0'> <a>version</a></li>
+                
+            </ul>
+
+            <div class="example-content ">
+                <div class="stdoc-code"><pre class="code prettyprint"><code>&lt;html&gt;
+    &lt;script&gt;
+        require.config({
+            baseUrl: &#39;./res&#39;
+        });
+        require([&#39;ea&#39;], function (ea) {
+            var version = ea().getVersion();
+            console.log(version);
+        });
+    &lt;/script&gt;
+&lt;/html&gt;</code></pre>
+</div>
+            </div>
+
+             <button class="btn btn-info btn-viewDemo" type="button">运行代码</button>
+            <button class="btn btn-info btn-editDemo" type="button">编辑代码</button>
+        </div>
+    
 </div>
 
                 
@@ -801,7 +1044,7 @@
             
         
         
-        <a href="../files/ea_code_ea_ea.js.html#l317"><code>ea&#x2F;code&#x2F;ea&#x2F;ea.js:317</code></a>
+        <a href="../files/ea_code_ea_ea.js.html#l366"><code>ea&#x2F;code&#x2F;ea&#x2F;ea.js:366</code></a>
         
         </p>
 
@@ -878,6 +1121,49 @@
     
 
     
+        <div class="example">
+            <h4>示例:</h4>
+            <ul class="nav nav-tabs example-list">
+                
+                <li role="presentation"  class="active"  _no='0'> <a>hide</a></li>
+                
+            </ul>
+
+            <div class="example-content ">
+                <div class="stdoc-code"><pre class="code prettyprint"><code>&lt;html&gt;
+    &lt;body&gt;
+        &lt;style&gt;
+            .container {
+               width: 500px;
+               margin: 200px auto;
+            }
+            #demo-div {
+                width: 100px;
+                height: 100px;
+                margin-left: 200px;
+                background: #b8f1d2;
+            }
+        &lt;/style&gt;
+        &lt;div class="container"&gt;
+            &lt;div id="demo-div"&gt;&lt;/div&gt;
+        &lt;/div&gt;
+    &lt;/body&gt;
+    &lt;script&gt;
+        require.config({
+            baseUrl: &#39;./res&#39;
+        });
+        require([&#39;ea&#39;], function (ea) {
+            ea(&#39;#demo-div&#39;).hide(2000);
+        });
+    &lt;/script&gt;
+&lt;/html&gt;</code></pre>
+</div>
+            </div>
+
+             <button class="btn btn-info btn-viewDemo" type="button">运行代码</button>
+            <button class="btn btn-info btn-editDemo" type="button">编辑代码</button>
+        </div>
+    
 </div>
 
                 
@@ -925,7 +1211,7 @@
             
         
         
-        <a href="../files/ea_code_ea_ea.js.html#l410"><code>ea&#x2F;code&#x2F;ea&#x2F;ea.js:410</code></a>
+        <a href="../files/ea_code_ea_ea.js.html#l467"><code>ea&#x2F;code&#x2F;ea&#x2F;ea.js:467</code></a>
         
         </p>
 
@@ -1009,6 +1295,65 @@
     
 
     
+        <div class="example">
+            <h4>示例:</h4>
+            <ul class="nav nav-tabs example-list">
+                
+                <li role="presentation"  class="active"  _no='0'> <a>run</a></li>
+                
+            </ul>
+
+            <div class="example-content ">
+                <div class="stdoc-code"><pre class="code prettyprint"><code>&lt;html&gt;
+    &lt;body&gt;
+        &lt;style&gt;
+            .container {
+               width: 500px;
+               margin: 200px auto;
+            }
+            #demo-div {
+                width: 100px;
+                height: 100px;
+                margin-left: 200px;
+                background: #b8f1d2;
+            }
+        &lt;/style&gt;
+        &lt;div class="container"&gt;
+            &lt;div id="demo-div" class="ea-rule"&gt;&lt;/div&gt;
+        &lt;/div&gt;
+    &lt;/body&gt;
+    &lt;script&gt;
+        require.config({
+            baseUrl: &#39;./res&#39;
+        });
+        require([&#39;ea&#39;], function (ea) {
+            ea().initKeyFrame([
+                {
+                  name:&#39;tada&#39;,
+                  keyframe:[
+                      &#39;0% {transform: scale(1);}&#39;,
+                      &#39;10%, 20% {transform: scale(0.9) rotate(-3deg);}&#39;,
+                      &#39;30%, 50%, 70%, 90% {transform: scale(1.1) rotate(3deg);}&#39;,
+                      &#39;40%, 60%, 80% {transform: scale(1.1) rotate(-3deg);}&#39;,
+                      &#39;100% {transform: scale(1) rotate(0);}&#39;
+                      ]
+                }
+            ]);
+            ea(&#39;#demo-div&#39;).run({
+                name: &#39;tada&#39;,
+                time: 2000,
+                save: false
+            });
+        });
+    &lt;/script&gt;
+&lt;/html&gt;</code></pre>
+</div>
+            </div>
+
+             <button class="btn btn-info btn-viewDemo" type="button">运行代码</button>
+            <button class="btn btn-info btn-editDemo" type="button">编辑代码</button>
+        </div>
+    
 </div>
 
                 
@@ -1074,7 +1419,7 @@
             
         
         
-        <a href="../files/ea_code_ea_ea.js.html#l160"><code>ea&#x2F;code&#x2F;ea&#x2F;ea.js:160</code></a>
+        <a href="../files/ea_code_ea_ea.js.html#l164"><code>ea&#x2F;code&#x2F;ea&#x2F;ea.js:164</code></a>
         
         </p>
 
@@ -1286,6 +1631,52 @@
     
 
     
+        <div class="example">
+            <h4>示例:</h4>
+            <ul class="nav nav-tabs example-list">
+                
+                <li role="presentation"  class="active"  _no='0'> <a>move</a></li>
+                
+            </ul>
+
+            <div class="example-content ">
+                <div class="stdoc-code"><pre class="code prettyprint"><code>&lt;html&gt;
+    &lt;body&gt;
+        &lt;style&gt;
+            .container {
+               width: 500px;
+               margin: 200px auto;
+            }
+            #demo-div {
+                width: 100px;
+                height: 100px;
+                margin-left: 200px;
+                background: #b8f1d2;
+            }
+        &lt;/style&gt;
+        &lt;div class="container"&gt;
+            &lt;div id="demo-div"&gt;&lt;/div&gt;
+        &lt;/div&gt;
+    &lt;/body&gt;
+    &lt;script&gt;
+        require.config({
+            baseUrl: &#39;./res&#39;
+        });
+        require([&#39;ea&#39;], function (ea) {
+            ea(&#39;#demo-div&#39;).move({
+                right: &#39;50&#39;,
+                bottom: &#39;50&#39;
+            }, 2000);
+        });
+    &lt;/script&gt;
+&lt;/html&gt;</code></pre>
+</div>
+            </div>
+
+             <button class="btn btn-info btn-viewDemo" type="button">运行代码</button>
+            <button class="btn btn-info btn-editDemo" type="button">编辑代码</button>
+        </div>
+    
 </div>
 
                 
@@ -1351,7 +1742,7 @@
             
         
         
-        <a href="../files/ea_code_ea_ea.js.html#l209"><code>ea&#x2F;code&#x2F;ea&#x2F;ea.js:209</code></a>
+        <a href="../files/ea_code_ea_ea.js.html#l215"><code>ea&#x2F;code&#x2F;ea&#x2F;ea.js:215</code></a>
         
         </p>
 
@@ -1515,6 +1906,53 @@
     
 
     
+        <div class="example">
+            <h4>示例:</h4>
+            <ul class="nav nav-tabs example-list">
+                
+                <li role="presentation"  class="active"  _no='0'> <a>rotate</a></li>
+                
+            </ul>
+
+            <div class="example-content ">
+                <div class="stdoc-code"><pre class="code prettyprint"><code>&lt;html&gt;
+    &lt;body&gt;
+        &lt;style&gt;
+            .container {
+               width: 500px;
+               margin: 200px auto;
+            }
+            #demo-div {
+                width: 100px;
+                height: 100px;
+                margin-left: 200px;
+                background: #b8f1d2;
+            }
+        &lt;/style&gt;
+        &lt;div class="container"&gt;
+            &lt;div id="demo-div"&gt;&lt;/div&gt;
+        &lt;/div&gt;
+    &lt;/body&gt;
+    &lt;script&gt;
+        require.config({
+            baseUrl: &#39;./res&#39;
+        });
+        require([&#39;ea&#39;], function (ea) {
+            ea(&#39;#demo-div&#39;).rotate({
+                x: 20,
+                y: 50,
+                p: 100
+            }, 2000);
+        });
+    &lt;/script&gt;
+&lt;/html&gt;</code></pre>
+</div>
+            </div>
+
+             <button class="btn btn-info btn-viewDemo" type="button">运行代码</button>
+            <button class="btn btn-info btn-editDemo" type="button">编辑代码</button>
+        </div>
+    
 </div>
 
                 
@@ -1574,7 +2012,7 @@
             
         
         
-        <a href="../files/ea_code_ea_ea.js.html#l436"><code>ea&#x2F;code&#x2F;ea&#x2F;ea.js:436</code></a>
+        <a href="../files/ea_code_ea_ea.js.html#l495"><code>ea&#x2F;code&#x2F;ea&#x2F;ea.js:495</code></a>
         
         </p>
 
@@ -1769,6 +2207,324 @@
     
 
     
+        <div class="example">
+            <h4>示例:</h4>
+            <ul class="nav nav-tabs example-list">
+                
+                <li role="presentation"  class="active"  _no='0'> <a>run</a></li>
+                
+            </ul>
+
+            <div class="example-content ">
+                <div class="stdoc-code"><pre class="code prettyprint"><code>&lt;html&gt;
+    &lt;body&gt;
+        &lt;style&gt;
+            .container {
+               width: 500px;
+               margin: 200px auto;
+            }
+            #demo-div {
+                width: 100px;
+                height: 100px;
+                margin-left: 200px;
+                background: #b8f1d2;
+            }
+        &lt;/style&gt;
+        &lt;div class="container"&gt;
+            &lt;div id="demo-div" class="ea-rule"&gt;&lt;/div&gt;
+        &lt;/div&gt;
+    &lt;/body&gt;
+    &lt;script&gt;
+        require.config({
+            baseUrl: &#39;./res&#39;
+        });
+        require([&#39;ea&#39;], function (ea) {
+            ea().initKeyFrame([
+                {
+                  name:&#39;tada&#39;,
+                  keyframe:[
+                      &#39;0% {transform: scale(1);}&#39;,
+                      &#39;10%, 20% {transform: scale(0.9) rotate(-3deg);}&#39;,
+                      &#39;30%, 50%, 70%, 90% {transform: scale(1.1) rotate(3deg);}&#39;,
+                      &#39;40%, 60%, 80% {transform: scale(1.1) rotate(-3deg);}&#39;,
+                      &#39;100% {transform: scale(1) rotate(0);}&#39;
+                      ]
+                }
+            ]);
+            ea(&#39;#demo-div&#39;).run({
+                name: &#39;tada&#39;,
+                time: 2000,
+                save: false
+            });
+        });
+    &lt;/script&gt;
+&lt;/html&gt;</code></pre>
+</div>
+            </div>
+
+             <button class="btn btn-info btn-viewDemo" type="button">运行代码</button>
+            <button class="btn btn-info btn-editDemo" type="button">编辑代码</button>
+        </div>
+    
+</div>
+
+                
+                    <div id="method_scale" class="method item">
+    <h3 class="name">scale</h3>
+    <code>
+    scale
+    
+        <div class="args">
+            <span class="paren">(</span><ul class="args-list inline commas">
+            
+                <li class="arg">
+                    
+                        option
+                    
+                </li>
+            
+                <li class="arg">
+                    
+                        time
+                    
+                </li>
+            
+                <li class="arg">
+                    
+                        callback
+                    
+                </li>
+            
+            </ul><span class="paren">)</span>
+        </div>
+    
+    </code>
+
+    
+        <span class="returns-inline">
+            <span class="type">Object</span>
+        </span>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+        <span class="flag chainable">chainable</span>
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                代码位置
+                
+            
+        
+        
+        <a href="../files/ea_code_ea_ea.js.html#l306"><code>ea&#x2F;code&#x2F;ea&#x2F;ea.js:306</code></a>
+        
+        </p>
+
+
+        
+
+        
+    </div>
+
+    <div class="description well well-small sign-left3">
+        <div class="stdoc-code"><p>缩放元素</p>
+</div>
+    </div>
+
+    
+        <div class="params">
+            <h4>参数:</h4>
+
+            <table class="table table-bordered">
+            <tr class='active'><th>名称</th><th>类型</th><!--<th>flag</th>--><th>描述</th></tr>
+            
+                <tr class="param">
+                    
+                       <td> <code class="param-name">option</code>
+                       <td> <span class="type">Object</span>
+                       <!--<td>
+                    
+
+                    
+                  </td>-->
+                    <td><div class="param-description">
+                        <p>运动参数</p>
+
+                    </div>
+
+                    
+                        <table class="table table-bordered">
+                         <tr class='active'><th>名称</th><th>类型</th><!--<th>flag</th>--><th>描述</th></tr>
+                           
+                            <tr class="param">
+                            
+                                   <td> <code class="param-name">x</code>
+                                   <td> <span class="type">Number=</span>
+                                   <!--<td>
+                                
+
+                                
+                              </td>-->
+                                <td><div class="param-description">
+                                    <p>x轴缩放比例，可选参数</p>
+
+                                </div>
+                                
+                            </tr>
+                            
+                            <tr class="param">
+                            
+                                   <td> <code class="param-name">y</code>
+                                   <td> <span class="type">Number=</span>
+                                   <!--<td>
+                                
+
+                                
+                              </td>-->
+                                <td><div class="param-description">
+                                    <p>y轴缩放比例，可选参数</p>
+
+                                </div>
+                                
+                            </tr>
+                            
+                            <tr class="param">
+                            
+                                   <td> <code class="param-name">mix</code>
+                                   <td> <span class="type">Number=</span>
+                                   <!--<td>
+                                
+
+                                
+                              </td>-->
+                                <td><div class="param-description">
+                                    <p>混合动画，可选参数</p>
+
+                                </div>
+                                
+                            </tr>
+                            
+                        </table>
+                        </td>
+                    
+                </tr>
+            
+                <tr class="param">
+                    
+                       <td> <code class="param-name">time</code>
+                       <td> <span class="type">Number</span>
+                       <!--<td>
+                    
+
+                    
+                  </td>-->
+                    <td><div class="param-description">
+                        <p>动画时间</p>
+
+                    </div>
+
+                    
+                </tr>
+            
+                <tr class="param">
+                    
+                       <td> <code class="param-name">callback</code>
+                       <td> <span class="type">Function=</span>
+                       <!--<td>
+                    
+
+                    
+                  </td>-->
+                    <td><div class="param-description">
+                        <p>回调函数，可选参数</p>
+
+                    </div>
+
+                    
+                </tr>
+            
+            </table>
+        </div>
+    
+
+    
+        <div class="returns">
+            <h4>返回:</h4>
+
+            <div class="returns-description">
+                
+                    
+                        [<span class="type">Object</span>]
+                    
+                    <p>EA实例</p>
+
+                
+            </div>
+        </div>
+    
+
+    
+        <div class="example">
+            <h4>示例:</h4>
+            <ul class="nav nav-tabs example-list">
+                
+                <li role="presentation"  class="active"  _no='0'> <a>scale</a></li>
+                
+            </ul>
+
+            <div class="example-content ">
+                <div class="stdoc-code"><pre class="code prettyprint"><code>&lt;html&gt;
+    &lt;body&gt;
+        &lt;style&gt;
+            .container {
+               width: 500px;
+               margin: 200px auto;
+            }
+            #demo-div {
+                width: 100px;
+                height: 100px;
+                margin-left: 200px;
+                background: #b8f1d2;
+            }
+        &lt;/style&gt;
+        &lt;div class="container"&gt;
+            &lt;div id="demo-div"&gt;&lt;/div&gt;
+        &lt;/div&gt;
+    &lt;/body&gt;
+    &lt;script&gt;
+        require.config({
+            baseUrl: &#39;./res&#39;
+        });
+        require([&#39;ea&#39;], function (ea) {
+            ea(&#39;#demo-div&#39;).scale({
+                x: 1.2,
+                y: 1.4
+            }, 2000);
+        });
+    &lt;/script&gt;
+&lt;/html&gt;</code></pre>
+</div>
+            </div>
+
+             <button class="btn btn-info btn-viewDemo" type="button">运行代码</button>
+            <button class="btn btn-info btn-editDemo" type="button">编辑代码</button>
+        </div>
+    
 </div>
 
                 
@@ -1828,7 +2584,7 @@
             
         
         
-        <a href="../files/ea_code_ea_ea.js.html#l296"><code>ea&#x2F;code&#x2F;ea&#x2F;ea.js:296</code></a>
+        <a href="../files/ea_code_ea_ea.js.html#l343"><code>ea&#x2F;code&#x2F;ea&#x2F;ea.js:343</code></a>
         
         </p>
 
@@ -1905,6 +2661,49 @@
     
 
     
+        <div class="example">
+            <h4>示例:</h4>
+            <ul class="nav nav-tabs example-list">
+                
+                <li role="presentation"  class="active"  _no='0'> <a>show</a></li>
+                
+            </ul>
+
+            <div class="example-content ">
+                <div class="stdoc-code"><pre class="code prettyprint"><code>&lt;html&gt;
+    &lt;body&gt;
+        &lt;style&gt;
+            .container {
+               width: 500px;
+               margin: 200px auto;
+            }
+            #demo-div {
+                width: 100px;
+                height: 100px;
+                margin-left: 200px;
+                background: #b8f1d2;
+            }
+        &lt;/style&gt;
+        &lt;div class="container"&gt;
+            &lt;div id="demo-div"&gt;&lt;/div&gt;
+        &lt;/div&gt;
+    &lt;/body&gt;
+    &lt;script&gt;
+        require.config({
+            baseUrl: &#39;./res&#39;
+        });
+        require([&#39;ea&#39;], function (ea) {
+            ea(&#39;#demo-div&#39;).show(2000);
+        });
+    &lt;/script&gt;
+&lt;/html&gt;</code></pre>
+</div>
+            </div>
+
+             <button class="btn btn-info btn-viewDemo" type="button">运行代码</button>
+            <button class="btn btn-info btn-editDemo" type="button">编辑代码</button>
+        </div>
+    
 </div>
 
                 
@@ -1970,7 +2769,7 @@
             
         
         
-        <a href="../files/ea_code_ea_ea.js.html#l256"><code>ea&#x2F;code&#x2F;ea&#x2F;ea.js:256</code></a>
+        <a href="../files/ea_code_ea_ea.js.html#l264"><code>ea&#x2F;code&#x2F;ea&#x2F;ea.js:264</code></a>
         
         </p>
 
@@ -2118,6 +2917,52 @@
     
 
     
+        <div class="example">
+            <h4>示例:</h4>
+            <ul class="nav nav-tabs example-list">
+                
+                <li role="presentation"  class="active"  _no='0'> <a>skew</a></li>
+                
+            </ul>
+
+            <div class="example-content ">
+                <div class="stdoc-code"><pre class="code prettyprint"><code>&lt;html&gt;
+    &lt;body&gt;
+        &lt;style&gt;
+            .container {
+               width: 500px;
+               margin: 200px auto;
+            }
+            #demo-div {
+                width: 100px;
+                height: 100px;
+                margin-left: 200px;
+                background: #b8f1d2;
+            }
+        &lt;/style&gt;
+        &lt;div class="container"&gt;
+            &lt;div id="demo-div"&gt;&lt;/div&gt;
+        &lt;/div&gt;
+    &lt;/body&gt;
+    &lt;script&gt;
+        require.config({
+            baseUrl: &#39;./res&#39;
+        });
+        require([&#39;ea&#39;], function (ea) {
+            ea(&#39;#demo-div&#39;).skew({
+                x: 20,
+                y: 50
+            }, 2000);
+        });
+    &lt;/script&gt;
+&lt;/html&gt;</code></pre>
+</div>
+            </div>
+
+             <button class="btn btn-info btn-viewDemo" type="button">运行代码</button>
+            <button class="btn btn-info btn-editDemo" type="button">编辑代码</button>
+        </div>
+    
 </div>
 
                 
@@ -2171,7 +3016,7 @@
             
         
         
-        <a href="../files/ea_code_ea_ea.js.html#l376"><code>ea&#x2F;code&#x2F;ea&#x2F;ea.js:376</code></a>
+        <a href="../files/ea_code_ea_ea.js.html#l429"><code>ea&#x2F;code&#x2F;ea&#x2F;ea.js:429</code></a>
         
         </p>
 
@@ -2230,6 +3075,109 @@
         </div>
     
 
+    
+        <div class="example">
+            <h4>示例:</h4>
+            <ul class="nav nav-tabs example-list">
+                
+                <li role="presentation"  class="active"  _no='0'> <a>stop</a></li>
+                
+            </ul>
+
+            <div class="example-content ">
+                <div class="stdoc-code"><pre class="code prettyprint"><code>&lt;html&gt;
+    &lt;body&gt;
+        &lt;style&gt;
+            .container {
+               width: 500px;
+               margin: 200px auto;
+            }
+            #demo-div {
+                width: 100px;
+                height: 100px;
+                margin-left: 200px;
+                background: #b8f1d2;
+            }
+            .ea-rule {
+                -webkit-animation: 2s ease;
+                   -moz-animation: 2s ease;
+                    -ms-animation: 2s ease;
+                     -o-animation: 2s ease;
+                        animation: 2s ease;
+            }
+            .ea-flash {
+                    -webkit-animation-name: ea-flash;
+                    -moz-animation-name: ea-flash;
+                    -ms-animation-name: ea-flash;
+                    -o-animation-name: ea-flash;
+                    animation-name: ea-flash;
+            }
+
+            @-webkit-keyframes ea-flash {
+                    0%, 50%, 100% {
+                            opacity: 1;
+                    }
+                    25%, 75% {
+                            opacity: 0;
+                    }
+            }
+
+            @-moz-keyframes ea-flash {
+                    0%, 50%, 100% {
+                            opacity: 1;
+                    }
+                    25%, 75% {
+                            opacity: 0;
+                    }
+            }
+
+            @-ms-keyframes ea-flash {
+                    0%, 50%, 100% {
+                            opacity: 1;
+                    }
+                    25%, 75% {
+                            opacity: 0;
+                    }
+            }
+
+            @-o-keyframes ea-flash {
+                    0%, 50%, 100% {
+                            opacity: 1;
+                    }
+                    25%, 75% {
+                            opacity: 0;
+                    }
+            }
+
+            @keyframes ea-flash {
+                    0%, 50%, 100% {
+                            opacity: 1;
+                    }
+                    25%, 75% {
+                            opacity: 0;
+                    }
+            }
+        &lt;/style&gt;
+        &lt;div class="container"&gt;
+            &lt;div id="demo-div" class="ea-rule"&gt;&lt;/div&gt;
+        &lt;/div&gt;
+    &lt;/body&gt;
+    &lt;script&gt;
+        require.config({
+            baseUrl: &#39;./res&#39;
+        });
+        require([&#39;ea&#39;], function (ea) {
+            ea(&#39;#demo-div&#39;).trigger(&#39;ea-flash&#39;, true);
+            ea(&#39;#demo-div&#39;).stop(&#39;ea-flash&#39;);
+        });
+    &lt;/script&gt;
+&lt;/html&gt;</code></pre>
+</div>
+            </div>
+
+             <button class="btn btn-info btn-viewDemo" type="button">运行代码</button>
+            <button class="btn btn-info btn-editDemo" type="button">编辑代码</button>
+        </div>
     
 </div>
 
@@ -2296,7 +3244,7 @@
             
         
         
-        <a href="../files/ea_code_ea_ea.js.html#l338"><code>ea&#x2F;code&#x2F;ea&#x2F;ea.js:338</code></a>
+        <a href="../files/ea_code_ea_ea.js.html#l389"><code>ea&#x2F;code&#x2F;ea&#x2F;ea.js:389</code></a>
         
         </p>
 
@@ -2390,6 +3338,108 @@
     
 
     
+        <div class="example">
+            <h4>示例:</h4>
+            <ul class="nav nav-tabs example-list">
+                
+                <li role="presentation"  class="active"  _no='0'> <a>trigger</a></li>
+                
+            </ul>
+
+            <div class="example-content ">
+                <div class="stdoc-code"><pre class="code prettyprint"><code>&lt;html&gt;
+    &lt;body&gt;
+        &lt;style&gt;
+            .container {
+               width: 500px;
+               margin: 200px auto;
+            }
+            #demo-div {
+                width: 100px;
+                height: 100px;
+                margin-left: 200px;
+                background: #b8f1d2;
+            }
+            .ea-rule {
+                -webkit-animation: 2s ease;
+                   -moz-animation: 2s ease;
+                    -ms-animation: 2s ease;
+                     -o-animation: 2s ease;
+                        animation: 2s ease;
+            }
+            .ea-flash {
+                    -webkit-animation-name: ea-flash;
+                    -moz-animation-name: ea-flash;
+                    -ms-animation-name: ea-flash;
+                    -o-animation-name: ea-flash;
+                    animation-name: ea-flash;
+            }
+
+            @-webkit-keyframes ea-flash {
+                    0%, 50%, 100% {
+                            opacity: 1;
+                    }
+                    25%, 75% {
+                            opacity: 0;
+                    }
+            }
+
+            @-moz-keyframes ea-flash {
+                    0%, 50%, 100% {
+                            opacity: 1;
+                    }
+                    25%, 75% {
+                            opacity: 0;
+                    }
+            }
+
+            @-ms-keyframes ea-flash {
+                    0%, 50%, 100% {
+                            opacity: 1;
+                    }
+                    25%, 75% {
+                            opacity: 0;
+                    }
+            }
+
+            @-o-keyframes ea-flash {
+                    0%, 50%, 100% {
+                            opacity: 1;
+                    }
+                    25%, 75% {
+                            opacity: 0;
+                    }
+            }
+
+            @keyframes ea-flash {
+                    0%, 50%, 100% {
+                            opacity: 1;
+                    }
+                    25%, 75% {
+                            opacity: 0;
+                    }
+            }
+        &lt;/style&gt;
+        &lt;div class="container"&gt;
+            &lt;div id="demo-div" class="ea-rule"&gt;&lt;/div&gt;
+        &lt;/div&gt;
+    &lt;/body&gt;
+    &lt;script&gt;
+        require.config({
+            baseUrl: &#39;./res&#39;
+        });
+        require([&#39;ea&#39;], function (ea) {
+            ea(&#39;#demo-div&#39;).trigger(&#39;ea-flash&#39;, true);
+        });
+    &lt;/script&gt;
+&lt;/html&gt;</code></pre>
+</div>
+            </div>
+
+             <button class="btn btn-info btn-viewDemo" type="button">运行代码</button>
+            <button class="btn btn-info btn-editDemo" type="button">编辑代码</button>
+        </div>
+    
 </div>
 
                 
@@ -2443,7 +3493,7 @@
             
         
         
-        <a href="../files/ea_code_ea_ea.js.html#l497"><code>ea&#x2F;code&#x2F;ea&#x2F;ea.js:497</code></a>
+        <a href="../files/ea_code_ea_ea.js.html#l558"><code>ea&#x2F;code&#x2F;ea&#x2F;ea.js:558</code></a>
         
         </p>
 
@@ -2505,6 +3555,68 @@
 
     
 
+    
+        <div class="example">
+            <h4>示例:</h4>
+            <ul class="nav nav-tabs example-list">
+                
+                <li role="presentation"  class="active"  _no='0'> <a>update</a></li>
+                
+            </ul>
+
+            <div class="example-content ">
+                <div class="stdoc-code"><pre class="code prettyprint"><code>&lt;html&gt;
+    &lt;body&gt;
+        &lt;style&gt;
+            .container {
+               width: 500px;
+               margin: 200px auto;
+            }
+            #demo-div {
+                width: 100px;
+                height: 100px;
+                margin-left: 200px;
+                background: #b8f1d2;
+            }
+        &lt;/style&gt;
+        &lt;div class="container"&gt;
+            &lt;div id="demo-div" class="ea-rule"&gt;&lt;/div&gt;
+        &lt;/div&gt;
+    &lt;/body&gt;
+    &lt;script&gt;
+        require.config({
+            baseUrl: &#39;./res&#39;
+        });
+        require([&#39;ea&#39;], function (ea) {
+            ea().initKeyFrame([
+                {
+                  name:&#39;tada&#39;,
+                  keyframe:[
+                      &#39;0% {transform: scale(1);}&#39;,
+                      &#39;10%, 20% {transform: scale(0.9) rotate(-3deg);}&#39;,
+                      &#39;30%, 50%, 70%, 90% {transform: scale(1.1) rotate(3deg);}&#39;,
+                      &#39;40%, 60%, 80% {transform: scale(1.1) rotate(-3deg);}&#39;,
+                      &#39;100% {transform: scale(1) rotate(0);}&#39;
+                      ]
+                }
+            ]);
+            ea().update(&#39;tada&#39;, [
+                &#39;100% {transform: translate(100px);}&#39;
+            ]);
+            ea(&#39;#demo-div&#39;).run({
+                name: &#39;tada&#39;,
+                time: 2000,
+                save: true
+            });
+        });
+    &lt;/script&gt;
+&lt;/html&gt;</code></pre>
+</div>
+            </div>
+
+             <button class="btn btn-info btn-viewDemo" type="button">运行代码</button>
+            <button class="btn btn-info btn-editDemo" type="button">编辑代码</button>
+        </div>
     
 </div>
 

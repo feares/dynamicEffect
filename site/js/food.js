@@ -46,11 +46,11 @@ $(document).ready(function() {
     });
 
     for (var i = 0; i < 6; i++) {
-        ea($('.plate').children()[i]).move({up: '200px'}).rotate({y: i * 60, mix: true});
+        ea($('.plate').children()[i]).move({up: '200'}).rotate({y: i * 60, mix: true});
     }
 
     $('.scroll-mask .scroll').on('click', function() {
-        ea('.scroll-mask').move({left: '0px'}, 2000, function() {
+        ea('.scroll-mask').move({left: '0'}, 2000, function() {
             ea('.text1').show(3000, function() {
                 ea('.text2').show(3000, function() {
                     ea('.text3').show(3000, star_bg);
@@ -67,12 +67,12 @@ function star_bg() {
         $('.page2').css('z-index', 3);
         ea('.page2').show(2000);
     }, 2000);
-    ea('.scroll-img').run({name: 'star', time: 36, save: true}, function() {
+    ea('.scroll-img').run({name: 'star', time: 36000, save: true}, function() {
         ea().update('star', [
             '0% {transform: rotate(0deg);}',
             '100% {transform: rotate(360deg);}'
         ]);
-        ea('.scroll-img').run({name: 'star', time: 36, count: 'forever'});
+        ea('.scroll-img').run({name: 'star', time: 36000, count: 'forever'});
     });
 }
 

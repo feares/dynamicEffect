@@ -2,7 +2,7 @@
 知心动效库
 
 代码位置 src
-ea.css 和 ea.js 已做了压缩
+ea.css 、ea.js和ea_amd.js 已做了压缩
 源码在 ea_src.css 和 ea_src.js
 amd 源码为：ea_src_amd.js
 

@@ -84,6 +84,8 @@ define(function (require) {
          * @method getVersion
          *
          * @return {string} 当前版本号
+         *
+         * @demo version.html
          */
         'getVersion': function () {
             return version;
@@ -107,13 +109,15 @@ define(function (require) {
          *
          * @chainable
          * @return {Object} EA实例
+         *
+         * @demo create.html
          */
         'create': function (option, callback) {
             var that = this;
             setEnd3(this.elm, prefixed.lowercase, clear);
             if (option.name && option.keyframe) {
                 var cssText = '';
-                var plan = option.name + ' ' + option.time + 's';
+                var plan = option.name + ' ' + getTime(option.time) + 's';
                 cssText = '@' + prefixed.css + 'keyframes ' + option.name
                 + ' {' + getCssText(option.keyframe, prefixed.css) + '}';
                 addCSS(cssText, option.name);
@@ -174,6 +178,8 @@ define(function (require) {
          *
          * @chainable
          * @return {Object} EA实例
+         *
+         * @demo move.html
          */
         'move': function (option, time, callback) {
             var plan = '';
@@ -182,22 +188,22 @@ define(function (require) {
                 setEnd3(this.elm, prefixed.lowercase, callback);
             }
             if (option.top) {
-                plan += ' translateY(-' + option.top + ')';
+                plan += ' translateY(-' + option.top + 'px)';
             }
             if (option.right) {
-                plan += ' translateX(' + option.right + ')';
+                plan += ' translateX(' + option.right + 'px)';
             }
             if (option.bottom) {
-                plan += ' translateY(' + option.bottom + ')';
+                plan += ' translateY(' + option.bottom + 'px)';
             }
             if (option.left) {
-                plan += ' translateX(-' + option.left + ')';
+                plan += ' translateX(-' + option.left + 'px)';
             }
             if (option.up) {
-                plan += ' translateZ(' + option.up + ')';
+                plan += ' translateZ(' + option.up + 'px)';
             }
             if (option.down) {
-                plan += ' translateZ(-' + option.down + ')';
+                plan += ' translateZ(-' + option.down + 'px)';
             }
             if (option.mix) {
                 plan += getStyle3(this.elm, prefixed.js, 'transform');
@@ -220,6 +226,8 @@ define(function (require) {
          *
          * @chainable
          * @return {Object} EA实例
+         *
+         * @demo rotate.html
          */
         'rotate': function (option, time, callback) {
             setStyle3(this.elm, prefixed.js, 'transition', getTime(time) + 's');
@@ -241,7 +249,7 @@ define(function (require) {
             }
             if (option.p) {
                 plan = 'perspective(' + option.p + 'px)' + plan;
-                this.setStyle(this.elm, {
+                setStyle(this.elm, {
                     'transform-style': 'preserve-3d'
                 });
             }
@@ -266,6 +274,8 @@ define(function (require) {
          *
          * @chainable
          * @return {Object} EA实例
+         *
+         * @demo skew.html
          */
         'skew': function (option, time, callback) {
             setStyle3(this.elm, prefixed.js, 'transition', getTime(time) + 's');
@@ -294,6 +304,43 @@ define(function (require) {
         },
 
         /**
+         * 缩放元素
+         *
+         * @method scale
+         * @param {Object} option 运动参数
+         * @param {number=} option.x x轴缩放比例，可选参数
+         * @param {number=} option.y y轴缩放比例，可选参数
+         * @param {number=} option.mix 混合动画，可选参数
+         * @param {number} time 动画时间
+         * @param {Function=} callback 回调函数，可选参数
+         *
+         * @chainable
+         * @return {Object} EA实例
+         *
+         * @demo scale.html
+         */
+        'scale': function (option, time, callback) {
+            setStyle3(this.elm, prefixed.js, 'transition', getTime(time) + 's');
+            if (callback) {
+                setEnd3(this.elm, prefixed.lowercase, callback);
+            }
+            if (!option.x) {
+                option.x = 1;
+            }
+            if (!option.y) {
+                option.y = 1;
+            }
+            var plan = ' scale(' + option.x + ',' + option.y + ')';
+
+            if (option.mix) {
+                plan += getStyle3(this.elm, prefixed.js, 'transform');
+            }
+
+            setStyle3(this.elm, prefixed.js, 'transform', plan);
+            return this;
+        },
+
+        /**
          * 显示元素
          *
          * @method show
@@ -302,6 +349,8 @@ define(function (require) {
          *
          * @chainable
          * @return {Object} EA实例
+         *
+         * @demo show.html
          */
         'show': function (time, callback) {
             setStyle3(this.elm, prefixed.js, 'transition', getTime(time) + 's');
@@ -323,6 +372,8 @@ define(function (require) {
          *
          * @chainable
          * @return {Object} EA实例
+         *
+         * @demo hide.html
          */
         'hide': function (time, callback) {
             setStyle3(this.elm, prefixed.js, 'transition', getTime(time) + 's');
@@ -345,6 +396,8 @@ define(function (require) {
          *
          * @chainable
          * @return {Object} EA实例
+         *
+         * @demo trigger.html
          */
         'trigger': function (className, save, callback) {
             if (is(save, 'function')) {
@@ -374,13 +427,15 @@ define(function (require) {
         },
 
         /**
-         * 停止动画
+         * 停止动画，用于trigger触发的动画
          *
          * @method stop
          * @param {string | Array} className 要触发css类名，多个用数组
          *
          * @chainable
          * @return {Object} EA实例
+         *
+         * @demo stop.html
          */
         'stop': function (className) {
             if (className) {
@@ -400,8 +455,10 @@ define(function (require) {
         /**
          * 删除关键帧动画
          *
-         * @delete getVersion
+         * @method delete
          * @param {string} name 动画名称
+         *
+         * @demo delete.html
          */
         'delete': function (name) {
             removeCSS(name);
@@ -414,6 +471,8 @@ define(function (require) {
          * @param {Object | Array} option 关键帧动作对象或数组
          * @param {string} option.name 动画名称
          * @param {Array} option.keyframe 关键帧动作
+         *
+         * @demo run.html
          */
         'initKeyFrame': function (option) {
             if (option) {
@@ -449,12 +508,14 @@ define(function (require) {
          *
          * @chainable
          * @return {Object} EA实例
+         *
+         * @demo run.html
          */
         'run': function (option, callback) {
             var that = this;
             setEnd3(this.elm, prefixed.lowercase, clear);
             if (option.name) {
-                var plan = option.name + ' ' + option.time + 's';
+                var plan = option.name + ' ' + getTime(option.time) + 's';
                 if (!option.easing) {
                     option.easing = 'ease';
                 }
@@ -500,6 +561,8 @@ define(function (require) {
          * @method update
          * @param {string} name 动画名字
          * @param {Array} keyframe 关键帧动作
+         *
+         * @demo update.html
          */
         'update': function (name, keyframe) {
             var keyframesRule = getKeyFramse(name);
@@ -743,7 +806,7 @@ define(function (require) {
             }
         }
         else {
-            if (arguments.length === 1) {
+            if (arguments.length === 2) {
                 for (var j in json) {
                     if (json.hasOwnProperty(j)) {
                         element.style[j] = json[j];
@@ -751,7 +814,7 @@ define(function (require) {
                 }
             }
             else {
-                element.style[arguments[1]] = arguments[2];
+                element.style[arguments[2]] = arguments[3];
             }
         }
     }
@@ -826,7 +889,7 @@ define(function (require) {
      */
     function addClass(element, className) {
         if (element.className.indexOf(className) === -1) {
-            element.className += className;
+            element.className += ' ' + className;
         }
     }
 
@@ -840,6 +903,7 @@ define(function (require) {
     function removeClass(element, className) {
         var classValue = element.className;
         if (classValue.indexOf(className) > -1) {
+            element.className = classValue.replace(' ' + className, '');
             element.className = classValue.replace(className, '');
         }
     }
