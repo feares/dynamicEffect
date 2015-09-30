@@ -26,6 +26,13 @@ define(function (require) {
     var prefixed = null;
 
     /**
+     * 浏览器前缀
+     *
+     * @public
+     */
+    var used = true;
+
+    /**
      * 动画名称集合
      *
      * @public
@@ -92,7 +99,7 @@ define(function (require) {
         },
         'constructor': EA,
 
-       /**
+        /**
          * 创建动画
          *
          * @method create
@@ -114,7 +121,12 @@ define(function (require) {
          */
         'create': function (option, callback) {
             var that = this;
-            setEnd3(this.elm, prefixed.lowercase, clear);
+            if (prefixed.used) {
+                setEnd3(this.elm, prefixed.lowercase, clear);
+            }
+            else {
+                callback();
+            }
             if (option.name && option.keyframe) {
                 var cssText = '';
                 var plan = option.name + ' ' + getTime(option.time) + 's';
@@ -185,7 +197,12 @@ define(function (require) {
             var plan = '';
             setStyle3(this.elm, prefixed.js, 'transition', getTime(time) + 's');
             if (callback) {
-                setEnd3(this.elm, prefixed.lowercase, callback);
+                if (prefixed.used) {
+                    setEnd3(this.elm, prefixed.lowercase, callback);
+                }
+                else {
+                    callback();
+                }
             }
             if (option.top) {
                 plan += ' translateY(-' + option.top + 'px)';
@@ -219,6 +236,7 @@ define(function (require) {
          * @param {Object} option 运动参数
          * @param {number=} option.x 相对于x轴角度，可选参数
          * @param {number=} option.y 相对于y轴角度，可选参数
+         * @param {number=} option.z 相对于z轴角度，可选参数
          * @param {number=} option.p 3d视距，可选参数
          * @param {number=} option.mix 混合动画，可选参数
          * @param {number} time 动画时间
@@ -232,7 +250,12 @@ define(function (require) {
         'rotate': function (option, time, callback) {
             setStyle3(this.elm, prefixed.js, 'transition', getTime(time) + 's');
             if (callback) {
-                setEnd3(this.elm, prefixed.lowercase, callback);
+                if (prefixed.used) {
+                    setEnd3(this.elm, prefixed.lowercase, callback);
+                }
+                else {
+                    callback();
+                }
             }
             var plan = '';
             if (option.x) {
@@ -246,6 +269,12 @@ define(function (require) {
             }
             else {
                 plan += ' rotateY(0deg)';
+            }
+            if (option.z) {
+                plan += ' rotateZ(' + option.z + 'deg)';
+            }
+            else {
+                plan += ' rotateZ(0deg)';
             }
             if (option.p) {
                 plan = 'perspective(' + option.p + 'px)' + plan;
@@ -280,7 +309,12 @@ define(function (require) {
         'skew': function (option, time, callback) {
             setStyle3(this.elm, prefixed.js, 'transition', getTime(time) + 's');
             if (callback) {
-                setEnd3(this.elm, prefixed.lowercase, callback);
+                if (prefixed.used) {
+                    setEnd3(this.elm, prefixed.lowercase, callback);
+                }
+                else {
+                    callback();
+                }
             }
             var plan = '';
             if (option.x) {
@@ -322,7 +356,12 @@ define(function (require) {
         'scale': function (option, time, callback) {
             setStyle3(this.elm, prefixed.js, 'transition', getTime(time) + 's');
             if (callback) {
-                setEnd3(this.elm, prefixed.lowercase, callback);
+                if (prefixed.used) {
+                    setEnd3(this.elm, prefixed.lowercase, callback);
+                }
+                else {
+                    callback();
+                }
             }
             if (!option.x) {
                 option.x = 1;
@@ -355,7 +394,12 @@ define(function (require) {
         'show': function (time, callback) {
             setStyle3(this.elm, prefixed.js, 'transition', getTime(time) + 's');
             if (callback) {
-                setEnd3(this.elm, prefixed.lowercase, callback);
+                if (prefixed.used) {
+                    setEnd3(this.elm, prefixed.lowercase, callback);
+                }
+                else {
+                    callback();
+                }
             }
             setStyle(this.elm, {
                 opacity: 1
@@ -378,7 +422,12 @@ define(function (require) {
         'hide': function (time, callback) {
             setStyle3(this.elm, prefixed.js, 'transition', getTime(time) + 's');
             if (callback) {
-                setEnd3(this.elm, prefixed.lowercase, callback);
+                if (prefixed.used) {
+                    setEnd3(this.elm, prefixed.lowercase, callback);
+                }
+                else {
+                    callback();
+                }
             }
             setStyle(this.elm, {
                 opacity: 0
@@ -405,7 +454,14 @@ define(function (require) {
                 save = false;
             }
             var that = this;
-            setEnd3(this.elm, prefixed.lowercase, clear);
+            if (callback) {
+                if (prefixed.used) {
+                    setEnd3(this.elm, prefixed.lowercase, clear);
+                }
+                else {
+                    callback();
+                }
+            }
             if (is(className, 'array')) {
                 for (var i = 0, len = className.length; i < len; i++) {
                     addClass(this.elm, className[i]);
@@ -513,7 +569,14 @@ define(function (require) {
          */
         'run': function (option, callback) {
             var that = this;
-            setEnd3(this.elm, prefixed.lowercase, clear);
+            if (callback) {
+                if (prefixed.used) {
+                    setEnd3(this.elm, prefixed.lowercase, clear);
+                }
+                else {
+                    callback();
+                }
+            }
             if (option.name) {
                 var plan = option.name + ' ' + getTime(option.time) + 's';
                 if (!option.easing) {
@@ -571,24 +634,48 @@ define(function (require) {
                     keyframesRule[0].insertRule(keyframe[i]);
                 }
             }
+        },
+
+        /**
+         * 是否可用
+         *
+         * @method isUsed
+         *
+         * @return {boolean} 是否支持css3的标识
+         */
+        'isUsed': function () {
+            return used;
         }
     };
 
     EA.prototype.Init.prototype = EA.prototype;
 
     /**
-      * 获得浏览器前缀
-      *
-      * @return {Object}
-      */
+     * 获得浏览器前缀
+     *
+     * @return {Object}
+     */
     function getPrefixed() {
-        var styles = window.getComputedStyle(document.documentElement, '');
-        var pre = (Array.prototype.slice
-            .call(styles)
-            .join('')
-            .match(/-(moz|webkit|ms)-/) || (styles.OLink === '' && ['', 'o']))[1];
+        var body = document.body || document.documentElement;
+        var style = body.style;
+        var vendor = ['Webkit', 'Khtml', 'Moz', 'Ms', 'O'];
+        var i = 0;
+        var pre = '';
+
+        while (i < vendor.length) {
+            if (typeof style[vendor[i] + 'Transition'] === 'string') {
+                pre = vendor[i].toLowerCase();
+            }
+            i++;
+        }
+
+        if (!pre) {
+            pre = 'o';
+            used = false;
+        }
         var dom = ('WebKit|Moz|MS|O').match(new RegExp('(' + pre + ')', 'i'))[1];
         return {
+            used: used,
             dom: dom,
             lowercase: pre,
             uppercase: pre.toUpperCase(),
@@ -738,6 +825,7 @@ define(function (require) {
     function setStyle3(element, prefixed, name, value) {
         var style = prefixed + name.charAt(0).toUpperCase() + name.substring(1);
         element.style[style] = value;
+        element.style[name] = value;
     }
 
     /**
@@ -751,7 +839,7 @@ define(function (require) {
      */
     function getStyle3(element, prefixed, name) {
         var style = prefixed + name.charAt(0).toUpperCase() + name.substring(1);
-        return element.style[style];
+        return element.style[style] ? element.style[style] : element.style[name];
     }
 
     /**

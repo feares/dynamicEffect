@@ -52,7 +52,6 @@ EA.prototype = {
         }
         return this;
     },
-    'constructor': EA,
 
     /**
      * @const 版本号
@@ -69,6 +68,13 @@ EA.prototype = {
     'prefixed': null,
 
     /**
+     * 浏览器前缀
+     *
+     * @public
+     */
+    'used': true,
+
+    /**
      * 动画名称集合
      *
      * @public
@@ -83,51 +89,36 @@ EA.prototype = {
     'getVersion': function () {
         return this.version;
     },
+    'constructor': EA,
 
-		/**
-		 * 获得浏览器前缀
-		 *
-		 * @return {Object}
-		 */
-    'getPrefixed': function () {
-        var styles = window.getComputedStyle(document.documentElement, '');
-        var pre = (Array.prototype.slice
-            .call(styles)
-            .join('')
-            .match(/-(moz|webkit|ms)-/) || (styles.OLink === '' && ['', 'o']))[1];
-        var dom = ('WebKit|Moz|MS|O').match(new RegExp('(' + pre + ')', 'i'))[1];
-        return {
-            dom: dom,
-            lowercase: pre,
-            uppercase: pre.toUpperCase(),
-            css: '-' + pre + '-',
-            js: pre[0].toUpperCase() + pre.substr(1)
-        };
-    },
-
-		/**
-		 * 创建动画
-		 *
+    /**
+     * 创建动画
+     *
      * @method create
-		 * @param {Object} option 运动参数
-		 * @param {string} option.name 动画名称
-		 * @param {number} option.time 动画时间
-		 * @param {string=} option.easing 缓动函数，可选参数
-		 * @param {number=} option.delay 延迟时间，可选参数
-		 * @param {number | string=} option.count 动画次数，可选参数默认为1，forever无限
-		 * @param {boolean=} option.back 是否反向播放动画，可选参数
-		 * @param {boolean=} option.save 是否保持动画结束时的状态
-		 * @param {Array} option.keyframe 关键帧动作
-		 * @param {Function=} callback 回调函数，可选
-		 *
+     * @param {Object} option 运动参数
+     * @param {string} option.name 动画名称
+     * @param {number} option.time 动画时间
+     * @param {string=} option.easing 缓动函数，可选参数
+     * @param {number=} option.delay 延迟时间，可选参数
+     * @param {number | string=} option.count 动画次数，可选参数默认为1，forever无限
+     * @param {boolean=} option.back 是否反向播放动画，可选参数
+     * @param {boolean=} option.save 是否保持动画结束时的状态
+     * @param {Array} option.keyframe 关键帧动作
+     * @param {Function=} callback 回调函数，可选
+     *
      * @chainable
      * @return {Object} EA实例
      *
      * @demo create.html
-		 */
+     */
     'create': function (option, callback) {
         var that = this;
-        this.setEnd3(clear);
+        if (this.prefixed.used) {
+            this.setEnd3(clear);
+        }
+        else {
+            callback();
+        }
         if (option.name && option.keyframe) {
             var cssText = '';
             var plan = option.name + ' ' + this.getTime(option.time) + 's';
@@ -174,7 +165,7 @@ EA.prototype = {
         }
     },
 
-		/**
+    /**
      * 移动元素
      *
      * @method move
@@ -198,7 +189,12 @@ EA.prototype = {
         var plan = '';
         this.setStyle3('transition', this.getTime(time) + 's');
         if (callback) {
-            this.setEnd3(callback);
+            if (this.prefixed.used) {
+                this.setEnd3(callback);
+            }
+            else {
+                callback();
+            }
         }
         if (option.top) {
             plan += ' translateY(-' + option.top + 'px)';
@@ -232,6 +228,7 @@ EA.prototype = {
      * @param {Object} option 运动参数
      * @param {number=} option.x 相对于x轴角度，可选参数
      * @param {number=} option.y 相对于y轴角度，可选参数
+     * @param {number=} option.z 相对于z轴角度，可选参数
      * @param {number=} option.p 3d视距，可选参数
      * @param {number=} option.mix 混合动画，可选参数
      * @param {number} time 动画时间
@@ -245,7 +242,12 @@ EA.prototype = {
     'rotate': function (option, time, callback) {
         this.setStyle3('transition', this.getTime(time) + 's');
         if (callback) {
-            this.setEnd3(callback);
+            if (this.prefixed.used) {
+                this.setEnd3(callback);
+            }
+            else {
+                callback();
+            }
         }
         var plan = '';
         if (option.x) {
@@ -259,6 +261,12 @@ EA.prototype = {
         }
 				else {
             plan += ' rotateY(0deg)';
+        }
+        if (option.z) {
+            plan += ' rotateZ(' + option.z + 'deg)';
+        }
+        else {
+            plan += ' rotateZ(0deg)';
         }
         if (option.p) {
             plan = 'perspective(' + option.p + 'px)' + plan;
@@ -291,7 +299,12 @@ EA.prototype = {
     'skew': function (option, time, callback) {
         this.setStyle3('transition', this.getTime(time) + 's');
         if (callback) {
-            this.setEnd3(callback);
+            if (this.prefixed.used) {
+                this.setEnd3(callback);
+            }
+            else {
+                callback();
+            }
         }
         var plan = '';
         if (option.x) {
@@ -315,25 +328,30 @@ EA.prototype = {
     },
 
     /**
-    * 缩放元素
-    *
-    * @method scale
-    * @param {Object} option 运动参数
-    * @param {number=} option.x x轴缩放比例，可选参数
-    * @param {number=} option.y y轴缩放比例，可选参数
-    * @param {number=} option.mix 混合动画，可选参数
-    * @param {number} time 动画时间
-    * @param {Function=} callback 回调函数，可选参数
-    *
-    * @chainable
-    * @return {Object} EA实例
-    *
-    * @demo scale.html
-    */
+     * 缩放元素
+     *
+     * @method scale
+     * @param {Object} option 运动参数
+     * @param {number=} option.x x轴缩放比例，可选参数
+     * @param {number=} option.y y轴缩放比例，可选参数
+     * @param {number=} option.mix 混合动画，可选参数
+     * @param {number} time 动画时间
+     * @param {Function=} callback 回调函数，可选参数
+     *
+     * @chainable
+     * @return {Object} EA实例
+     *
+     * @demo scale.html
+     */
     'scale': function (option, time, callback) {
         this.setStyle3('transition', this.getTime(time) + 's');
         if (callback) {
-            this.setEnd3(callback);
+            if (this.prefixed.used) {
+                this.setEnd3(callback);
+            }
+            else {
+                callback();
+            }
         }
         if (!option.x) {
             option.x = 1;
@@ -366,7 +384,12 @@ EA.prototype = {
     'show': function (time, callback) {
         this.setStyle3('transition', this.getTime(time) + 's');
         if (callback) {
-            this.setEnd3(callback);
+            if (this.prefixed.used) {
+                this.setEnd3(callback);
+            }
+            else {
+                callback();
+            }
         }
         this.setStyle({opacity: 1});
         return this;
@@ -387,7 +410,12 @@ EA.prototype = {
     'hide': function (time, callback) {
         this.setStyle3('transition', this.getTime(time) + 's');
         if (callback) {
-            this.setEnd3(callback);
+            if (this.prefixed.used) {
+                this.setEnd3(callback);
+            }
+            else {
+                callback();
+            }
         }
         this.setStyle({opacity: 0});
         return this;
@@ -412,7 +440,14 @@ EA.prototype = {
             save = false;
         }
         var that = this;
-        this.setEnd3(clear);
+        if (callback) {
+            if (this.prefixed.used) {
+                this.setEnd3(clear);
+            }
+            else {
+                callback();
+            }
+        }
         if (this.is(className, 'array')) {
             for (var i = 0, len = className.length; i < len; i++) {
                 this.addClass(className[i]);
@@ -520,7 +555,14 @@ EA.prototype = {
      */
     'run': function (option, callback) {
         var that = this;
-        this.setEnd3(clear);
+        if (callback) {
+            if (this.prefixed.used) {
+                this.setEnd3(clear);
+            }
+            else {
+                callback();
+            }
+        }
         if (option.name) {
             var plan = option.name + ' ' + this.getTime(option.time) + 's';
             if (!option.easing) {
@@ -581,11 +623,56 @@ EA.prototype = {
     },
 
     /**
+     * 是否可用
+     *
+     * @method isUsed
+     *
+     * @return {boolean} 是否支持css3的标识
+     */
+    'isUsed': function () {
+        return this.used;
+    },
+
+    /**
+     * 获得浏览器前缀
+     *
+     * @return {Object}
+     */
+    'getPrefixed': function () {
+        var body = document.body || document.documentElement;
+        var style = body.style;
+        var vendor = ['Webkit', 'Khtml', 'Moz', 'Ms', 'O'];
+        var i = 0;
+        var pre = '';
+
+        while (i < vendor.length) {
+            if (typeof style[vendor[i] + 'Transition'] === 'string') {
+                pre = vendor[i].toLowerCase();
+            }
+            i++;
+        }
+
+        if (!pre) {
+            pre = 'o';
+            this.used = false;
+        }
+        var dom = ('WebKit|Moz|MS|O').match(new RegExp('(' + pre + ')', 'i'))[1];
+        return {
+            used: this.used,
+            dom: dom,
+            lowercase: pre,
+            uppercase: pre.toUpperCase(),
+            css: '-' + pre + '-',
+            js: pre[0].toUpperCase() + pre.substr(1)
+        };
+    },
+
+    /**
      * 获得关键帧对象
      *
      * @param {string} name 动画名字
-		 *
-		 * @return {Object}
+     *
+     * @return {Object}
      */
     'getKeyFramse': function (name) {
         var styleSheet = document.styleSheets;
@@ -606,8 +693,8 @@ EA.prototype = {
      *
      * @param {Array} option 生成css文本需要的参数
      * @param {string} prefixed 浏览器前缀
-		 *
-		 * @return {Object}
+     *
+     * @return {Object}
      */
     'getCssText': function (option, prefixed) {
         var tmp = '';
@@ -648,11 +735,11 @@ EA.prototype = {
             if (style.styleSheet.disabled) {
                 setTimeout(func, 10);
             }
-						else {
+            else {
                 func();
             }
         }
-				else {
+        else {
             var textNode = document.createTextNode(cssText);
             style.appendChild(textNode);
         }
@@ -682,11 +769,11 @@ EA.prototype = {
             if (style.styleSheet.disabled) {
                 setTimeout(func, 10);
             }
-						else {
+            else {
                 func();
             }
         }
-				else {
+        else {
             style.innerText = style.innerText.replace(cssText, '');
         }
         head.appendChild(style);
@@ -697,8 +784,8 @@ EA.prototype = {
      *
      * @param {number} time 时间，单位是毫秒数
      * @param {number=} fixed 时间精度，换算成秒小数点儿后的精度位数，可选参数
-		 *
-		 * @return {number}
+     *
+     * @return {number}
      */
     'getTime': function (time, fixed) {
         if (!time) {
@@ -800,8 +887,8 @@ EA.prototype = {
      *
      * @param {Object} obj 数据对象
      * @param {string} type 要匹配的类型
-		 *
-		 * @return {?number}
+     *
+     * @return {?number}
      */
     'is': function (obj, type) {
         var ret = false;
@@ -860,7 +947,7 @@ EA.prototype = {
      * 添加className
      *
      * @param {string} className css类名
-		 *
+     *
      */
     'addClass': function (className) {
         if (this.elm.className.indexOf(className) === -1) {
@@ -872,7 +959,7 @@ EA.prototype = {
      * 移除className
      *
      * @param {string} className css类名
-		 *
+     *
      */
     'removeClass': function (className) {
         if (this.elm.className.indexOf(className) > -1) {
@@ -887,11 +974,13 @@ EA.prototype = {
      * @param {string} msg 日志内容
      * @param {string=} level 日志级别，可选参数
      */
+    /* eslint-disable no-console */
     'log': function (msg, level) {
         if (window.console) {
-            window.console.log(msg);
+            console.log(msg);
         }
     },
+    /* eslint-enable no-console */
 
     /**
      * 添加事件

@@ -95,962 +95,1050 @@
 YUI.add(&#x27;EA&#x27;, function (Y) {
 define(function (require) {
 
-  /**
-   * 版本号
-   * @property version
-   * @type{String}
-   *
-   * @final
-   */
-  var version = &#x27;0.0.1&#x27;;
+    /**
+     * 版本号
+     * @property version
+     * @type{String}
+     *
+     * @final
+     */
+    var version = &#x27;0.0.1&#x27;;
 
-  /**
-   * 浏览器前缀
-   *
-   * @public
-   */
-  var prefixed = null;
+    /**
+     * 浏览器前缀
+     *
+     * @public
+     */
+    var prefixed = null;
 
-  /**
-   * 动画名称集合
-   *
-   * @public
-   */
-  var animations = {};
+    /**
+     * 浏览器前缀
+     *
+     * @public
+     */
+    var used = true;
 
-  /**
-   * EA 动效库实例
-   *
-   * @constructor
-   * @class EA
-   * @param {string|Object} selector id、class 选择器或dom对象
-   *
-   * @return {Object} 生成后的EA对象
-   *
-   * @demo init.html
-   */
-  var EA = function (selector) {
-      return new EA.prototype.Init(selector);
-  };
+    /**
+     * 动画名称集合
+     *
+     * @public
+     */
+    var animations = {};
 
-  EA.prototype = {
+    /**
+     * EA 动效库实例
+     *
+     * @constructor
+     * @class EA
+     * @param {string|Object} selector id、class 选择器或dom对象
+     *
+     * @return {Object} 生成后的EA对象
+     *
+     * @demo init.html
+     */
+    var EA = function (selector) {
+        return new EA.prototype.Init(selector);
+    };
 
-      /**
-       * 构造EA对象
-       *
-       * @param {string|Object} selector id、class 选择器或dom对象
-       * @return {Object} 生成后的EA对象
-       */
-      &#x27;Init&#x27;: function (selector) {
-          prefixed = getPrefixed();
-          if (!selector) {
-              return this;
-          }
-          if (selector.jquery) {
-              this.elm = selector[0];
-          }
-          else if (is(selector, &#x27;dom&#x27;)) {
-              this.elm = selector;
-          }
-          else if (selector.indexOf(&#x27;#&#x27;) === 0) {
-              this.elm = document.getElementById(selector.substr(1));
-          }
-          else if (selector.indexOf(&#x27;.&#x27;) === 0) {
-              var tmp = document.getElementsByClassName(selector.substr(1));
-              if (tmp &amp;&amp; tmp.length &gt; 0) {
-                  this.elm = tmp[0];
-              }
-          }
-          return this;
-      },
+    EA.prototype = {
 
-      /**
-       * 返回当前版本号
-       *
-       * @method getVersion
-       *
-       * @return {string} 当前版本号
-       *
-       * @demo version.html
-       */
-      &#x27;getVersion&#x27;: function () {
-          return version;
-      },
-      &#x27;constructor&#x27;: EA,
+        /**
+         * 构造EA对象
+         *
+         * @param {string|Object} selector id、class 选择器或dom对象
+         * @return {Object} 生成后的EA对象
+         */
+        &#x27;Init&#x27;: function (selector) {
+            prefixed = getPrefixed();
+            if (!selector) {
+                return this;
+            }
+            if (selector.jquery) {
+                this.elm = selector[0];
+            }
+            else if (is(selector, &#x27;dom&#x27;)) {
+                this.elm = selector;
+            }
+            else if (selector.indexOf(&#x27;#&#x27;) === 0) {
+                this.elm = document.getElementById(selector.substr(1));
+            }
+            else if (selector.indexOf(&#x27;.&#x27;) === 0) {
+                var tmp = document.getElementsByClassName(selector.substr(1));
+                if (tmp &amp;&amp; tmp.length &gt; 0) {
+                    this.elm = tmp[0];
+                }
+            }
+            return this;
+        },
 
-     /**
-       * 创建动画
-       *
-       * @method create
-       * @param {Object} option 运动参数
-       * @param {string} option.name 动画名称
-       * @param {number} option.time 动画时间
-       * @param {string=} option.easing 缓动函数，可选参数
-       * @param {number=} option.delay 延迟时间，可选参数
-       * @param {number | string=} option.count 动画次数，可选参数默认为1，forever无限
-       * @param {boolean=} option.back 是否反向播放动画，可选参数
-       * @param {boolean=} option.save 是否保持动画结束时的状态
-       * @param {Array} option.keyframe 关键帧动作
-       * @param {Function=} callback 回调函数，可选
-       *
-       * @chainable
-       * @return {Object} EA实例
-       *
-       * @demo create.html
-       */
-      &#x27;create&#x27;: function (option, callback) {
-          var that = this;
-          setEnd3(this.elm, prefixed.lowercase, clear);
-          if (option.name &amp;&amp; option.keyframe) {
-              var cssText = &#x27;&#x27;;
-              var plan = option.name + &#x27; &#x27; + getTime(option.time) + &#x27;s&#x27;;
-              cssText = &#x27;@&#x27; + prefixed.css + &#x27;keyframes &#x27; + option.name
-              + &#x27; {&#x27; + getCssText(option.keyframe, prefixed.css) + &#x27;}&#x27;;
-              addCSS(cssText, option.name);
-              if (!option.easing) {
-                  option.easing = &#x27;ease&#x27;;
-              }
-              if (!option.delay) {
-                  option.delay = 0;
-              }
-              if (!option.count) {
-                  option.count = 1;
-              }
-              else if (option.count === &#x27;forever&#x27;) {
-                  option.count = &#x27;infinite&#x27;;
-              }
-              if (option.back === true) {
-                  option.back = &#x27;alternate&#x27;;
-              }
-              else {
-                  option.back = &#x27;normal&#x27;;
-              }
-              plan += &#x27; &#x27; + option.easing + &#x27; &#x27; + option.delay + &#x27;s &#x27;
-              + option.count + &#x27; &#x27; + option.back;
-              setStyle3(this.elm, prefixed.js, &#x27;animation&#x27;, plan);
-              if (!option.save) {
-                  setStyle3(this.elm, prefixed.js, &#x27;animationFillMode&#x27;, &#x27;none&#x27;);
-              }
-              else {
-                  setStyle3(this.elm, prefixed.js, &#x27;animationFillMode&#x27;, &#x27;forwards&#x27;);
-              }
-              return this;
-          }
+        /**
+         * 返回当前版本号
+         *
+         * @method getVersion
+         *
+         * @return {string} 当前版本号
+         *
+         * @demo version.html
+         */
+        &#x27;getVersion&#x27;: function () {
+            return version;
+        },
+        &#x27;constructor&#x27;: EA,
 
-          function clear() {
-              if (callback) {
-                  callback();
-              }
-              if (!option.save) {
-                  clearStyle3(that.elm, that.prefixed.js);
-              }
-          }
-      },
+        /**
+         * 创建动画
+         *
+         * @method create
+         * @param {Object} option 运动参数
+         * @param {string} option.name 动画名称
+         * @param {number} option.time 动画时间
+         * @param {string=} option.easing 缓动函数，可选参数
+         * @param {number=} option.delay 延迟时间，可选参数
+         * @param {number | string=} option.count 动画次数，可选参数默认为1，forever无限
+         * @param {boolean=} option.back 是否反向播放动画，可选参数
+         * @param {boolean=} option.save 是否保持动画结束时的状态
+         * @param {Array} option.keyframe 关键帧动作
+         * @param {Function=} callback 回调函数，可选
+         *
+         * @chainable
+         * @return {Object} EA实例
+         *
+         * @demo create.html
+         */
+        &#x27;create&#x27;: function (option, callback) {
+            var that = this;
+            if (prefixed.used) {
+                setEnd3(this.elm, prefixed.lowercase, clear);
+            }
+            else {
+                callback();
+            }
+            if (option.name &amp;&amp; option.keyframe) {
+                var cssText = &#x27;&#x27;;
+                var plan = option.name + &#x27; &#x27; + getTime(option.time) + &#x27;s&#x27;;
+                cssText = &#x27;@&#x27; + prefixed.css + &#x27;keyframes &#x27; + option.name
+                + &#x27; {&#x27; + getCssText(option.keyframe, prefixed.css) + &#x27;}&#x27;;
+                addCSS(cssText, option.name);
+                if (!option.easing) {
+                    option.easing = &#x27;ease&#x27;;
+                }
+                if (!option.delay) {
+                    option.delay = 0;
+                }
+                if (!option.count) {
+                    option.count = 1;
+                }
+                else if (option.count === &#x27;forever&#x27;) {
+                    option.count = &#x27;infinite&#x27;;
+                }
+                if (option.back === true) {
+                    option.back = &#x27;alternate&#x27;;
+                }
+                else {
+                    option.back = &#x27;normal&#x27;;
+                }
+                plan += &#x27; &#x27; + option.easing + &#x27; &#x27; + option.delay + &#x27;s &#x27;
+                + option.count + &#x27; &#x27; + option.back;
+                setStyle3(this.elm, prefixed.js, &#x27;animation&#x27;, plan);
+                if (!option.save) {
+                    setStyle3(this.elm, prefixed.js, &#x27;animationFillMode&#x27;, &#x27;none&#x27;);
+                }
+                else {
+                    setStyle3(this.elm, prefixed.js, &#x27;animationFillMode&#x27;, &#x27;forwards&#x27;);
+                }
+                return this;
+            }
 
-      /**
-       * 移动元素
-       *
-       * @method move
-       * @param {Object} option 运动参数
-       * @param {number=} option.top top位移，可选参数
-       * @param {number=} option.right right位移，可选参数
-       * @param {number=} option.bottom bottom位移，可选参数
-       * @param {number=} option.left left位移，可选参数
-       * @param {number=} option.up up位移，可选参数
-       * @param {number=} option.down down位移，可选参数
-       * @param {number=} option.mix 混合动画，可选参数
-       * @param {number} time 动画时间
-       * @param {Function=} callback 回调函数，可选参数
-       *
-       * @chainable
-       * @return {Object} EA实例
-       *
-       * @demo move.html
-       */
-      &#x27;move&#x27;: function (option, time, callback) {
-          var plan = &#x27;&#x27;;
-          setStyle3(this.elm, prefixed.js, &#x27;transition&#x27;, getTime(time) + &#x27;s&#x27;);
-          if (callback) {
-              setEnd3(this.elm, prefixed.lowercase, callback);
-          }
-          if (option.top) {
-              plan += &#x27; translateY(-&#x27; + option.top + &#x27;px)&#x27;;
-          }
-          if (option.right) {
-              plan += &#x27; translateX(&#x27; + option.right + &#x27;px)&#x27;;
-          }
-          if (option.bottom) {
-              plan += &#x27; translateY(&#x27; + option.bottom + &#x27;px)&#x27;;
-          }
-          if (option.left) {
-              plan += &#x27; translateX(-&#x27; + option.left + &#x27;px)&#x27;;
-          }
-          if (option.up) {
-              plan += &#x27; translateZ(&#x27; + option.up + &#x27;px)&#x27;;
-          }
-          if (option.down) {
-              plan += &#x27; translateZ(-&#x27; + option.down + &#x27;px)&#x27;;
-          }
-          if (option.mix) {
-              plan += getStyle3(this.elm, prefixed.js, &#x27;transform&#x27;);
-          }
-          setStyle3(this.elm, prefixed.js, &#x27;transform&#x27;, plan);
-          return this;
-      },
+            function clear() {
+                if (callback) {
+                    callback();
+                }
+                if (!option.save) {
+                    clearStyle3(that.elm, that.prefixed.js);
+                }
+            }
+        },
 
-      /**
-       * 旋转元素
-       *
-       * @method rotate
-       * @param {Object} option 运动参数
-       * @param {number=} option.x 相对于x轴角度，可选参数
-       * @param {number=} option.y 相对于y轴角度，可选参数
-       * @param {number=} option.p 3d视距，可选参数
-       * @param {number=} option.mix 混合动画，可选参数
-       * @param {number} time 动画时间
-       * @param {Function=} callback 回调函数，可选参数
-       *
-       * @chainable
-       * @return {Object} EA实例
-       *
-       * @demo rotate.html
-       */
-      &#x27;rotate&#x27;: function (option, time, callback) {
-          setStyle3(this.elm, prefixed.js, &#x27;transition&#x27;, getTime(time) + &#x27;s&#x27;);
-          if (callback) {
-              setEnd3(this.elm, prefixed.lowercase, callback);
-          }
-          var plan = &#x27;&#x27;;
-          if (option.x) {
-              plan += &#x27; rotateX(&#x27; + option.x + &#x27;deg)&#x27;;
-          }
-          else {
-              plan += &#x27; rotateX(0deg)&#x27;;
-          }
-          if (option.y) {
-              plan += &#x27; rotateY(&#x27; + option.y + &#x27;deg)&#x27;;
-          }
-          else {
-              plan += &#x27; rotateY(0deg)&#x27;;
-          }
-          if (option.p) {
-              plan = &#x27;perspective(&#x27; + option.p + &#x27;px)&#x27; + plan;
-              setStyle(this.elm, {
-                  &#x27;transform-style&#x27;: &#x27;preserve-3d&#x27;
-              });
-          }
-          if (option.mix) {
-              plan += getStyle3(this.elm, prefixed.js, &#x27;transform&#x27;);
-          }
+        /**
+         * 移动元素
+         *
+         * @method move
+         * @param {Object} option 运动参数
+         * @param {number=} option.top top位移，可选参数
+         * @param {number=} option.right right位移，可选参数
+         * @param {number=} option.bottom bottom位移，可选参数
+         * @param {number=} option.left left位移，可选参数
+         * @param {number=} option.up up位移，可选参数
+         * @param {number=} option.down down位移，可选参数
+         * @param {number=} option.mix 混合动画，可选参数
+         * @param {number} time 动画时间
+         * @param {Function=} callback 回调函数，可选参数
+         *
+         * @chainable
+         * @return {Object} EA实例
+         *
+         * @demo move.html
+         */
+        &#x27;move&#x27;: function (option, time, callback) {
+            var plan = &#x27;&#x27;;
+            setStyle3(this.elm, prefixed.js, &#x27;transition&#x27;, getTime(time) + &#x27;s&#x27;);
+            if (callback) {
+                if (prefixed.used) {
+                    setEnd3(this.elm, prefixed.lowercase, callback);
+                }
+                else {
+                    callback();
+                }
+            }
+            if (option.top) {
+                plan += &#x27; translateY(-&#x27; + option.top + &#x27;px)&#x27;;
+            }
+            if (option.right) {
+                plan += &#x27; translateX(&#x27; + option.right + &#x27;px)&#x27;;
+            }
+            if (option.bottom) {
+                plan += &#x27; translateY(&#x27; + option.bottom + &#x27;px)&#x27;;
+            }
+            if (option.left) {
+                plan += &#x27; translateX(-&#x27; + option.left + &#x27;px)&#x27;;
+            }
+            if (option.up) {
+                plan += &#x27; translateZ(&#x27; + option.up + &#x27;px)&#x27;;
+            }
+            if (option.down) {
+                plan += &#x27; translateZ(-&#x27; + option.down + &#x27;px)&#x27;;
+            }
+            if (option.mix) {
+                plan += getStyle3(this.elm, prefixed.js, &#x27;transform&#x27;);
+            }
+            setStyle3(this.elm, prefixed.js, &#x27;transform&#x27;, plan);
+            return this;
+        },
 
-          setStyle3(this.elm, prefixed.js, &#x27;transform&#x27;, plan);
-          return this;
-      },
+        /**
+         * 旋转元素
+         *
+         * @method rotate
+         * @param {Object} option 运动参数
+         * @param {number=} option.x 相对于x轴角度，可选参数
+         * @param {number=} option.y 相对于y轴角度，可选参数
+         * @param {number=} option.z 相对于z轴角度，可选参数
+         * @param {number=} option.p 3d视距，可选参数
+         * @param {number=} option.mix 混合动画，可选参数
+         * @param {number} time 动画时间
+         * @param {Function=} callback 回调函数，可选参数
+         *
+         * @chainable
+         * @return {Object} EA实例
+         *
+         * @demo rotate.html
+         */
+        &#x27;rotate&#x27;: function (option, time, callback) {
+            setStyle3(this.elm, prefixed.js, &#x27;transition&#x27;, getTime(time) + &#x27;s&#x27;);
+            if (callback) {
+                if (prefixed.used) {
+                    setEnd3(this.elm, prefixed.lowercase, callback);
+                }
+                else {
+                    callback();
+                }
+            }
+            var plan = &#x27;&#x27;;
+            if (option.x) {
+                plan += &#x27; rotateX(&#x27; + option.x + &#x27;deg)&#x27;;
+            }
+            else {
+                plan += &#x27; rotateX(0deg)&#x27;;
+            }
+            if (option.y) {
+                plan += &#x27; rotateY(&#x27; + option.y + &#x27;deg)&#x27;;
+            }
+            else {
+                plan += &#x27; rotateY(0deg)&#x27;;
+            }
+            if (option.z) {
+                plan += &#x27; rotateZ(&#x27; + option.z + &#x27;deg)&#x27;;
+            }
+            else {
+                plan += &#x27; rotateZ(0deg)&#x27;;
+            }
+            if (option.p) {
+                plan = &#x27;perspective(&#x27; + option.p + &#x27;px)&#x27; + plan;
+                setStyle(this.elm, {
+                    &#x27;transform-style&#x27;: &#x27;preserve-3d&#x27;
+                });
+            }
+            if (option.mix) {
+                plan += getStyle3(this.elm, prefixed.js, &#x27;transform&#x27;);
+            }
 
-      /**
-       * 扭曲元素
-       *
-       * @method skew
-       * @param {Object} option 运动参数
-       * @param {number=} option.x 相对于x轴角度，可选参数
-       * @param {number=} option.y 相对于y轴角度，可选参数
-       * @param {number=} option.mix 混合动画，可选参数
-       * @param {number} time 动画时间
-       * @param {Function=} callback 回调函数，可选参数
-       *
-       * @chainable
-       * @return {Object} EA实例
-       *
-       * @demo skew.html
-       */
-      &#x27;skew&#x27;: function (option, time, callback) {
-          setStyle3(this.elm, prefixed.js, &#x27;transition&#x27;, getTime(time) + &#x27;s&#x27;);
-          if (callback) {
-              setEnd3(this.elm, prefixed.lowercase, callback);
-          }
-          var plan = &#x27;&#x27;;
-          if (option.x) {
-              plan = &#x27; skewX(&#x27; + option.x + &#x27;deg)&#x27;;
-          }
-          else {
-              plan += &#x27; skewX(0deg)&#x27;;
-          }
-          if (option.y) {
-              plan += &#x27; skewY(&#x27; + option.y + &#x27;deg)&#x27;;
-          }
-          else {
-              plan += &#x27; skewY(0deg)&#x27;;
-          }
-          if (option.mix) {
-              plan += getStyle3(this.elm, prefixed.js, &#x27;transform&#x27;);
-          }
+            setStyle3(this.elm, prefixed.js, &#x27;transform&#x27;, plan);
+            return this;
+        },
 
-          setStyle3(this.elm, prefixed.js, &#x27;transform&#x27;, plan);
-          return this;
-      },
+        /**
+         * 扭曲元素
+         *
+         * @method skew
+         * @param {Object} option 运动参数
+         * @param {number=} option.x 相对于x轴角度，可选参数
+         * @param {number=} option.y 相对于y轴角度，可选参数
+         * @param {number=} option.mix 混合动画，可选参数
+         * @param {number} time 动画时间
+         * @param {Function=} callback 回调函数，可选参数
+         *
+         * @chainable
+         * @return {Object} EA实例
+         *
+         * @demo skew.html
+         */
+        &#x27;skew&#x27;: function (option, time, callback) {
+            setStyle3(this.elm, prefixed.js, &#x27;transition&#x27;, getTime(time) + &#x27;s&#x27;);
+            if (callback) {
+                if (prefixed.used) {
+                    setEnd3(this.elm, prefixed.lowercase, callback);
+                }
+                else {
+                    callback();
+                }
+            }
+            var plan = &#x27;&#x27;;
+            if (option.x) {
+                plan = &#x27; skewX(&#x27; + option.x + &#x27;deg)&#x27;;
+            }
+            else {
+                plan += &#x27; skewX(0deg)&#x27;;
+            }
+            if (option.y) {
+                plan += &#x27; skewY(&#x27; + option.y + &#x27;deg)&#x27;;
+            }
+            else {
+                plan += &#x27; skewY(0deg)&#x27;;
+            }
+            if (option.mix) {
+                plan += getStyle3(this.elm, prefixed.js, &#x27;transform&#x27;);
+            }
 
-      /**
-       * 缩放元素
-       *
-       * @method scale
-       * @param {Object} option 运动参数
-       * @param {number=} option.x x轴缩放比例，可选参数
-       * @param {number=} option.y y轴缩放比例，可选参数
-       * @param {number=} option.mix 混合动画，可选参数
-       * @param {number} time 动画时间
-       * @param {Function=} callback 回调函数，可选参数
-       *
-       * @chainable
-       * @return {Object} EA实例
-       *
-       * @demo scale.html
-       */
-      &#x27;scale&#x27;: function (option, time, callback) {
-          setStyle3(this.elm, prefixed.js, &#x27;transition&#x27;, getTime(time) + &#x27;s&#x27;);
-          if (callback) {
-              setEnd3(this.elm, prefixed.lowercase, callback);
-          }
-          if (!option.x) {
-              option.x = 1;
-          }
-          if (!option.y) {
-              option.y = 1;
-          }
-          var plan = &#x27; scale(&#x27; + option.x + &#x27;,&#x27; + option.y + &#x27;)&#x27;;
+            setStyle3(this.elm, prefixed.js, &#x27;transform&#x27;, plan);
+            return this;
+        },
 
-          if (option.mix) {
-              plan += getStyle3(this.elm, prefixed.js, &#x27;transform&#x27;);
-          }
+        /**
+         * 缩放元素
+         *
+         * @method scale
+         * @param {Object} option 运动参数
+         * @param {number=} option.x x轴缩放比例，可选参数
+         * @param {number=} option.y y轴缩放比例，可选参数
+         * @param {number=} option.mix 混合动画，可选参数
+         * @param {number} time 动画时间
+         * @param {Function=} callback 回调函数，可选参数
+         *
+         * @chainable
+         * @return {Object} EA实例
+         *
+         * @demo scale.html
+         */
+        &#x27;scale&#x27;: function (option, time, callback) {
+            setStyle3(this.elm, prefixed.js, &#x27;transition&#x27;, getTime(time) + &#x27;s&#x27;);
+            if (callback) {
+                if (prefixed.used) {
+                    setEnd3(this.elm, prefixed.lowercase, callback);
+                }
+                else {
+                    callback();
+                }
+            }
+            if (!option.x) {
+                option.x = 1;
+            }
+            if (!option.y) {
+                option.y = 1;
+            }
+            var plan = &#x27; scale(&#x27; + option.x + &#x27;,&#x27; + option.y + &#x27;)&#x27;;
 
-          setStyle3(this.elm, prefixed.js, &#x27;transform&#x27;, plan);
-          return this;
-      },
+            if (option.mix) {
+                plan += getStyle3(this.elm, prefixed.js, &#x27;transform&#x27;);
+            }
 
-      /**
-       * 显示元素
-       *
-       * @method show
-       * @param {number} time 动画时间
-       * @param {Function=} callback 回调函数，可选参数
-       *
-       * @chainable
-       * @return {Object} EA实例
-       *
-       * @demo show.html
-       */
-      &#x27;show&#x27;: function (time, callback) {
-          setStyle3(this.elm, prefixed.js, &#x27;transition&#x27;, getTime(time) + &#x27;s&#x27;);
-          if (callback) {
-              setEnd3(this.elm, prefixed.lowercase, callback);
-          }
-          setStyle(this.elm, {
-              opacity: 1
-          });
-          return this;
-      },
+            setStyle3(this.elm, prefixed.js, &#x27;transform&#x27;, plan);
+            return this;
+        },
 
-      /**
-       * 隐藏元素
-       *
-       * @method hide
-       * @param {number} time 动画时间
-       * @param {Function=} callback 回调函数，可选参数
-       *
-       * @chainable
-       * @return {Object} EA实例
-       *
-       * @demo hide.html
-       */
-      &#x27;hide&#x27;: function (time, callback) {
-          setStyle3(this.elm, prefixed.js, &#x27;transition&#x27;, getTime(time) + &#x27;s&#x27;);
-          if (callback) {
-              setEnd3(this.elm, prefixed.lowercase, callback);
-          }
-          setStyle(this.elm, {
-              opacity: 0
-          });
-          return this;
-      },
+        /**
+         * 显示元素
+         *
+         * @method show
+         * @param {number} time 动画时间
+         * @param {Function=} callback 回调函数，可选参数
+         *
+         * @chainable
+         * @return {Object} EA实例
+         *
+         * @demo show.html
+         */
+        &#x27;show&#x27;: function (time, callback) {
+            setStyle3(this.elm, prefixed.js, &#x27;transition&#x27;, getTime(time) + &#x27;s&#x27;);
+            if (callback) {
+                if (prefixed.used) {
+                    setEnd3(this.elm, prefixed.lowercase, callback);
+                }
+                else {
+                    callback();
+                }
+            }
+            setStyle(this.elm, {
+                opacity: 1
+            });
+            return this;
+        },
 
-      /**
-       * 触发动画，用于对写好的cssanimation调用
-       *
-       * @method trigger
-       * @param {string | Array} className 要触发css类名，多个用数组
-       * @param {boolean=} save 是否保持动画结束时的状态
-       * @param {Function=} callback 回调函数，可选参数
-       *
-       * @chainable
-       * @return {Object} EA实例
-       *
-       * @demo trigger.html
-       */
-      &#x27;trigger&#x27;: function (className, save, callback) {
-          if (is(save, &#x27;function&#x27;)) {
-              callback = save;
-              save = false;
-          }
-          var that = this;
-          setEnd3(this.elm, prefixed.lowercase, clear);
-          if (is(className, &#x27;array&#x27;)) {
-              for (var i = 0, len = className.length; i &lt; len; i++) {
-                  addClass(this.elm, className[i]);
-              }
-          }
-          else {
-              addClass(this.elm, className);
-          }
+        /**
+         * 隐藏元素
+         *
+         * @method hide
+         * @param {number} time 动画时间
+         * @param {Function=} callback 回调函数，可选参数
+         *
+         * @chainable
+         * @return {Object} EA实例
+         *
+         * @demo hide.html
+         */
+        &#x27;hide&#x27;: function (time, callback) {
+            setStyle3(this.elm, prefixed.js, &#x27;transition&#x27;, getTime(time) + &#x27;s&#x27;);
+            if (callback) {
+                if (prefixed.used) {
+                    setEnd3(this.elm, prefixed.lowercase, callback);
+                }
+                else {
+                    callback();
+                }
+            }
+            setStyle(this.elm, {
+                opacity: 0
+            });
+            return this;
+        },
 
-          function clear() {
-              if (callback) {
-                  callback();
-              }
-              if (!save) {
-                  removeClass(that.elm, className);
-              }
-          }
-          return this;
-      },
+        /**
+         * 触发动画，用于对写好的cssanimation调用
+         *
+         * @method trigger
+         * @param {string | Array} className 要触发css类名，多个用数组
+         * @param {boolean=} save 是否保持动画结束时的状态
+         * @param {Function=} callback 回调函数，可选参数
+         *
+         * @chainable
+         * @return {Object} EA实例
+         *
+         * @demo trigger.html
+         */
+        &#x27;trigger&#x27;: function (className, save, callback) {
+            if (is(save, &#x27;function&#x27;)) {
+                callback = save;
+                save = false;
+            }
+            var that = this;
+            if (callback) {
+                if (prefixed.used) {
+                    setEnd3(this.elm, prefixed.lowercase, clear);
+                }
+                else {
+                    callback();
+                }
+            }
+            if (is(className, &#x27;array&#x27;)) {
+                for (var i = 0, len = className.length; i &lt; len; i++) {
+                    addClass(this.elm, className[i]);
+                }
+            }
+            else {
+                addClass(this.elm, className);
+            }
 
-      /**
-       * 停止动画
-       *
-       * @method stop
-       * @param {string | Array} className 要触发css类名，多个用数组
-       *
-       * @chainable
-       * @return {Object} EA实例
-       *
-       * @demo stop.html
-       */
-      &#x27;stop&#x27;: function (className) {
-          if (className) {
-              if (is(className, &#x27;array&#x27;)) {
-                  for (var i = 0, len = className.length; i &lt; len; i++) {
-                      removeClass(this.elm, className[i]);
-                  }
-              }
-          else {
-                  removeClass(this.elm, className);
-              }
-          }
-          clearStyle3(this.elm, prefixed.js);
-          return this;
-      },
+            function clear() {
+                if (callback) {
+                    callback();
+                }
+                if (!save) {
+                    removeClass(that.elm, className);
+                }
+            }
+            return this;
+        },
 
-      /**
-       * 删除关键帧动画
-       *
-       * @method delete
-       * @param {string} name 动画名称
-       *
-       * @demo delete.html
-       */
-      &#x27;delete&#x27;: function (name) {
-          removeCSS(name);
-      },
+        /**
+         * 停止动画，用于trigger触发的动画
+         *
+         * @method stop
+         * @param {string | Array} className 要触发css类名，多个用数组
+         *
+         * @chainable
+         * @return {Object} EA实例
+         *
+         * @demo stop.html
+         */
+        &#x27;stop&#x27;: function (className) {
+            if (className) {
+                if (is(className, &#x27;array&#x27;)) {
+                    for (var i = 0, len = className.length; i &lt; len; i++) {
+                        removeClass(this.elm, className[i]);
+                    }
+                }
+            else {
+                    removeClass(this.elm, className);
+                }
+            }
+            clearStyle3(this.elm, prefixed.js);
+            return this;
+        },
 
-      /**
-       * 创建关键帧
-       *
-       * @method initKeyFrame
-       * @param {Object | Array} option 关键帧动作对象或数组
-       * @param {string} option.name 动画名称
-       * @param {Array} option.keyframe 关键帧动作
-       *
-       * @demo run.html
-       */
-      &#x27;initKeyFrame&#x27;: function (option) {
-          if (option) {
-              var cssText = &#x27;&#x27;;
-              if (is(option, &#x27;array&#x27;)) {
-                  for (var i = 0, len = option.length; i &lt; len; i++) {
-                      cssText = &#x27;@&#x27; + prefixed.css + &#x27;keyframes &#x27; + option[i].name
-                      + &#x27; {&#x27; + getCssText(option[i].keyframe, prefixed.css) + &#x27;}&#x27;;
-                      addCSS(cssText, option[i].name);
-                  }
-              }
-              else {
-                  cssText = &#x27;@&#x27; + prefixed.css + &#x27;keyframes &#x27; + option.name
-                  + &#x27; {&#x27; + getCssText(option.keyframe, prefixed.css) + &#x27;}&#x27;;
-                  addCSS(cssText, option.name);
-              }
-          }
-      },
+        /**
+         * 删除关键帧动画
+         *
+         * @method delete
+         * @param {string} name 动画名称
+         *
+         * @demo delete.html
+         */
+        &#x27;delete&#x27;: function (name) {
+            removeCSS(name);
+        },
 
-      /**
-       * 运行已定义的动画
-       *
-       * @method run
-       * @param {Object} option 运动参数
-       * @param {string} option.name 动画名称
-       * @param {number} option.time 动画时间
-       * @param {string=} option.easing 缓动函数，可选参数
-       * @param {number=} option.delay 延迟时间，可选参数
-       * @param {number | string=} option.count 动画次数，可选参数默认为1，forever无限
-       * @param {boolean=} option.back 是否反向播放动画，可选参数
-       * @param {boolean=} option.save 是否保持动画结束时的状态
-       * @param {Function=} callback 回调函数
-       *
-       * @chainable
-       * @return {Object} EA实例
-       *
-       * @demo run.html
-       */
-      &#x27;run&#x27;: function (option, callback) {
-          var that = this;
-          setEnd3(this.elm, prefixed.lowercase, clear);
-          if (option.name) {
-              var plan = option.name + &#x27; &#x27; + getTime(option.time) + &#x27;s&#x27;;
-              if (!option.easing) {
-                  option.easing = &#x27;ease&#x27;;
-              }
-              if (!option.delay) {
-                  option.delay = 0;
-              }
-              if (!option.count) {
-                  option.count = 1;
-              }
-              else if (option.count === &#x27;forever&#x27;) {
-                  option.count = &#x27;infinite&#x27;;
-              }
-              if (option.back === true) {
-                  option.back = &#x27;alternate&#x27;;
-              }
-              else {
-                  option.back = &#x27;normal&#x27;;
-              }
-              plan += &#x27; &#x27; + option.easing + &#x27; &#x27; + option.delay + &#x27;s &#x27; + option.count + &#x27; &#x27; + option.back;
-              setStyle3(this.elm, prefixed.js, &#x27;animation&#x27;, plan);
-              if (!option.save) {
-                  setStyle3(this.elm, prefixed.js, &#x27;animationFillMode&#x27;, &#x27;none&#x27;);
-              }
-              else {
-                  setStyle3(this.elm, prefixed.js, &#x27;animationFillMode&#x27;, &#x27;forwards&#x27;);
-              }
-              return this;
-          }
+        /**
+         * 创建关键帧
+         *
+         * @method initKeyFrame
+         * @param {Object | Array} option 关键帧动作对象或数组
+         * @param {string} option.name 动画名称
+         * @param {Array} option.keyframe 关键帧动作
+         *
+         * @demo run.html
+         */
+        &#x27;initKeyFrame&#x27;: function (option) {
+            if (option) {
+                var cssText = &#x27;&#x27;;
+                if (is(option, &#x27;array&#x27;)) {
+                    for (var i = 0, len = option.length; i &lt; len; i++) {
+                        cssText = &#x27;@&#x27; + prefixed.css + &#x27;keyframes &#x27; + option[i].name
+                        + &#x27; {&#x27; + getCssText(option[i].keyframe, prefixed.css) + &#x27;}&#x27;;
+                        addCSS(cssText, option[i].name);
+                    }
+                }
+                else {
+                    cssText = &#x27;@&#x27; + prefixed.css + &#x27;keyframes &#x27; + option.name
+                    + &#x27; {&#x27; + getCssText(option.keyframe, prefixed.css) + &#x27;}&#x27;;
+                    addCSS(cssText, option.name);
+                }
+            }
+        },
 
-          function clear() {
-              if (callback) {
-                  callback();
-              }
-              if (!option.save) {
-                  clearStyle3(that.elm, that.prefixed.js);
-              }
-          }
-      },
+        /**
+         * 运行已定义的动画
+         *
+         * @method run
+         * @param {Object} option 运动参数
+         * @param {string} option.name 动画名称
+         * @param {number} option.time 动画时间
+         * @param {string=} option.easing 缓动函数，可选参数
+         * @param {number=} option.delay 延迟时间，可选参数
+         * @param {number | string=} option.count 动画次数，可选参数默认为1，forever无限
+         * @param {boolean=} option.back 是否反向播放动画，可选参数
+         * @param {boolean=} option.save 是否保持动画结束时的状态
+         * @param {Function=} callback 回调函数
+         *
+         * @chainable
+         * @return {Object} EA实例
+         *
+         * @demo run.html
+         */
+        &#x27;run&#x27;: function (option, callback) {
+            var that = this;
+            if (callback) {
+                if (prefixed.used) {
+                    setEnd3(this.elm, prefixed.lowercase, clear);
+                }
+                else {
+                    callback();
+                }
+            }
+            if (option.name) {
+                var plan = option.name + &#x27; &#x27; + getTime(option.time) + &#x27;s&#x27;;
+                if (!option.easing) {
+                    option.easing = &#x27;ease&#x27;;
+                }
+                if (!option.delay) {
+                    option.delay = 0;
+                }
+                if (!option.count) {
+                    option.count = 1;
+                }
+                else if (option.count === &#x27;forever&#x27;) {
+                    option.count = &#x27;infinite&#x27;;
+                }
+                if (option.back === true) {
+                    option.back = &#x27;alternate&#x27;;
+                }
+                else {
+                    option.back = &#x27;normal&#x27;;
+                }
+                plan += &#x27; &#x27; + option.easing + &#x27; &#x27; + option.delay + &#x27;s &#x27; + option.count + &#x27; &#x27; + option.back;
+                setStyle3(this.elm, prefixed.js, &#x27;animation&#x27;, plan);
+                if (!option.save) {
+                    setStyle3(this.elm, prefixed.js, &#x27;animationFillMode&#x27;, &#x27;none&#x27;);
+                }
+                else {
+                    setStyle3(this.elm, prefixed.js, &#x27;animationFillMode&#x27;, &#x27;forwards&#x27;);
+                }
+                return this;
+            }
 
-      /**
-       * 更新动画
-       *
-       * @method update
-       * @param {string} name 动画名字
-       * @param {Array} keyframe 关键帧动作
-       *
-       * @demo update.html
-       */
-      &#x27;update&#x27;: function (name, keyframe) {
-          var keyframesRule = getKeyFramse(name);
-          if (keyframesRule.length &gt; 0) {
-              for (var i = 0, len = keyframe.length; i &lt; len; i++) {
-                  keyframesRule[0].insertRule(keyframe[i]);
-              }
-          }
-      }
-  };
+            function clear() {
+                if (callback) {
+                    callback();
+                }
+                if (!option.save) {
+                    clearStyle3(that.elm, that.prefixed.js);
+                }
+            }
+        },
 
-  EA.prototype.Init.prototype = EA.prototype;
+        /**
+         * 更新动画
+         *
+         * @method update
+         * @param {string} name 动画名字
+         * @param {Array} keyframe 关键帧动作
+         *
+         * @demo update.html
+         */
+        &#x27;update&#x27;: function (name, keyframe) {
+            var keyframesRule = getKeyFramse(name);
+            if (keyframesRule.length &gt; 0) {
+                for (var i = 0, len = keyframe.length; i &lt; len; i++) {
+                    keyframesRule[0].insertRule(keyframe[i]);
+                }
+            }
+        },
 
-  /**
-    * 获得浏览器前缀
-    *
-    * @return {Object}
-    */
-  function getPrefixed() {
-      var styles = window.getComputedStyle(document.documentElement, &#x27;&#x27;);
-      var pre = (Array.prototype.slice
-          .call(styles)
-          .join(&#x27;&#x27;)
-          .match(/-(moz|webkit|ms)-/) || (styles.OLink === &#x27;&#x27; &amp;&amp; [&#x27;&#x27;, &#x27;o&#x27;]))[1];
-      var dom = (&#x27;WebKit|Moz|MS|O&#x27;).match(new RegExp(&#x27;(&#x27; + pre + &#x27;)&#x27;, &#x27;i&#x27;))[1];
-      return {
-          dom: dom,
-          lowercase: pre,
-          uppercase: pre.toUpperCase(),
-          css: &#x27;-&#x27; + pre + &#x27;-&#x27;,
-          js: pre[0].toUpperCase() + pre.substr(1)
-      };
-  }
+        /**
+         * 是否可用
+         *
+         * @method isUsed
+         *
+         * @return {boolean} 是否支持css3的标识
+         */
+        &#x27;isUsed&#x27;: function () {
+            return used;
+        }
+    };
 
-  /**
-   * 获得关键帧对象
-   *
-   * @param {string} name 动画名字
-   *
-   * @return {Object}
-   */
-  function getKeyFramse(name) {
-      var styleSheet = document.styleSheets;
-      var keyframesRule = [];
-      for (var i = 0, len = styleSheet.length; i &lt; len; i++) {
-          for (var j = 0; j &lt; styleSheet[i].cssRules.length; j++) {
-              if (styleSheet[i].cssRules[j].type === window.CSSRule.KEYFRAMES_RULE
-                  &amp;&amp; styleSheet[i].cssRules[j].name === name) {
-                  keyframesRule.push(styleSheet[i].cssRules[j]);
-              }
-          }
-      }
-      return keyframesRule;
-  }
+    EA.prototype.Init.prototype = EA.prototype;
 
-  /**
-   * 解析参数生成css文本
-   *
-   * @param {Array} option 生成css文本需要的参数
-   * @param {string} prefixed 浏览器前缀
-   *
-   * @return {Object}
-   */
-  function getCssText(option, prefixed) {
-      var tmp = &#x27;&#x27;;
-      for (var i = 0, len = option.length; i &lt; len; i++) {
-          tmp += option[i];
-      }
-      tmp = tmp.replace(/transform/g, prefixed + &#x27;transform&#x27;);
-      tmp = tmp.replace(/animation/g, prefixed + &#x27;animation&#x27;);
-      return tmp;
-  }
+    /**
+     * 获得浏览器前缀
+     *
+     * @return {Object}
+     */
+    function getPrefixed() {
+        var body = document.body || document.documentElement;
+        var style = body.style;
+        var vendor = [&#x27;Webkit&#x27;, &#x27;Khtml&#x27;, &#x27;Moz&#x27;, &#x27;Ms&#x27;, &#x27;O&#x27;];
+        var i = 0;
+        var pre = &#x27;&#x27;;
 
-  /**
-   * 向dom添加样式
-   *
-   * @param {string} cssText css文本
-   * @param {string} name keyframe名字
-   */
-  function addCSS(cssText, name) {
-      if (animations[name]) {
-          return;
-      }
-      var style = null;
-      var head = document.head || document.getElementsByTagName(&#x27;head&#x27;)[0];
-      style = document.getElementsByTagName(&#x27;style&#x27;)[0];
-      if (!style) {
-          style = document.createElement(&#x27;style&#x27;);
-          style.type = &#x27;text/css&#x27;;
-      }
-      if (style.styleSheet) {
-          var func = function () {
-              try {
-                  style.styleSheet.cssText += cssText;
-              }
-              catch(e) {
-                  log(&#x27;addCSS faild&#x27;);
-              }
-          };
-          if (style.styleSheet.disabled) {
-              setTimeout(func, 10);
-          }
-          else {
-              func();
-          }
-      }
-      else {
-          var textNode = document.createTextNode(cssText);
-          style.appendChild(textNode);
-      }
-      head.appendChild(style);
-      animations[name] = cssText;
-  }
+        while (i &lt; vendor.length) {
+            if (typeof style[vendor[i] + &#x27;Transition&#x27;] === &#x27;string&#x27;) {
+                pre = vendor[i].toLowerCase();
+            }
+            i++;
+        }
 
-  /**
-   * 从dom删除样式
-   *
-   * @param {string} name keyframe名字
-   */
-  function removeCSS(name) {
-      var style = null;
-      var head = document.head || document.getElementsByTagName(&#x27;head&#x27;)[0];
-      style = document.getElementsByTagName(&#x27;style&#x27;)[0];
-      var cssText = animations[name];
-      if (style.styleSheet) {
-          var func = function () {
-              try {
-                  style.styleSheet.cssText = style.styleSheet.cssText.replace(cssText, &#x27;&#x27;);
-              }
-              catch (e) {
-                  log(&#x27;removeCSS faild&#x27;);
-              }
-          };
-          if (style.styleSheet.disabled) {
-              setTimeout(func, 10);
-          }
-          else {
-              func();
-          }
-      }
-      else {
-          style.innerText = style.innerText.replace(cssText, &#x27;&#x27;);
-      }
-      head.appendChild(style);
-  }
+        if (!pre) {
+            pre = &#x27;o&#x27;;
+            used = false;
+        }
+        var dom = (&#x27;WebKit|Moz|MS|O&#x27;).match(new RegExp(&#x27;(&#x27; + pre + &#x27;)&#x27;, &#x27;i&#x27;))[1];
+        return {
+            used: used,
+            dom: dom,
+            lowercase: pre,
+            uppercase: pre.toUpperCase(),
+            css: &#x27;-&#x27; + pre + &#x27;-&#x27;,
+            js: pre[0].toUpperCase() + pre.substr(1)
+        };
+    }
 
-  /**
-   * 格式化时间
-   *
-   * @param {number} time 时间，单位是毫秒数
-   * @param {number=} fixed 时间精度，换算成秒小数点儿后的精度位数，可选参数
-   *
-   * @return {number}
-   */
-  function getTime(time, fixed) {
-      if (!time) {
-          return 0;
-      }
-      if (!fixed) {
-          fixed = 1;
-      }
-      return (time / 1000).toFixed(fixed);
-  }
+    /**
+     * 获得关键帧对象
+     *
+     * @param {string} name 动画名字
+     *
+     * @return {Object}
+     */
+    function getKeyFramse(name) {
+        var styleSheet = document.styleSheets;
+        var keyframesRule = [];
+        for (var i = 0, len = styleSheet.length; i &lt; len; i++) {
+            for (var j = 0; j &lt; styleSheet[i].cssRules.length; j++) {
+                if (styleSheet[i].cssRules[j].type === window.CSSRule.KEYFRAMES_RULE
+                    &amp;&amp; styleSheet[i].cssRules[j].name === name) {
+                    keyframesRule.push(styleSheet[i].cssRules[j]);
+                }
+            }
+        }
+        return keyframesRule;
+    }
 
-  /**
-   * 设置css3样式
-   *
-   * @param {Object} element dom 对象
-   * @param {string} prefixed js属性前缀
-   * @param {string} name 属性名
-   * @param {string} value 属性值
-   */
-  function setStyle3(element, prefixed, name, value) {
-      var style = prefixed + name.charAt(0).toUpperCase() + name.substring(1);
-      element.style[style] = value;
-  }
+    /**
+     * 解析参数生成css文本
+     *
+     * @param {Array} option 生成css文本需要的参数
+     * @param {string} prefixed 浏览器前缀
+     *
+     * @return {Object}
+     */
+    function getCssText(option, prefixed) {
+        var tmp = &#x27;&#x27;;
+        for (var i = 0, len = option.length; i &lt; len; i++) {
+            tmp += option[i];
+        }
+        tmp = tmp.replace(/transform/g, prefixed + &#x27;transform&#x27;);
+        tmp = tmp.replace(/animation/g, prefixed + &#x27;animation&#x27;);
+        return tmp;
+    }
 
-  /**
-   * 获取css3样式
-   *
-   * @param {Object} element dom 对象
-   * @param {string} prefixed js属性前缀
-   * @param {string} name 属性名
-   *
-   * @return {string}
-   */
-  function getStyle3(element, prefixed, name) {
-      var style = prefixed + name.charAt(0).toUpperCase() + name.substring(1);
-      return element.style[style];
-  }
+    /**
+     * 向dom添加样式
+     *
+     * @param {string} cssText css文本
+     * @param {string} name keyframe名字
+     */
+    function addCSS(cssText, name) {
+        if (animations[name]) {
+            return;
+        }
+        var style = null;
+        var head = document.head || document.getElementsByTagName(&#x27;head&#x27;)[0];
+        style = document.getElementsByTagName(&#x27;style&#x27;)[0];
+        if (!style) {
+            style = document.createElement(&#x27;style&#x27;);
+            style.type = &#x27;text/css&#x27;;
+        }
+        if (style.styleSheet) {
+            var func = function () {
+                try {
+                    style.styleSheet.cssText += cssText;
+                }
+                catch(e) {
+                    log(&#x27;addCSS faild&#x27;);
+                }
+            };
+            if (style.styleSheet.disabled) {
+                setTimeout(func, 10);
+            }
+            else {
+                func();
+            }
+        }
+        else {
+            var textNode = document.createTextNode(cssText);
+            style.appendChild(textNode);
+        }
+        head.appendChild(style);
+        animations[name] = cssText;
+    }
 
-  /**
-   * 清除css3样式
-   *
-   * @param {Object} element dom 对象
-   * @param {string} prefixed js属性前缀
-   */
-  function clearStyle3(element, prefixed) {
-      setStyle3(element, prefixed, &#x27;transition&#x27;, &#x27;0s&#x27;);
-      setStyle3(element, prefixed, &#x27;transform&#x27;, &#x27;&#x27;);
-      setStyle3(element, prefixed, &#x27;animation&#x27;, &#x27;&#x27;);
-  }
+    /**
+     * 从dom删除样式
+     *
+     * @param {string} name keyframe名字
+     */
+    function removeCSS(name) {
+        var style = null;
+        var head = document.head || document.getElementsByTagName(&#x27;head&#x27;)[0];
+        style = document.getElementsByTagName(&#x27;style&#x27;)[0];
+        var cssText = animations[name];
+        if (style.styleSheet) {
+            var func = function () {
+                try {
+                    style.styleSheet.cssText = style.styleSheet.cssText.replace(cssText, &#x27;&#x27;);
+                }
+                catch (e) {
+                    log(&#x27;removeCSS faild&#x27;);
+                }
+            };
+            if (style.styleSheet.disabled) {
+                setTimeout(func, 10);
+            }
+            else {
+                func();
+            }
+        }
+        else {
+            style.innerText = style.innerText.replace(cssText, &#x27;&#x27;);
+        }
+        head.appendChild(style);
+    }
 
-  /**
-   * 设置动画回调函数
-   *
-   * @param {Object} element dom 对象
-   * @param {string} prefixed js属性前缀
-   * @param {Function=} callback 回调函数
-   */
-  function setEnd3(element, prefixed, callback) {
-      var funA = function () {
-          callback();
-          removeHandler(element, prefixed === &#x27;o&#x27; ? &#x27;oanimationend&#x27;
-          : prefixed + &#x27;AnimationEnd&#x27;, funA);
-          removeHandler(element, &#x27;animationend&#x27;, funA);
-      };
-      var funT = function () {
-          callback();
-          removeHandler(element, prefixed + &#x27;TransitionEnd&#x27;, funT);
-          removeHandler(element, &#x27;transitionend&#x27;, funT);
-      };
-      addHandler(element, prefixed === &#x27;o&#x27; ? &#x27;oanimationend&#x27;
-      : prefixed + &#x27;AnimationEnd&#x27;, funA);
-      addHandler(element, &#x27;animationend&#x27;, funA);
-      addHandler(element, prefixed === &#x27;o&#x27; ? &#x27;otransitionend&#x27;
-      : prefixed + &#x27;TransitionEnd&#x27;, funT);
-      addHandler(element, &#x27;transitionend&#x27;, funT);
-  }
+    /**
+     * 格式化时间
+     *
+     * @param {number} time 时间，单位是毫秒数
+     * @param {number=} fixed 时间精度，换算成秒小数点儿后的精度位数，可选参数
+     *
+     * @return {number}
+     */
+    function getTime(time, fixed) {
+        if (!time) {
+            return 0;
+        }
+        if (!fixed) {
+            fixed = 1;
+        }
+        return (time / 1000).toFixed(fixed);
+    }
 
-  /**
-   * 设置元素样式
-   *
-   * @param {Object} element dom 对象
-   * @param {Object} json 属性集合
-   */
-  function setStyle(element, json) {
-      if (element.length) {
-          for (var i = 0, len = element.length; i &lt; len; i++) {
-              arguments.callee(element[i], json);
-          }
-      }
-      else {
-          if (arguments.length === 2) {
-              for (var j in json) {
-                  if (json.hasOwnProperty(j)) {
-                      element.style[j] = json[j];
-                  }
-              }
-          }
-          else {
-              element.style[arguments[1]] = arguments[2];
-          }
-      }
-  }
+    /**
+     * 设置css3样式
+     *
+     * @param {Object} element dom 对象
+     * @param {string} prefixed js属性前缀
+     * @param {string} name 属性名
+     * @param {string} value 属性值
+     */
+    function setStyle3(element, prefixed, name, value) {
+        var style = prefixed + name.charAt(0).toUpperCase() + name.substring(1);
+        element.style[style] = value;
+        element.style[name] = value;
+    }
 
-  /**
-   * 类型判断
-   *
-   * @param {Object} obj 数据对象
-   * @param {string} type 要匹配的类型
-   *
-   * @return {?number}
-   */
-  function is(obj, type) {
-      var ret = false;
-      var tmp = Object.prototype.toString.call(obj);
-      switch (type) {
-          case &#x27;number&#x27;:
-              if (tmp === &#x27;[object Number]&#x27;) {
-                  ret = true;
-              }
-              break;
-          case &#x27;string&#x27;:
-              if (tmp === &#x27;[object String]&#x27;) {
-                  ret = true;
-              }
-              break;
-          case &#x27;boolean&#x27;:
-              if (tmp === &#x27;[object Boolean]&#x27;) {
-                  ret = true;
-              }
-              break;
-          case &#x27;array&#x27;:
-              if (tmp === &#x27;[object Array]&#x27;) {
-                  ret = true;
-              }
-              break;
-          case &#x27;function&#x27;:
-              if (tmp === &#x27;[object Function]&#x27;) {
-                  ret = true;
-              }
-              break;
-          case &#x27;object&#x27;:
-              if (tmp === &#x27;[object Object]&#x27;) {
-                  ret = true;
-              }
-              break;
-          case &#x27;null&#x27;:
-              if (tmp === &#x27;[object Null]&#x27;) {
-                  ret = true;
-              }
-              break;
-          case &#x27;undefined&#x27;:
-              if (tmp === &#x27;[object Undefined]&#x27;) {
-                  ret = true;
-              }
-              break;
-          case &#x27;dom&#x27;:
-              if (tmp === &#x27;[object HTMLDivElement]&#x27;) {
-                  ret = true;
-              }
-              break;
-      }
-      return ret;
-  }
+    /**
+     * 获取css3样式
+     *
+     * @param {Object} element dom 对象
+     * @param {string} prefixed js属性前缀
+     * @param {string} name 属性名
+     *
+     * @return {string}
+     */
+    function getStyle3(element, prefixed, name) {
+        var style = prefixed + name.charAt(0).toUpperCase() + name.substring(1);
+        return element.style[style] ? element.style[style] : element.style[name];
+    }
 
-  /**
-   * 添加className
-   *
-   * @param {Object} element dom 对象
-   * @param {string} className css类名
-   *
-   */
-  function addClass(element, className) {
-      if (element.className.indexOf(className) === -1) {
-          element.className += &#x27; &#x27; + className;
-      }
-  }
+    /**
+     * 清除css3样式
+     *
+     * @param {Object} element dom 对象
+     * @param {string} prefixed js属性前缀
+     */
+    function clearStyle3(element, prefixed) {
+        setStyle3(element, prefixed, &#x27;transition&#x27;, &#x27;0s&#x27;);
+        setStyle3(element, prefixed, &#x27;transform&#x27;, &#x27;&#x27;);
+        setStyle3(element, prefixed, &#x27;animation&#x27;, &#x27;&#x27;);
+    }
 
-  /**
-   * 移除className
-   *
-   * @param {Object} element dom 对象
-   * @param {string} className css类名
-   *
-   */
-  function removeClass(element, className) {
-      var classValue = element.className;
-      if (classValue.indexOf(className) &gt; -1) {
-          element.className = classValue.replace(&#x27; &#x27; + className, &#x27;&#x27;);
-          element.className = classValue.replace(className, &#x27;&#x27;);
-      }
-  }
+    /**
+     * 设置动画回调函数
+     *
+     * @param {Object} element dom 对象
+     * @param {string} prefixed js属性前缀
+     * @param {Function=} callback 回调函数
+     */
+    function setEnd3(element, prefixed, callback) {
+        var funA = function () {
+            callback();
+            removeHandler(element, prefixed === &#x27;o&#x27; ? &#x27;oanimationend&#x27;
+            : prefixed + &#x27;AnimationEnd&#x27;, funA);
+            removeHandler(element, &#x27;animationend&#x27;, funA);
+        };
+        var funT = function () {
+            callback();
+            removeHandler(element, prefixed + &#x27;TransitionEnd&#x27;, funT);
+            removeHandler(element, &#x27;transitionend&#x27;, funT);
+        };
+        addHandler(element, prefixed === &#x27;o&#x27; ? &#x27;oanimationend&#x27;
+        : prefixed + &#x27;AnimationEnd&#x27;, funA);
+        addHandler(element, &#x27;animationend&#x27;, funA);
+        addHandler(element, prefixed === &#x27;o&#x27; ? &#x27;otransitionend&#x27;
+        : prefixed + &#x27;TransitionEnd&#x27;, funT);
+        addHandler(element, &#x27;transitionend&#x27;, funT);
+    }
 
-  /**
-   * 设置元素样式
-   *
-   * @param {string} msg 日志内容
-   * @param {string=} level 日志级别，可选参数
-   */
-  /* eslint-disable no-console */
-  function log(msg, level) {
-      if (window.console) {
-          console.log(msg);
-      }
-  }
-  /* eslint-enable no-console */
+    /**
+     * 设置元素样式
+     *
+     * @param {Object} element dom 对象
+     * @param {Object} json 属性集合
+     */
+    function setStyle(element, json) {
+        if (element.length) {
+            for (var i = 0, len = element.length; i &lt; len; i++) {
+                arguments.callee(element[i], json);
+            }
+        }
+        else {
+            if (arguments.length === 2) {
+                for (var j in json) {
+                    if (json.hasOwnProperty(j)) {
+                        element.style[j] = json[j];
+                    }
+                }
+            }
+            else {
+                element.style[arguments[2]] = arguments[3];
+            }
+        }
+    }
 
-  /**
-   * 添加事件
-   *
-   * @param {Object} element dom 对象
-   * @param {string} type 事件类型
-   * @param {Function} handler 处理函数
-   *
-   */
-  function addHandler(element, type, handler) {
-      if (element.addEventListener) {
-          element.addEventListener(type, handler, false);
-      }
-      else if (element.attachEvent) {
-          element.attachEvent(&#x27;on&#x27; + type, handler);
-      }
-      else {
-          element[&#x27;on&#x27; + type] = handler;
-      }
-  }
+    /**
+     * 类型判断
+     *
+     * @param {Object} obj 数据对象
+     * @param {string} type 要匹配的类型
+     *
+     * @return {?number}
+     */
+    function is(obj, type) {
+        var ret = false;
+        var tmp = Object.prototype.toString.call(obj);
+        switch (type) {
+            case &#x27;number&#x27;:
+                if (tmp === &#x27;[object Number]&#x27;) {
+                    ret = true;
+                }
+                break;
+            case &#x27;string&#x27;:
+                if (tmp === &#x27;[object String]&#x27;) {
+                    ret = true;
+                }
+                break;
+            case &#x27;boolean&#x27;:
+                if (tmp === &#x27;[object Boolean]&#x27;) {
+                    ret = true;
+                }
+                break;
+            case &#x27;array&#x27;:
+                if (tmp === &#x27;[object Array]&#x27;) {
+                    ret = true;
+                }
+                break;
+            case &#x27;function&#x27;:
+                if (tmp === &#x27;[object Function]&#x27;) {
+                    ret = true;
+                }
+                break;
+            case &#x27;object&#x27;:
+                if (tmp === &#x27;[object Object]&#x27;) {
+                    ret = true;
+                }
+                break;
+            case &#x27;null&#x27;:
+                if (tmp === &#x27;[object Null]&#x27;) {
+                    ret = true;
+                }
+                break;
+            case &#x27;undefined&#x27;:
+                if (tmp === &#x27;[object Undefined]&#x27;) {
+                    ret = true;
+                }
+                break;
+            case &#x27;dom&#x27;:
+                if (tmp === &#x27;[object HTMLDivElement]&#x27;) {
+                    ret = true;
+                }
+                break;
+        }
+        return ret;
+    }
 
-  /**
-   * 移除事件
-   *
-   * @param {Object} element dom 对象
-   * @param {string} type 事件类型
-   * @param {Function} handler 处理函数
-   *
-   */
-  function removeHandler(element, type, handler) {
-      if (element.removeEventListener) {
-          element.removeEventListener(type, handler, false);
-      }
-      else if (element.detachEvent) {
-          element.detachEvent(&#x27;on&#x27; + type, handler);
-      }
-      else {
-          element[&#x27;on&#x27; + type] = null;
-      }
-  }
+    /**
+     * 添加className
+     *
+     * @param {Object} element dom 对象
+     * @param {string} className css类名
+     *
+     */
+    function addClass(element, className) {
+        if (element.className.indexOf(className) === -1) {
+            element.className += &#x27; &#x27; + className;
+        }
+    }
 
-  var exports = EA;
+    /**
+     * 移除className
+     *
+     * @param {Object} element dom 对象
+     * @param {string} className css类名
+     *
+     */
+    function removeClass(element, className) {
+        var classValue = element.className;
+        if (classValue.indexOf(className) &gt; -1) {
+            element.className = classValue.replace(&#x27; &#x27; + className, &#x27;&#x27;);
+            element.className = classValue.replace(className, &#x27;&#x27;);
+        }
+    }
 
-  return exports;
+    /**
+     * 设置元素样式
+     *
+     * @param {string} msg 日志内容
+     * @param {string=} level 日志级别，可选参数
+     */
+    /* eslint-disable no-console */
+    function log(msg, level) {
+        if (window.console) {
+            console.log(msg);
+        }
+    }
+    /* eslint-enable no-console */
+
+    /**
+     * 添加事件
+     *
+     * @param {Object} element dom 对象
+     * @param {string} type 事件类型
+     * @param {Function} handler 处理函数
+     *
+     */
+    function addHandler(element, type, handler) {
+        if (element.addEventListener) {
+            element.addEventListener(type, handler, false);
+        }
+        else if (element.attachEvent) {
+            element.attachEvent(&#x27;on&#x27; + type, handler);
+        }
+        else {
+            element[&#x27;on&#x27; + type] = handler;
+        }
+    }
+
+    /**
+     * 移除事件
+     *
+     * @param {Object} element dom 对象
+     * @param {string} type 事件类型
+     * @param {Function} handler 处理函数
+     *
+     */
+    function removeHandler(element, type, handler) {
+        if (element.removeEventListener) {
+            element.removeEventListener(type, handler, false);
+        }
+        else if (element.detachEvent) {
+            element.detachEvent(&#x27;on&#x27; + type, handler);
+        }
+        else {
+            element[&#x27;on&#x27; + type] = null;
+        }
+    }
+
+    var exports = EA;
+
+    return exports;
 });
 });
 
